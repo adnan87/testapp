@@ -1,261 +1,139 @@
-== Welcome to Rails
-
-Rails is a web-application framework that includes everything needed to create
-database-backed web applications according to the Model-View-Control pattern.
-
-This pattern splits the view (also called the presentation) into "dumb"
-templates that are primarily responsible for inserting pre-built data in between
-HTML tags. The model contains the "smart" domain objects (such as Account,
-Product, Person, Post) that holds all the business logic and knows how to
-persist themselves to a database. The controller handles the incoming requests
-(such as Save New Account, Update Product, Show Post) by manipulating the model
-and directing data to the view.
-
-In Rails, the model is handled by what's called an object-relational mapping
-layer entitled Active Record. This layer allows you to present the data from
-database rows as objects and embellish these data objects with business logic
-methods. You can read more about Active Record in
-link:files/vendor/rails/activerecord/README.html.
-
-The controller and view are handled by the Action Pack, which handles both
-layers by its two parts: Action View and Action Controller. These two layers
-are bundled in a single package due to their heavy interdependence. This is
-unlike the relationship between the Active Record and Action Pack that is much
-more separate. Each of these packages can be used independently outside of
-Rails. You can read more about Action Pack in
-link:files/vendor/rails/actionpack/README.html.
+# RVM Installation For Single User, Multi User, Mixed Mode
 
 
-== Getting Started
+# Overview
 
-1. At the command prompt, create a new Rails application:
-       <tt>rails new myapp</tt> (where <tt>myapp</tt> is the application name)
+There are three different ways to install and configure RVM.
 
-2. Change directory to <tt>myapp</tt> and start the web server:
-       <tt>cd myapp; rails server</tt> (run with --help for options)
+1. Single-User installations (recommended) - For an isolated install within a user's $HOME, not for root.
 
-3. Go to http://localhost:3000/ and you'll see:
-       "Welcome aboard: You're riding Ruby on Rails!"
+2. Multi-User installations - For server administrators - For an installation usable by all users on the system - Please note that Single-
+User supercedes Multi-User. This also used to be called the System-Wide Install. Using this type of installation without knowledge how umask works is a big security risk.
 
-4. Follow the guidelines to start developing your application. You can find
-the following resources handy:
-
-* The Getting Started Guide: http://guides.rubyonrails.org/getting_started.html
-* Ruby on Rails Tutorial Book: http://www.railstutorial.org/
+3. Mixed mode installations - For an installation usable by all users on the system - with isolated rubies/gemsets within a user's $HOME. Installation instructions are exactly the same as for Multi-User installations, the difference is in users environment.
 
 
-== Debugging Rails
+# Installing Curl
 
-Sometimes your application goes wrong. Fortunately there are a lot of tools that
-will help you debug it and get it back on the rails.
-
-First area to check is the application log files. Have "tail -f" commands
-running on the server.log and development.log. Rails will automatically display
-debugging and runtime information to these files. Debugging info will also be
-shown in the browser on requests from 127.0.0.1.
-
-You can also log your own messages directly into the log file from your code
-using the Ruby logger class from inside your controllers. Example:
-
-  class WeblogController < ActionController::Base
-    def destroy
-      @weblog = Weblog.find(params[:id])
-      @weblog.destroy
-      logger.info("#{Time.now} Destroyed Weblog ID ##{@weblog.id}!")
-    end
-  end
-
-The result will be a message in your log file along the lines of:
-
-  Mon Oct 08 14:22:29 +1000 2007 Destroyed Weblog ID #1!
-
-More information on how to use the logger is at http://www.ruby-doc.org/core/
-
-Also, Ruby documentation can be found at http://www.ruby-lang.org/. There are
-several books available online as well:
-
-* Programming Ruby: http://www.ruby-doc.org/docs/ProgrammingRuby/ (Pickaxe)
-* Learn to Program: http://pine.fm/LearnToProgram/ (a beginners guide)
-
-These two books will bring you up to speed on the Ruby language and also on
-programming in general.
+     sudo apt-get install curl
 
 
-== Debugger
+# First run rvm requirements
 
-Debugger support is available through the debugger command when you start your
-Mongrel or WEBrick server with --debugger. This means that you can break out of
-execution at any point in the code, investigate and change the model, and then,
-resume execution! You need to install ruby-debug to run the server in debugging
-mode. With gems, use <tt>sudo gem install ruby-debug</tt>. Example:
+     rvm requirements
 
-  class WeblogController < ActionController::Base
-    def index
-      @posts = Post.all
-      debugger
-    end
-  end
+# Next Download the additional dependencies mention there.
 
-So the controller will accept the action, run the first line, then present you
-with a IRB prompt in the server window. Here you can do things like:
+For Ruby / Ruby HEAD (MRI, Rubinius, & REE), install the following:
 
-  >> @posts.inspect
-  => "[#<Post:0x14a6be8
-          @attributes={"title"=>nil, "body"=>nil, "id"=>"1"}>,
-       #<Post:0x14a6620
-          @attributes={"title"=>"Rails", "body"=>"Only ten..", "id"=>"2"}>]"
-  >> @posts.first.title = "hello from a debugger"
-  => "hello from a debugger"
-
-...and even better, you can examine how your runtime objects actually work:
-
-  >> f = @posts.first
-  => #<Post:0x13630c4 @attributes={"title"=>nil, "body"=>nil, "id"=>"1"}>
-  >> f.
-  Display all 152 possibilities? (y or n)
-
-Finally, when you're ready to resume execution, you can enter "cont".
+     sudo apt-get install build-essential openssl libreadline6 libreadline6-dev curl git-core zlib1g zlib1g-dev libssl-dev libyaml-dev libsqlite3-dev sqlite3 libxml2-dev libxslt-dev autoconf libc6-dev ncurses-dev automake libtool bison subversion pkg-config
 
 
-== Console
 
-The console is a Ruby shell, which allows you to interact with your
-application's domain model. Here you'll have all parts of the application
-configured, just like it is when the application is running. You can inspect
-domain models, change values, and save to the database. Starting the script
-without arguments will launch it in the development environment.
+# Single-User installation
 
-To start the console, run <tt>rails console</tt> from the application
-directory.
+Installing the stable release version: 
 
-Options:
-
-* Passing the <tt>-s, --sandbox</tt> argument will rollback any modifications
-  made to the database.
-* Passing an environment name as an argument will load the corresponding
-  environment. Example: <tt>rails console production</tt>.
-
-To reload your controllers and models after launching the console run
-<tt>reload!</tt>
-
-More information about irb can be found at:
-link:http://www.rubycentral.org/pickaxe/irb.html
+     \curl -L https://get.rvm.io | bash -s stable
 
 
-== dbconsole
+Installing a specific version:
 
-You can go to the command line of your database directly through <tt>rails
-dbconsole</tt>. You would be connected to the database with the credentials
-defined in database.yml. Starting the script without arguments will connect you
-to the development database. Passing an argument will connect you to a different
-database, like <tt>rails dbconsole production</tt>. Currently works for MySQL,
-PostgreSQL and SQLite 3.
+     \curl -L https://get.rvm.io | bash -s -- --version latest
+     \curl -L https://get.rvm.io | bash -s -- --branch [owner/][repo]
 
-== Description of Contents
 
-The default directory structure of a generated Ruby on Rails application:
+Debugging installation process:
 
-  |-- app
-  |   |-- assets
-  |       |-- images
-  |       |-- javascripts
-  |       `-- stylesheets
-  |   |-- controllers
-  |   |-- helpers
-  |   |-- mailers
-  |   |-- models
-  |   `-- views
-  |       `-- layouts
-  |-- config
-  |   |-- environments
-  |   |-- initializers
-  |   `-- locales
-  |-- db
-  |-- doc
-  |-- lib
-  |   `-- tasks
-  |-- log
-  |-- public
-  |-- script
-  |-- test
-  |   |-- fixtures
-  |   |-- functional
-  |   |-- integration
-  |   |-- performance
-  |   `-- unit
-  |-- tmp
-  |   |-- cache
-  |   |-- pids
-  |   |-- sessions
-  |   `-- sockets
-  `-- vendor
-      |-- assets
-          `-- stylesheets
-      `-- plugins
+     \curl -L https://get.rvm.io | bash -s -- --trace
 
-app
-  Holds all the code that's specific to this particular application.
 
-app/assets
-  Contains subdirectories for images, stylesheets, and JavaScript files.
+If the rvm install script complains about certificates you need to follow the displayed instructions.
 
-app/controllers
-  Holds controllers that should be named like weblogs_controller.rb for
-  automated URL mapping. All controllers should descend from
-  ApplicationController which itself descends from ActionController::Base.
+Single-User Install Location: ~/.rvm/
 
-app/models
-  Holds models that should be named like post.rb. Models descend from
-  ActiveRecord::Base by default.
+**NOTE:** If the install script is run as a standard, non-root user, RVM will install into the current users's home directory.
 
-app/views
-  Holds the template files for the view that should be named like
-  weblogs/index.html.erb for the WeblogsController#index action. All views use
-  eRuby syntax by default.
+Modification of user configuration files (*rc / *profile) - RVM by default will modify user startup files, although it is not recommended you can disable automated process and do this manually (RVM version 1.18 / head):
 
-app/views/layouts
-  Holds the template files for layouts to be used with views. This models the
-  common header/footer method of wrapping views. In your views, define a layout
-  using the <tt>layout :default</tt> and create a file named default.html.erb.
-  Inside default.html.erb, call <% yield %> to render the view using this
-  layout.
+     \curl -L https://get.rvm.io | bash -s -- --ignore-dotfiles
+     echo "source $HOME/.rvm/scripts/rvm" >> ~/.bash_profile
 
-app/helpers
-  Holds view helpers that should be named like weblogs_helper.rb. These are
-  generated for you automatically when using generators for controllers.
-  Helpers can be used to wrap functionality for your views into methods.
 
-config
-  Configuration files for the Rails environment, the routing map, the database,
-  and other dependencies.
 
-db
-  Contains the database schema in schema.rb. db/migrate contains all the
-  sequence of Migrations for your schema.
+# Multi User Installation:
 
-doc
-  This directory is where your application documentation will be stored when
-  generated using <tt>rake doc:app</tt>
+     \curl -L https://get.rvm.io | sudo bash -s stable
 
-lib
-  Application specific libraries. Basically, any kind of custom code that
-  doesn't belong under controllers, models, or helpers. This directory is in
-  the load path.
 
-public
-  The directory available for the web server. Also contains the dispatchers and the
-  default HTML files. This should be set as the DOCUMENT_ROOT of your web
-  server.
+In this scenario in order to load RVM when any of the users start you need to edit /etc/bash.bashrc with root access:
 
-script
-  Helper scripts for automation and generation.
+     sudo nano /etc/bash.bashrc
 
-test
-  Unit and functional tests along with fixtures. When using the rails generate
-  command, template test files will be generated for you and placed in this
-  directory.
 
-vendor
-  External libraries that the application depends on. Also includes the plugins
-  subdirectory. If the app has frozen rails, those gems also go here, under
-  vendor/rails/. This directory is in the load path.
+Add the following line in the end.
+
+     ###
+     # SOURCE RVM BASH SCRIPT
+     ###
+     source "/etc/profile.d/rvm.sh"
+
+
+**Note:** The Multi-User install instructions must be prefixed with the 'sudo' command. However, once the install is complete, and the instructions to add users to the rvm group is followed, the use of either sudo or rvmsudo is no longer required. The 'sudo' command is only to temporarily elevate privileges so the installer can complete it's work. If you need to use 'sudo' or 'rvmsudo' after the install is complete, some part of the install directions were not properly followed. This usually is because people execute the install as root, rather than executing the installation instructions from a non-privileged user account.
+
+
+
+Next see if user is in rvm group by running the command
+
+     groups
+
+
+If the user is already in the rvm group skip the next step
+If the user is not in the rvm group, then to add user to the group
+
+     sudo usermod -a -G rvm <<username>>
+
+
+# Installing Ruby
+
+
+Known Rubies
+
+     rvm list known
+
+Find the requirements
+
+     rvm requirements
+
+Install ruby
+
+     rvm install ruby-2.0.0-p0
+
+To set it to default
+
+     rvm --default use 2.0.0-p0
+
+Check this worked correctly
+
+     ruby -v
+     which ruby
+
+To show what ruby is currently the selected default, if any, do
+
+     rvm list default
+
+
+# References: 
+
+rvm.io install - https://rvm.io/rvm/install/
+rvm.io best practices - https://rvm.io/rvm/best-practices/
+     
+
+# Official Site: 
+
+rvm.io - https://rvm.io/
+
+
+# Issues: 
+
+rvm.io-troubleshooting - https://rvm.io/support/troubleshooting/

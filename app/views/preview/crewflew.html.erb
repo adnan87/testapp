@@ -95,6 +95,8 @@
 		}
 	})
 </script>
+<% if @candidates.blank? %>
+<% else %>
 <% @candidates.each do |candidate| %>
 <section id="secUserIdentity_<%= candidate.id %>" class="user_identity" style="min-height: 520px; vertical-align: top">
 	<div class="User_img" id="lnkProfile_<%= candidate.id %>" >
@@ -118,13 +120,15 @@
 		<div class="user_detail">
 			<a href="#" style="text-decoration: none"><h6><%= candidate.job_role%></h6></a>
 			<ul>
-				<% candidate.skill_tags.split(",").each do |skill| %>
-				<li>
-					<a href="#" class="btn grey_btn">
-						<%= skill %>
-					</a>
-				</li>
-				<% end %>
+				<%# if candidate.skill_tags %>
+					<% candidate.skill_tags.split(",").each do |skill| %>
+						<li>
+							<a href="#" class="btn grey_btn">
+								<%= skill %>
+							</a>
+						</li>
+					<% end %>
+				<%# end %>
 			</ul>
 		</div>
 	</div>
@@ -134,4 +138,5 @@
 	</p>
 
 </section>
+<% end %>
 <% end %>

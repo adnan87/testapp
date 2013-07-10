@@ -3,7 +3,7 @@
 
 $(function() {
 
-	var BigDay = new Date('<%#= (@takeoff.enddate).strftime("%B %d, %Y %H:%M:%S") %> ');
+	var BigDay = new Date('<%= (@takeoff.enddate).strftime("%B %d, %Y %H:%M:%S") %> ');
 	var msPerDay = 24 * 60 * 60 * 1000;
 	
 	var ServerDate = new Date('<%= DateTime.now.in_time_zone('Eastern Time (US & Canada)').strftime("%B %d, %Y %H:%M:%S")%>');

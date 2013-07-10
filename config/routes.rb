@@ -101,6 +101,7 @@ IJET::Application.routes.draw do
   get "preview/employer"
   get "preview/viewtalent"
   get "preview/content"
+  get "preview/preview_takeoff"
   
   match 'preview' => 'preview#index'
   match 'preview/talent/:id' => 'preview#takeoff'

@@ -18,7 +18,7 @@
 			<td><%= l takeoff.startdate %></td>
 			<td><%= l takeoff.enddate %></td>
 			<td><%= takeoff.active %></td>
-			<td><a href="/previewtakeoff/<%= takeoff.id%>" target="_blank" style="color: #ff0000">PREVIEW</a></td>
+			<td><%= link_to "PREVIEW",preview_preview_takeoff_path(:id=>takeoff.id) %><!-- <a href="/previewtakeoff/<%= takeoff.id%>" target="_blank" style="color: #ff0000">PREVIEW</a> --></td>
 		</tr>
 		<% end %>
 		<% end %>

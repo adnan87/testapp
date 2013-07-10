@@ -266,12 +266,7 @@ class PreviewController < ApplicationController
   
   def preview_takeoff
     @takeoff = Takeoff.limit(1).find_by_id(params[:id])
-        
-    
-    
     @candidates = Candidate.find(:all, :conditions => { 'candidates.featured' => true, 'candidates.takeoff_id' => @takeoff.id  })      
-    
-
   end
   #this is used to pick the layout file based on the controller
   private
