@@ -1,0 +1,50 @@
+<%- model_class = Employer -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => t('helpers.titles.new', :model => model_class.model_name.human,
+                                 :default => "New #{model_class.model_name.human}") %></h1>
+</div>
+<%= render :partial => 'form' %>
+
+<script>
+	$('document').ready(function() {
+
+		tinyMCE.init({
+			mode : 'textareas',
+			theme : 'simple',
+			onchange_callback : function(editor) {
+				tinyMCE.triggerSave();
+				$("#" + editor.id).valid();
+			}
+		});
+
+	});
+
+	$(document).ready(function() {
+
+		$.validator.setDefaults({
+			ignore : ''
+		});
+		$("#new_employer").validate({
+			rules : {
+				"employer[name]" : {
+					required : true,
+				},
+				"employer[email]" : {
+					required : true,
+					email : true
+				},
+				"employer[phone]" : {
+					required : true
+				},
+				"employer[website]" : {
+					url : true
+				}
+			},
+			messages : {
+				"employer[name]" : "Enter your full name*",
+				"employer[email]" : "Enter your email*"
+			}
+		});
+
+	}); 
+</script>

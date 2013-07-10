@@ -1,0 +1,145 @@
+<%= form_for @takeoff, :html => { :class => 'form-horizontal' } do |f| %> <script src="/assets/jquery-ui-timepicker-addon.js"></script>
+<link rel="stylesheet" media="all" type="text/css" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css">
+<style>
+	/* css for timepicker */
+	.ui-timepicker-div .ui-widget-header {
+		margin-bottom: 8px;
+	}
+	.ui-timepicker-div dl {
+		text-align: left;
+	}
+	.ui-timepicker-div dl dt {
+		height: 25px;
+		margin-bottom: -25px;
+	}
+	.ui-timepicker-div dl dd {
+		margin: 0 10px 10px 65px;
+	}
+	.ui-timepicker-div td {
+		font-size: 90%;
+	}
+	.ui-tpicker-grid-label {
+		background: none;
+		border: none;
+		margin: 0;
+		padding: 0;
+	}
+
+	.ui-timepicker-rtl {
+		direction: rtl;
+	}
+	.ui-timepicker-rtl dl {
+		text-align: right;
+	}
+	.ui-timepicker-rtl dl dd {
+		margin: 0 65px 10px 10px;
+	}
+	#ui-datepicker-div, .ui-datepicker {
+		font-size: 11px;
+	}
+
+</style>
+<div class="row-fluid">
+	<div class="span6">
+		<ul class="unstyled" style="padding: 15px;">
+			<li>
+				<%= label_tag(:name, "Name :*") %>
+
+				<%= f.text_field :name, :class => 'span12' %>
+			</li>
+			<li>
+				<%= label_tag(:active, "Active :") %>
+
+				<%= f.check_box :active, :class => 'span12' %>
+			</li>
+		</ul>
+	</div>
+	<div class="span6">
+		<ul class="unstyled" style="padding: 15px;">
+			<li>
+				<%= label_tag(:startdate, "Start Date: * ")%>
+				<%= f.text_field :startdate, :value => (@takeoff.startdate.blank? ? '' :@takeoff.startdate.strftime("%Y-%m-%d %H:%M")) %>
+				<!--<%= f.text_field :startdate, :class => 'span12' %> -->
+			</li>
+			<li>
+				<%= label_tag(:enddate, "End Date: * ")%>
+				<%= f.text_field :enddate, :value => (@takeoff.enddate.blank? ? '' :@takeoff.enddate.strftime("%Y-%m-%d %H:%M")) %>
+				<!--<%= f.text_field :enddate, :class => 'span12' %> -->
+			</li>
+			
+		</ul>
+	</div>
+</div>
+<div class="form-actions" style="padding-left: 0px; text-align: center">
+	<ul class="unstyled">
+		<li class="error error-large">
+			* - Mandatory Fields
+		</li>
+		<% @takeoff.errors.full_messages.each do |message| %>
+		<li class="error error-large">
+			<%= message %>
+		</li>
+		<% end %>
+	</ul>
+	<%= f.submit 'Save', :class => 'btn btn-primary btn-large' %>
+	<%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+	@takeoff, :class => 'btn btn-large' %>
+</div>
+
+<script>
+	$(document).ready(function() {
+		var startDateTextBox = $('#takeoff_startdate');
+		var endDateTextBox = $('#takeoff_enddate');
+
+		
+		 $("#takeoff_startdate").datetimepicker({
+		 //minDate: 0,
+		 // maxDate: "+6M"
+		 defaultDate : "+1w",
+		 //	changeMonth : true,
+		 numberOfMonths : 2,
+		 dateFormat : "yy-mm-dd",
+		 timezone: -240,
+		 hourGrid: 4,
+		 minuteGrid: 15,
+		 onClose : function(dateText, inst) {
+				/*if (endDateTextBox.val() != '') {
+					var testStartDate = startDateTextBox.datetimepicker('getDate');
+					var testEndDate = endDateTextBox.datetimepicker('getDate');
+					if (testStartDate > testEndDate) {
+						endDateTextBox.datetimepicker('setDate', testStartDate);
+					}
+					$("#takeoff_enddate").datetimepicker("option", "minDate", testStartDate);
+				} else {
+					endDateTextBox.val(dateText);
+				}*/
+			}
+		 });
+		 $("#takeoff_enddate").datetimepicker({
+		 defaultDate : "+1w",
+		 //changeMonth : true,
+		 numberOfMonths : 2,
+		 dateFormat : "yy-mm-dd",
+		 timezone: -240,
+		 hourGrid: 4,
+		 minuteGrid: 15,
+		 onClose : function(dateText, inst) {
+				/*if (startDateTextBox.val() != '') {
+					var testStartDate = startDateTextBox.datetimepicker('getDate');
+					var testEndDate = endDateTextBox.datetimepicker('getDate');
+					if (testStartDate > testEndDate) {
+						startDateTextBox.datetimepicker('setDate', testEndDate);
+					}
+					$("#takeoff_startdate").datepicker("option", "maxDate", testEndDate);
+				} else {
+					startDateTextBox.val(dateText);
+				}*/
+			}
+		 });
+
+		 
+
+	});
+
+</script>
+<% end %>

@@ -1,0 +1,41 @@
+/*
+Table Of Content:
+
+1.) Home Page Content
+2.) User Grid Content
+--------------------------------*/
+
+/*
+1.) Home Page Content
+--------------------------------*/
+#wrapper{
+	position:inherit;
+	min-height:0;
+}
+#content{
+	padding-bottom:0px;
+}
+#footer{
+	position:inherit;
+	bottom:inherit;
+}
+
+/*
+2.) User Grid Content
+--------------------------------*/
+.user_data {
+	width:906px;
+	margin:0 auto;
+	display:block;
+	overflow:hidden;
+}
+.user_identity{
+	float:left;
+}
+.bio_graphi {
+	padding: 18px 22px 0px 20px;
+	font-size: 1.4em;
+	max-height: 335px; 
+	overflow-y: auto; 
+}
+

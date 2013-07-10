@@ -1,0 +1,79 @@
+<%= stylesheet_link_tag    "responsive_table", :media => "all" %>
+<div class="page-header">
+	<% if params[:filter] %>
+	<h1>Reports - <%= params[:filter] %></h1>
+	<% else %>
+	
+	<h1>Reports - Current Week </h1>
+	<% end %>
+</div>
+<div class="row-fluid" >
+	<div class="span8 offset4" style="text-align: right">
+		<ul class="inline">
+			<li>
+				View :
+			</li>
+			<li>
+				<%= link_to "Today", reports_url(:filter => "today"), :class => "badge"%>
+			</li>
+			<li>
+				<%= link_to "Week", reports_url(:filter => "week"), :class => "badge"%>
+			</li>
+			<li>
+				<%= link_to "Month", reports_url(:filter => "month"), :class => "badge"%>
+			</li>
+			<li>
+				<%= link_to "All", reports_url(:filter => "all"), :class => "badge"%>
+			</li>
+		</ul>
+	</div>
+</div>
+
+<div class="row-fluid">
+	<h3>Candidate & Employer Stats</h3>
+<div class="table">
+	<div class="row table-head">
+		<div class="column" data-label="# of Candidates">
+			# of Candidates
+		</div>
+		<div class="column" data-label="# of Employers">
+			# of Employers
+		</div>
+	</div>
+	<div class="row">
+		<div class="column" data-label="# of Candidates">
+			<%= @candidate.count %>
+		</div>
+		<div class="column" data-label="# of Employers">
+			<%= @employer.count %>
+		</div>
+	</div>
+</div>
+
+<div class="row-fluid">
+	<h3>Interview Stats</h3>
+<div class="table">
+	<div class="row table-head">
+		<div class="column" data-label="# of Interview Requests">
+			# of Interview Requests
+		</div>
+		<div class="column" data-label="# of Interview Accepted">
+			# of Interviews Accepted
+		</div>
+		<div class="column" data-label="# of Interview Declined">
+			# of Interviews Declined
+		</div>
+	</div>
+	<div class="row">
+		<div class="column" data-label="# of Interview Requests">
+			<%= @interview_requested.count %>
+		</div>
+		<div class="column" data-label="# of Interview Accepted">
+			<%= @interview_accepted.count %>
+		</div>
+		<div class="column" data-label="# of Interview Declined">
+			<%= @interview_declined.count %>
+		</div>
+	</div>
+</div>
+</div>

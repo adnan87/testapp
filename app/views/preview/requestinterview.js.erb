@@ -1,0 +1,21 @@
+<%= remotipart_response do %>
+  // Display a Javascript alert
+  //alert('success!');
+  <% if remotipart_submitted? %>
+    //alert('submitted via remotipart')
+  <% else %>
+    //alert('submitted via native jquery-ujs')
+  <% end %>
+  $("#bRequestedInterview").val(0);
+  $("#lnkProcessRequestInterview").html('SEND <span class="ipod_none">APPLICATION</span>');
+  $("#divInterviewApplicationThankYou").show();
+  $("html, body").animate({ scrollTop: 0 }, 600);
+  $(function() { // wait for the DOM
+    setTimeout(function () {
+        var $modal = $('#myModalInterviewApplication'); // your selector; cache it; only query the DOM once!
+    
+        $modal.modal('hide'); // show modal; this happens after 3 seconds 
+        
+    }, 3000);
+});
+<% end %>

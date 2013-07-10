@@ -1,0 +1,51 @@
+<%- model_class = Takeoff -%>
+<div class="page-header">
+	<h1><%= t '.title', :default => model_class.model_name.human.pluralize %></h1>
+</div>
+<div class="row-fluid" >
+	<div class="span1">
+		<%= link_to t('.new', :default => t("helpers.links.new")),
+		new_takeoff_path,
+		:class => 'btn btn-primary' %>
+	</div>
+
+<div class="span2">
+		<ul>
+	   		<li class="dropdown" style="list-style:none;">
+    	<a class="dropdown-toggle"  data-toggle="dropdown" href="#" style="text-decoration: none;">
+    		<i class="icon-filter"></i>Sort By <b class="caret"></b></a>
+
+    	<ul class="dropdown-menu" \>
+	      <li>
+				<%= link_to raw("<i class='icon-envelope'></i> Name"), sort_takeoff_takeoffs_path(:sortby => "Title"), :remote=>true%>
+			</li>
+	      <li>
+				<%= link_to raw("<i class='icon-calendar'></i> Start Date"), sort_takeoff_takeoffs_path(:sortby => "Start Date"), :remote=>true%>
+		  </li>
+		  <li>
+				<%= link_to raw("<i class='icon-calendar'></i> End Date"), sort_takeoff_takeoffs_path(:sortby => "End Date"), :remote=>true%>
+		  </li>
+		  <li>
+				<%= link_to raw("<i class='icon-check'></i> Active"), sort_takeoff_takeoffs_path(:sortby => "Active"), :remote=>true%>
+		  </li>
+    	</ul>
+        </li>	
+	   	</ul>
+	</div>
+	<div class="span9"><p>Sorted By: <b class="sort"></b></p></div>
+</div>
+<div class="row-fluid">
+   <div id="data-index">
+      <%= render :partial => "list" -%> 
+    </div>
+</div>
+<script>
+$(document).ready(function(){
+	$('.span9 p').hide();
+	$('.dropdown-menu li a').click(function(){ 
+		$('.span9 p').show();
+		$('.sort').html($(this).text());
+		$('li').removeClass('open');
+	})
+})
+</script>

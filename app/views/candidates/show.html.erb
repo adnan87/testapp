@@ -1,0 +1,152 @@
+<%- model_class = Candidate -%>
+<div class="page-header">
+	<h1><%= t '.title', :default => model_class.model_name.human %></h1>
+</div>
+<div class="row-fluid" style="text-align: right">
+	<a href="/preview/viewtalent/<%= @candidate.id%>" target="_blank" style="font-weight: bold; font-size: 16px; color: #ff0000">PREVIEW</a>
+</div>
+<div class="row-fluid">
+	<div class="span6">
+		<dl class="dl-horizontal">
+			<dt>
+				<strong><%= model_class.human_attribute_name(:email) %>:</strong>
+			</dt>
+			<dd>
+				&nbsp;<%= @candidate.email %>
+			</dd>
+			<dt>
+				<strong><%= model_class.human_attribute_name(:name) %>:</strong>
+			</dt>
+			<dd>
+				&nbsp;<%= @candidate.name %>
+			</dd>
+			<dt>
+				<strong><%= model_class.human_attribute_name(:phone) %>:</strong>
+			</dt>
+			<dd>
+				&nbsp;<%= @candidate.phone %>
+			</dd>
+			<dt>
+				<strong><%= model_class.human_attribute_name(:linkedin_url) %>:</strong>
+			</dt>
+			<dd>
+				&nbsp;<%= link_to @candidate.linkedin_url, @candidate.linkedin_url, :target => "_blank" %>
+			</dd>
+			<dt>
+				<strong><%= model_class.human_attribute_name(:other_url) %>:</strong>
+			</dt>
+			<dd>
+				&nbsp;<%= link_to @candidate.other_url, @candidate.other_url, :target => "_blank" %>
+			</dd>
+		</dl>
+	</div>
+	<div class="span6">
+		<dl class="dl-horizontal">
+
+			<dt>
+				<strong><%= model_class.human_attribute_name(:resume) %>:</strong>
+			</dt>
+			<dd>
+				&nbsp;<%= @candidate.resume.to_s.html_safe %>
+			</dd>
+			<dt>
+				<strong><%= model_class.human_attribute_name(:resume_file) %>:</strong>
+			</dt>
+			<dd>
+				&nbsp;<!--<%= @candidate.resume_file %>-->
+				<% if @candidate.resume_file.present? %>
+				<%= link_to 'Download', @candidate.resume_file.url, target: "_blank" %>
+				<% end %>
+				
+			</dd>
+		</dl>
+
+	</div>
+</div>
+<div class="row-fluid">
+	<div class="span6">
+		<dl class="dl-horizontal">
+			<dt>
+				<strong><%= model_class.human_attribute_name(:anonymous) %>:</strong>
+			</dt>
+			<dd>
+				&nbsp;<%= @candidate.anonymous %>
+			</dd>
+			<dt>
+				<strong><%= model_class.human_attribute_name(:availability_status) %>:</strong>
+			</dt>
+			<dd>
+				&nbsp;<%= @candidate.availability_status %>
+			</dd>
+			<dt>
+				<strong><%= model_class.human_attribute_name(:location_tag) %>:</strong>
+			</dt>
+			<dd>
+				&nbsp;<%= @candidate.location_tag %>
+			</dd>
+			<dt>
+				<strong><%= model_class.human_attribute_name(:location) %>:</strong>
+			</dt>
+			<dd>
+				&nbsp;<%= @candidate.location %>
+			</dd>
+			<dt>
+				<strong><%= model_class.human_attribute_name(:skill_tags) %>:</strong>
+			</dt>
+			<dd>
+				&nbsp;<%= @candidate.skill_tags %>
+			</dd>
+			<dt>
+				<strong><%= model_class.human_attribute_name(:skill_set) %>:</strong>
+			</dt>
+			<dd>
+				&nbsp;<%= @candidate.skill_set %>
+			</dd>
+			<dt>
+				<strong><%= model_class.human_attribute_name(:background_image) %>:</strong>
+			</dt>
+			<dd>
+				&nbsp;<%= image_tag @candidate.profile_image, :width => "50%" %>
+			</dd>
+		</dl>
+	</div>
+	<div class="span6">
+		<dl class="dl-horizontal">
+			<dt>
+				<strong><%= model_class.human_attribute_name(:candidate_pitch) %>:</strong>
+			</dt>
+			<dd>
+				&nbsp;<%= @candidate.candidate_pitch.to_s.html_safe %>
+			</dd>
+			<dt>
+				<strong><%= model_class.human_attribute_name(:job_role) %>:</strong>
+			</dt>
+			<dd>
+				&nbsp;<%= @candidate.job_role %>
+			</dd>
+		</dl>
+	</div>
+</div>
+<%  @candidate.portfolios.all.each do |portfolio| %>
+<div class="row-fluid">
+	<div class="span12">
+		<dl class="dl-horizontal">
+			<dt>
+				<strong><%= portfolio.title %>:</strong>
+			</dt>
+			<dd>
+				&nbsp;<%= image_tag portfolio.slider_image, :width => "50%" %>
+			</dd>
+		</dl>
+	</div>
+</div>
+<% end %>
+<div class="form-actions">
+	<p style="text-align: center">
+	<%= link_to t('.back', :default => t("helpers.links.back")),
+	candidates_path, :class => 'btn'  %>
+	
+	<%= link_to t('.edit', :default => t("helpers.links.edit")),
+	edit_candidate_path(@candidate), :class => 'btn' %>
+	</p>
+</div>

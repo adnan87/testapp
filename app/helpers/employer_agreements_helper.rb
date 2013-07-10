@@ -1,0 +1,2 @@
+module EmployerAgreementsHelper
+end

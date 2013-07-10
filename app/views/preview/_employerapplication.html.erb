@@ -1,0 +1,200 @@
+<%= form_for @employer, :url => { :action => :employerrequest } , :remote => true do |f| %>
+<div class="talent_form">
+
+	<div class="talent_inputarea employer_inputarea">
+		<%= f.text_field :email, :placeholder => "Email Address", :readonly => true %>
+		<%= f.text_field :firstname, :placeholder => "First Name*" %>
+		<%= f.text_field :lastname, :placeholder => "Last Name*" %>
+		<%= f.text_field :companyname, :placeholder => "Company Name*" %>
+		<%= f.text_field :phone, :placeholder => "Phone Number" %>
+		<%= f.text_field :website, :placeholder => "Company URL" %>
+	</div>
+	<div class="employer_titles">
+		<div class="job_title">
+			<h5>Job Titles</h5>
+			<% JobTitle.all.each do |jobtitle| %>
+			<div class="checkbox"> 
+				<%= check_box_tag  'employer[job_title_ids][]', jobtitle.id, @employer.job_title_ids.include?(jobtitle), :id => 'employer_job_title_ids_' + jobtitle.id.to_s %>
+				<%= label_tag 'employer_job_title_ids_' + jobtitle.id.to_s, jobtitle.name %> 
+			</div>
+			<% end %>
+			<!--
+			<label class="checkbox">
+				<input type="checkbox" value="">
+				Back End Developer </label>
+			<label class="checkbox">
+				<input type="checkbox" value="">
+				Front End Developer </label>
+			<label class="checkbox">
+				<input type="checkbox" value="">
+				Sys Admin </label>
+			<label class="checkbox">
+				<input type="checkbox" value="">
+				Designers </label>
+			<label class="checkbox">
+				<input type="checkbox" value="">
+				Project Managers </label>
+			-->
+		</div>
+		<div class="job_title">
+			<h5>Coding Languages</h5>
+			
+			<% Skill.all.each do |skill| %>
+			<div class="checkbox"> 
+				<%= check_box_tag  'employer[skill_ids][]', skill.id, @employer.skill_ids.include?(skill), :id => 'employer_skill_ids_' + skill.id.to_s %>
+				<%= label_tag 'employer_skill_ids_' + skill.id.to_s, skill.name %> 
+			</div>
+			<% end %>
+			
+			<!--
+			<label class="checkbox">
+				<input type="checkbox" value="">
+				Ruby On Rails </label>
+			<label class="checkbox">
+				<input type="checkbox" value="">
+				Java </label>
+			<label class="checkbox">
+				<input type="checkbox" value="">
+				C++ </label>
+			<label class="checkbox">
+				<input type="checkbox" value="">
+				Python </label>
+			-->
+		</div>
+	</div>
+
+</div>
+<div class="application_btn">
+	<a href="javascript:void(0)" id="lnkCancelEmployerApplication" class="btn btn-large btn-block cancel_btn">CANCEL</a><a href="javascript:void(0)" id="lnkSendEmployerApplication" class="btn btn-large btn-block send_btn">SEND <span class="ipod_none">APPLICATION</span></a>
+</div>
+
+<script>
+
+$("#lnkCancelEmployerApplication").click(function () {
+	$("#myModal2").modal('hide');
+	return false;
+})
+	$("#lnkSendEmployerApplication").click(function() {
+		
+		var iResult = ValidateEmployerApplication();
+		
+		if (iResult == true) {
+
+			var iMessage = 'SEND <span class="ipod_none">APPLICATION</span>';
+
+			var valuesToSubmit = $('#new_employer').serialize();
+
+			
+			$("#lnkSendEmployerApplication").html('PROCESSING');
+
+			$.ajax({
+				type : "POST",
+				//contentType : 'multipart/form-data',
+				url : $('#new_employer').attr('action'), //sumbits it to the given url of the form
+				data : valuesToSubmit,
+				dataType : "JSON" // you want a difference between normal and ajax-calls, and json is standard
+			}).success(function(json) {
+				//act on result.
+				$("#lnkSendEmployerApplication").html(iMessage);
+				$("#myModal2").modal('hide');
+				$("#myModalEmployerSuccess").modal();
+				//alert("profile created")
+			}).error(function(json) {
+				//act on result.
+				$("#lnkSendEmployerApplication").html(iMessage);
+				var result = json.responseText;
+				alert(result);
+			});
+		}
+		return false;
+		// prevents normal behaviour
+
+	});
+
+		$("form#new_employer :input").blur(function () {
+			ValidateEmployerApplication() 
+		})
+
+	function ValidateEmployerApplication() {
+		var element;
+		var iResult = false;
+
+		//Check for first and last name
+		//Check for first and last name
+		element = "#employer_firstname";
+
+		if ($(element).val() == "") {
+			//$(element).css("border", "1px solid #ff0000");
+			$(element).addClass('input-error');
+			//alert('first name required')
+			iResult = false;
+		} else {
+			//$(element).css("border", "1px solid #cccccc");
+			$(element).removeClass('input-error');
+			$(element).addClass('input-success');
+			iResult = true;
+		}
+
+		if (iResult == true) {
+			element = "#employer_lastname";
+		
+		if ($(element).val() == "") {
+			//$(element).css("border", "1px solid #ff0000");
+			$(element).addClass('input-error');
+			iResult = false;
+		} else {
+			//$(element).css("border", "1px solid #CCCCCC");
+			$(element).removeClass('input-error');
+			$(element).addClass('input-success');
+			element = "#employer_companyname";
+			if ($(element).val() == "") {
+				//$(element).css("border", "1px solid #ff0000");
+				$(element).addClass('input-error');
+				iResult = false;
+			} else {
+
+				//$(element).css("border", "1px solid #CCCCCC");
+				$(element).removeClass('input-error');
+				$(element).addClass('input-success');
+				element = "#employer_website";
+				value = $(element).val();
+
+				if (value != "") {
+					if (value.substr(0, 7) != 'http://') {
+						value = 'http://' + value;
+					}
+					if (value.substr(value.length - 1, 1) != '/') {
+						value = value + '/';
+					}
+
+					filter = /^(http|https|ftp):\/\/[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/i;
+
+					if (!filter.test(value)) {
+						//$(element).css("border", "1px solid #ff0000");
+						$(element).addClass('input-error');
+						iResult = false;
+					} else {
+						//$(element).css("border", "1px solid #CCCCCC");
+						$(element).removeClass('input-error');
+						$(element).addClass('input-success');
+						
+						iResult = true;
+					}
+				} else {
+
+					//$(element).css("border", "1px solid #CCCCCC");
+					$(element).removeClass('input-error');
+			
+					iResult = true;
+
+				}
+			}
+		}
+		}
+		
+
+		return iResult;
+	}
+
+</script>
+<% end %>

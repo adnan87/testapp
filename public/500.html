@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+		<title>Welcome to Interview Jet - We're sorry, but something went wrong.</title>
+		
+		<link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+		<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,800,700,600,300' rel='stylesheet' type='text/css'>
+		<link rel="stylesheet" href="/assets/ijet.css" media="screen">
+		<link rel="stylesheet" href="/assets/global.css" media="screen">
+		<link rel="stylesheet" href="/assets/style.css" media="screen">
+		<link rel="stylesheet" href="/assets/handheld.css" media="screen and (max-width:959px)">
+		<link rel="stylesheet" href="/assets/mobile.css" media="screen and (max-width:767px)">
+		<link rel="stylesheet" href="/assets/tablet.css" media="screen and (min-width:768px) and (max-width:959px)">
+		<link rel="stylesheet" href="/assets/tablet-landscape.css" media="screen and (min-width:960px) and (max-width:1024px)">
+		<!--[if lt IE 9]>
+		<script src="/assets/html5shiv.js"></script>
+		<script src="/assets/css3-mediaqueries.js"></script>
+		<script src="/assets/imgsizer.js"></script>
+		<link rel="stylesheet" type="text/css" href="/assets/ie.css" media="screen">
+		<![endif]-->
+
+		<script src="/assets/jquery-1.9.1.min.js"></script>
+		
+	<script src="/assets/jquery.placeholder.min.js"></script>
+
+		<script type="text/javascript">
+			var wt;
+			$(document).ready(function() {
+				wt = $(window).height() / 2
+				$(window).resize(function() {
+					wt = $(window).height() / 2
+				});
+			});
+		</script>
+		<script src="/assets/jquery.backstretch.min.js"></script>
+		<script>
+			function updateOrientation() {
+				//bgElement.resize();
+			}
+
+
+			$(document).ready(function() {
+				var ua = navigator.userAgent
+				//alert(ua)
+				if (ua.indexOf('Version/4.0') > -1 && ua.indexOf('Android') > -1) {
+					$("body").addClass("android-default");
+				} else {
+					$.backstretch("/assets/404-bg.jpg", {
+						speed : 1
+					});
+				}
+			})
+		</script>
+
+		
+
+	</head>
+	<body onorientationchange="updateOrientation();">
+		<!--Page Wrapper-->
+		<div id="wrapper">
+			<!--Content Section-->
+			<div id="content" class="content_banner" style="text-align: center">
+				<div class="container-fluid">
+					<div class="row-fluid">
+						<div class="interview_content" style="padding: 20% 0 0; display: inline-block">
+							<a href="/" class="brand"><img src="/assets/logo.png" alt="Website Logo" title="Welcome to Interview Jet" /></a>
+							<div class="email_section">
+								<p>
+									OOPS... we hit a technical snag...<br/>
+									We're sorry, but something went wrong.
+									
+								</p>
+								
+							</div>
+							
+						
+						</div>
+					</div>
+				</div>
+			</div>
+			<!--Content Section-->
+			<!--Footer Section-->
+			<footer id="footer">
+				<div class="container-fluid">
+					<div class="row-fluid">
+						<div class="footer_content">
+							<div class="footer_logo">
+								<div class="footer_small_logo">
+									<a href="/"><img src="/assets/footer-logo.png" alt="Website Logo" /></a>
+								</div>
+								<nav class="footer_list">
+									<ul class="nav">
+										<li>
+											<a href="/faq">FAQ</a>
+										</li>
+										<li>
+											<a href="/about">About Us</a>
+										</li>
+										<!--<li>
+											<a href="javascript:void(0)">Talent Application</a>
+										</li>-->
+										<li>
+											<a href="/terms">Terms Of Use</a>
+										</li>
+										<li>
+											<a href="/privacy">Privacy</a>
+										</li>
+									</ul>
+									<ul class="nav none_border">										
+										<li>
+											<a href="javascript:void(0)">LinkedIn</a>
+										</li>
+										<li>
+											<a href="javascript:void(0)">Twitter</a>
+										</li>
+										<li>
+											<a href="javascript:void(0)">Facebook</a>
+										</li>
+									</ul>
+								</nav>
+							</div>
+							<div class="footer_address">
+								<a href="#" class="small_logo"><img src="/assets/footer-logo.png" alt="Website Logo" /></a>
+								<address>
+									315 W38th Street Suite 1301
+									<br>
+									New York, New York 10038
+								</address>
+								<span class="made_In">Made In <strong>NYC</strong></span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</footer>
+			<!--Footer Section-->
+		</div>
+		<!--Page Wrapper-->
+
+		
+		<script src="/assets/bootstrap.js"></script>
+		
+		
+		
+		
+		<!--IE 8 Light Box 4-->
+		<div id="myModalIE8" class="modal hide fade invalid_email" style="top:50px" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false" aria-hidden="true">
+			<h4>Warning! Your browser is really old.</h4>
+			<p>
+				 Our website probably won't display correctly for you.<br/>
+				 For a less-frustrating experience, please download latest version of <a href="http://www.microsoft.com/ie" target="_blank" href="#">Internet Explorer</a> or use Firefox or Chrome for a less-frustrating experience
+			</p>
+			<a href="http://www.microsoft.com/ie" target="_blank" class="btn btn-large btn-block continue_btn">DOWNLOAD</a>
+		</div>
+		<!--IE 8 Light Box 4-->
+		<!--[if lt IE 9 ]>
+			<script>
+			var is_ie_lt9 = true;
+			$("#myModalIE8").modal();
+			</script>
+		<![endif]--> 
+		
+		<script>
+			$(document).ready(function () {
+				window.setInterval(function() {
+					window.location = "/";
+				}, 10000);
+			})
+		</script>
+	</body>
+</html>
+

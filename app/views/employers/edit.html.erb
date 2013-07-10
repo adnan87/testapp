@@ -1,0 +1,61 @@
+<%- model_class = Employer -%>
+<div class="page-header">
+	<h1><%= t '.title', :default => t('helpers.titles.edit', :model => model_class.model_name.human,
+	:default => "Edit #{model_class.model_name.human}") %></h1>
+</div>
+<%= render :partial => 'form' %>
+<script>
+	$('document').ready(function() {
+
+		tinyMCE.init({
+			mode : 'textareas',
+			theme : 'simple',
+			onchange_callback : function(editor) {
+				tinyMCE.triggerSave();
+				$("#" + editor.id).valid();
+			}
+		});
+
+	});
+
+	$(document).ready(function() {
+		$.validator.addMethod("cus_url", function(value, element) {
+			if (value.substr(0, 7) != 'http://') {
+				value = 'http://' + value;
+			}
+			if (value.substr(value.length - 1, 1) != '/') {
+				value = value + '/';
+			}
+			return this.optional(element) || /^(http|https|ftp):\/\/[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/i.test(value);
+		}, "Not valid url.");
+		$.validator.setDefaults({
+			ignore : ''
+		});
+		$('form[id^="edit_employer"]').validate({
+			rules : {
+				"employer[firstname]" : {
+					required : true,
+				},
+				"employer[lastname]" : {
+					required : true,
+				},
+				"employer[email]" : {
+					required : true,
+					email : true
+				},
+				"employer[phone]" : {
+					required : true
+				},
+				"employer[website]" : {
+					cus_url : true
+				}
+			},
+			messages : {
+				"employer[firstname]" : "Enter your first name*",
+				"employer[lastname]" : "Enter your last name*",
+				"employer[email]" : "Enter your email*"
+			}
+		});
+
+	}); 
+</script>

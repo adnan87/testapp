@@ -1,0 +1,164 @@
+<%= form_for @candidate, :url => { :action => :createfeatured }, :html => { :class => 'form-horizontal', :multipart => true }, :remote => true do |f| %>
+<div class="row-fluid">
+	<div class="span6">
+		<ul class="unstyled" style="padding: 15px;">
+			<li>
+				<%= label_tag(:email, "Email :*") %>
+
+				<%= f.text_field :email, :class => 'span12' %>
+			</li>
+			<li>
+				<%= label_tag(:name, "Name :*")%>
+				<%= f.text_field :name, :class => 'span12' %>
+			</li>
+			<li>
+				<%= label_tag(:phone, "Phone :")%>
+				<%= f.text_field :phone, :class => 'span12'  %>
+			</li>
+			<li>
+				<%= label_tag(:linkedin_url, "**Linkedin URL :") %>
+				<%= f.text_field :linkedin_url, :class => 'span12' %>
+			</li>
+			<li>
+				<%= label_tag(:other_url, "Other URL :") %>
+				<%= f.text_field :other_url, :class => 'span12' %>
+			</li>
+		</ul>
+	</div>
+	<div class="span6">
+		<ul class="unstyled" style="padding: 15px;">
+			<li>
+				<%= label_tag(:resume, "**Enter your resume:")%>
+				<%= f.text_area :resume, :class => 'span12 tinymce', :cols => 10, :rows => 9%>
+			</li>
+			<li>
+				<%= label_tag(:resume_file, "**Upload your resume: (word/pdf)")%>
+				<%= f.file_field :resume_file %>
+			</li>
+		</ul>
+	</div>
+</div>
+</div>
+<div class="form-actions" style="padding-left: 0px; text-align: center">
+	<ul class="unstyled">
+		<li class="error error-large">
+			* - Mandatory Fields
+		</li>
+		<li>
+			** - Any one of the field is mandatory
+		</li>
+		<% @candidate.errors.full_messages.each do |message| %>
+		<li class="error error-large">
+			<%= message %>
+		</li>
+		<% end %>
+	</ul>
+	<a href="#" id="lnkSubmit">Click here to submit </a>
+	<%= f.submit 'Get Featured', :class => 'btn btn-primary btn-large', :id => "btnSubmit" %>
+
+	<!--<%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+	root_path, :class => 'btn btn-large' %> -->
+
+</div>
+<script>
+	$("#lnkSubmit").click(function(e) {
+		e.preventDefault();
+		$("#btnSubmit").click();
+	})
+	$('document').ready(function() {
+
+		tinyMCE.init({
+			mode : 'textareas',
+			theme : 'simple',
+			onchange_callback : function(editor) {
+				tinyMCE.triggerSave();
+				$("#" + editor.id).valid();
+			}
+		});
+
+	});
+
+	$(document).ready(function() {
+		$.validator.addMethod("linkedinurl", function(value, element) {
+			return this.optional(element) || /linkedin.com/.test(value);
+		}, "Please specify a valid linkedin url");
+
+		// custom method for url validation with or without http://
+		$.validator.addMethod("cus_url", function(value, element) {
+			if (value.substr(0, 7) != 'http://') {
+				value = 'http://' + value;
+			}
+			if (value.substr(value.length - 1, 1) != '/') {
+				value = value + '/';
+			}
+			return this.optional(element) || /^(http|https|ftp):\/\/[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/i.test(value);
+		}, "Not valid url.");
+
+		$.validator.setDefaults({
+			ignore : ''
+		});
+		$("#new_candidate").validate({
+			submitHandler : function(form) {
+				//this runs when the form validated successfully
+				if (checkOthers()) {
+					form.submit();
+				}
+				//submit it the form
+			},
+			rules : {
+				"candidate[name]" : {
+					required : true,
+				},
+				"candidate[email]" : {
+					required : true,
+					email : true
+				},
+				"candidate[linkedin_url]" : {
+					linkedinurl : true
+				},
+				"candidate[other_url]" : {
+					cus_url : true
+				}
+			},
+			messages : {
+				"candidate[name]" : "Enter your full name*",
+				"candidate[email]" : "Enter your email*"
+			}
+		});
+		function checkOthers() {
+			var iResult = false;
+			var iValue = 0;
+
+			if ($('#candidate_resume_file').val() != "") {
+				var ext = $('#candidate_resume_file').val().split('.').pop().toLowerCase();
+				if ($.inArray(ext, ['doc', 'docx', 'pdf', 'rtf', 'txt']) == -1) {
+					alert('Please upload only doc/docx/pdf file formats!');
+					iResult = false;
+					iValue = 0;
+				} else {
+					iResult = true;
+					iValue = iValue + 1;
+				}
+
+			}
+
+			if ($('#candidate_resume').val() != "") {
+				iResult = true;
+				iValue = iValue + 1;
+			}
+
+			if ($('#candidate_linkedin_url').val() != "") {
+				iResult = true;
+				iValue = iValue + 1;
+			}
+			if (iValue < 1) {
+				iResult = false;
+				alert('We require one of the following (Linkedin URL/Resume or Resume File)');
+			}
+
+			return iResult;
+		}
+
+	}); 
+</script>
+<% end %>

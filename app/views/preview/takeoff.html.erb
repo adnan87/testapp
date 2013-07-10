@@ -1,0 +1,299 @@
+<script>
+	tmpCandidateToView = <%= @candidate_id %>;
+
+$(function() {
+
+	var BigDay = new Date('<%#= (@takeoff.enddate).strftime("%B %d, %Y %H:%M:%S") %> ');
+	var msPerDay = 24 * 60 * 60 * 1000;
+	
+	var ServerDate = new Date('<%= DateTime.now.in_time_zone('Eastern Time (US & Canada)').strftime("%B %d, %Y %H:%M:%S")%>');
+				
+	/*var BigDay = new Date('May 22, 2013 23:59');
+	var msPerDay = 24 * 60 * 60 * 1000;
+	var ServerDate = new Date('May 22, 2013 01:23');*/
+	
+	var timeLeft = (BigDay.getTime() / 1000  - ServerDate.getTime() / 1000 );
+	
+			
+				
+	//alert(BigDay);
+	//alert(ServerDate);
+	
+					
+	var _second=1;
+	var _minute=_second*60;
+	var _hour=_minute*60;
+	var _day=_hour*24;
+	var timer;
+	
+	window.setInterval(function() {
+	
+		timeLeft=timeLeft-1;
+		var distance=timeLeft;
+		
+		if (timeLeft < 0) {
+			window.location = '/crewflew';
+		}
+		
+		
+		var days=Math.floor(distance/_day);
+		var daysLeft = days;
+		var str_days = (daysLeft >= 10) ? daysLeft : '0' + (daysLeft < 1 ? 0 : daysLeft);
+	
+		var hours=Math.floor((distance%_day)/_hour);
+		var hrsLeft = hours;
+		
+		var str_hours = (hrsLeft >= 10) ? hrsLeft : '0' + (hrsLeft < 1 ? 0 : hrsLeft);
+
+		//if (daysLeft >=0 && daysLeft < 4 ){
+		//	hrsLeft =  (daysLeft) * 24;
+		//	str_hours = (hrsLeft >= 10) ? hrsLeft : '0' + (hrsLeft < 1 ? 0 : hrsLeft);
+		//}
+		
+		var minutes=Math.floor((distance%_hour)/_minute);
+		var minsLeft = minutes;
+		var str_mins = (minsLeft >= 10) ? minsLeft : '0' + (minsLeft < 1 ? 0 : minsLeft);
+		
+		
+		var seconds=Math.floor((distance%_minute)/_second);
+		var secsLeft = seconds;
+		var str_secs = (secsLeft >= 10) ? secsLeft : '0' + (secsLeft < 1 ? 0 : secsLeft);
+
+		var timeString = "";
+	
+		if (daysLeft >= 4) {
+			$("#spanHours").text(str_days);
+			$("#spanMins").text(str_hours);
+			$("#spanSecs").text(str_mins);
+			$("#smallHours").text('Days');
+			$("#smallMins").text('Hours');
+			$("#smallSecs").text('Minutes');
+		} else {
+			$("#spanHours").text(str_hours);
+			$("#spanMins").text(str_mins);
+			$("#spanSecs").text(str_secs);
+			$("#smallHours").text('Hours');
+			$("#smallMins").text('Minutes');
+			$("#smallSecs").text('Seconds');
+		}
+	}, 1000);
+	
+})
+</script>
+<% if @candidates.blank? %>
+<p>There are no candidates</p>
+<% else %>
+<% @candidates.each do |candidate| %>
+<section id="secUserIdentity_<%= candidate.id %>" class="user_identity" style="min-height: 520px; vertical-align: top">
+	<div class="User_img" id="lnkProfile_<%= candidate.id %>" >
+		<figure>
+			<a href="#javascript:void(0)" role="button" data-toggle="modal"> <%= image_tag (candidate.anonymous ? "/assets/anonymous_thumb.png" : candidate.profile_image ) %> </a>
+		</figure>
+		<% if (candidate.anonymous) %>
+		<a href="#javascript:void(0)" style="text-decoration: none">
+		<div class="overlayed active">
+
+			<img alt="" src="/assets/logo.png">
+			<span>ANONYMOUS CANDIDATE</span>
+
+		</div> </a>
+		<% end %>
+		<div id="divPreLoader_<%= candidate.id %>" class="overlayed">
+			<img alt="" src="/assets/logo.png">
+			<span>PLEASE WAIT ...</span>
+		</div>
+		<span class="user_location"><a href="#" style="text-decoration: none"><%= candidate.location_tag%></a></span>
+		<div class="user_detail">
+			<a href="#" style="text-decoration: none"><h6><%= candidate.job_role%></h6></a>
+			<ul>
+				<% candidate.skill_tags.split(",").each do |skill| %>
+				<li>
+					<a href="#" class="btn grey_btn"> <%= skill %> </a>
+				</li>
+				<% end %>
+			</ul>
+		</div>
+	</div>
+
+	<p>
+		<a href="#javascript:void(0)" id="lnkProfileOneLiner_<%= candidate.id %>"><%= candidate.one_liner.to_s.html_safe %></a>
+	</p>
+
+</section>
+<% end %>
+<% end %>
+<script>
+	// This is a functions that scrolls to #{blah}link
+	var iClickedProfile = false;
+	$('a[id^="lnkPortfolio_"]').on("click", function(event) {
+		//alert('clicked');
+		$('#myModal2').modal();
+		return false;
+	})
+	$('div[id^="lnkProfile"]').on("click", function(event) {
+
+		if (iClickedProfile == false) {
+			LoadCandidateProfile(this);
+		}
+		return false;
+	})
+	$('a[id^="lnkProfileOneLiner_"]').on("click", function(event) {
+
+		if (iClickedProfile == false) {
+			LoadCandidateProfile(this);
+		}
+		return false;
+	})
+		
+	
+	function LoadFlexSlider(id) {
+		$('.flexslider').removeData("flexslider");
+		$('.flexslider').flexslider({
+			animation : "slide"
+		});
+	}
+
+	function LoadCandidateProfile(link_id) {
+		iClickedProfile = true;
+
+		var strSelectedID = $(link_id).attr("id");
+		var strTemp = strSelectedID.split("_");
+		var iCurrentCandidate = strTemp[1];
+
+		$.ajax({
+			type : "GET",
+			async : true,
+			//contentType : 'multipart/form-data',
+			url : "/preview/profile.json", //sumbits it to the given url of the form
+			data : "id=" + iCurrentCandidate,
+			dataType : "JSON", // you want a difference between normal and ajax-calls, and json is standard
+			beforeSend : function() {
+				$("#divPreLoader_" + iCurrentCandidate).addClass("active");
+				$("#imgProfileImage").attr("src", "/assets/anonymous.png");
+			}
+		}).success(function(json) {
+			//act on result.
+			if (json.message == "false")
+				alert('candidate not found');
+			else {
+				//candidate_longer
+				$("#candidate_id").val(iCurrentCandidate);
+				$("#spanCandidateDisplay").text(json.displayname.toUpperCase());
+				if (json.anonymous == false) {
+					$("#imgProfileImage").attr("src", json.background_image.url);
+				}
+				$("#spanJobRole").html("<small>OCCUPATION</small> " + json.job_role.toUpperCase());
+				$("#spanLocation").html("<small>LOCATION</small> " + json.location.toUpperCase());
+				$("#pCandidateBio").html(json.candidate_pitch);
+				$("#divCandidateAnonymousOverlay").hide();
+				
+				var strSkillSets = json.skill_set.split(",");
+				var iSkillCount = strSkillSets.length;
+				var strSkill1 = "";
+				var strSkill2 = ""
+				for (var i = 0; i < iSkillCount; i++) {
+					if (i % 2 == 0) {
+						strSkill1 += "<li><a href=\"#\">" + $.trim(strSkillSets[i].toUpperCase()) + "</a></li>";
+					} else {
+						strSkill2 += "<li><a href=\"#\">" + $.trim(strSkillSets[i].toUpperCase()) + "</a></li>";
+					}
+				}
+
+				var iPortfolioCount = json.portfolios.length;
+				var strPortfolios = ""
+				var strSlides = "";
+				//$("#divPortfolio").hide();
+				//$("#divPortfolioiPad").hide();
+				$("#ulPortfolio").html("");
+				$("#ulPortfolioiPad").html("");
+				$("#ulSlides").html("<li><figure><img src=\"/assets/slider1.jpg\" alt=\"Image\" /></figure></li>");
+				//$("#divSlider").removeClass('flexslider');
+
+				for (var i = 0; i < iPortfolioCount; i++) {
+					strPortfolios += "<li><a onclick=\"javacript:$('#myModal2').modal();\" id=\"lnkPortfolio_" + i + "\" href=\"#\"><img src=\"" + json.portfolios[i].thumbnail_image.url + "\" alt=\"Recent Work\" /></a></li>";
+					strSlides += "<li><figure><img src=\"" + json.portfolios[i].slider_image.url + "\" alt=\"Image\" /></figure></li>";
+					//alert(strPortfolios);
+
+				}
+
+				if (strPortfolios != "") {
+					$("#ulPortfolio").html(strPortfolios);
+					$("#ulPortfolioiPad").html(strPortfolios);
+					$("#divSlider").html("<ul class=\"slides\">" + strSlides + "</ul>");
+					//$("#divSlider").addClass('flexslider');
+					LoadFlexSlider();
+
+					//alert($('.flexslider').flexslider().count);
+					//alert($("#ulPortfolio").html());
+					//$("#divPortfolio").show();
+					//$("#divPortfolioiPad").show();
+
+				}
+				$("#divCandidateImage").removeClass('candidate_longer');
+				$("#divCandidateImageOverlay").hide();
+				$('a[id^="lnkRequestInterview"]').removeClass('orange_btn');
+				$('a[id^="lnkRequestInterview"]').html('<span>REQUEST INTERVIEW</span>');
+				//<span>REQUEST INTERVIEW</span>
+				$("#spanOverlayText").html("");
+				if (json.anonymous == true) {
+
+					if (json.candidate_interview != null) {
+						//alert(json.candidate_interview.length);
+						//orange_btn, <span>NO LONGER AVAILABLE</span>
+						//lnkRequestInterview_2
+						$("#divCandidateImage").addClass('candidate_longer');
+						$("#divCandidateImageOverlay").show();
+						$("#spanOverlayText").html("ALREADY REQUESTED");
+						$('a[id^="lnkRequestInterview"]').addClass('orange_btn');
+						$('a[id^="lnkRequestInterview"]').html('<span>ALREADY REQUESTED</span>');
+					} else {
+						$("#divCandidateImage").addClass('candidate_longer');
+						$("#divCandidateImageOverlay").show();
+						$("#spanOverlayText").html("ANONYMOUS CANDIDATE");
+						//$('a[id^="lnkRequestInterview"]').addClass('orange_btn');
+
+					}
+
+				} else {
+					if (json.candidate_interview != null) {
+						//alert(json.candidate_interview.length);
+						//orange_btn, <span>NO LONGER AVAILABLE</span>
+						//lnkRequestInterview_2
+						$("#divCandidateImage").addClass('candidate_longer');
+						$("#divCandidateImageOverlay").show();
+						$('a[id^="lnkRequestInterview"]').addClass('orange_btn');
+						$('a[id^="lnkRequestInterview"]').html('<span>ALREADY REQUESTED</span>');
+					}
+				}
+
+				//divCandidateImage, divCandidateImageOverlay
+
+				$("#ulSkillList_1").html(strSkill1);
+				$("#ulSkillList_2").html(strSkill2);
+				//alert(iSkillCount);
+				$("#myModalCandidate").modal();
+				$("#divPreLoader_" + iCurrentCandidate).removeClass("active");
+				iClickedProfile = false;
+				/*
+				$('#imgProfileImage').load(function() {
+				//alert('loading done');
+
+				}).error(function() {
+				//alert('error')
+				$("#divPreLoader_" + iCurrentCandidate).removeClass("active");
+
+				}); */
+
+				//$("#divPreLoader_" + iCurrentCandidate).removeClass("active");
+
+				//event.preventDefault();
+
+			}
+
+		}).error(function(json) {
+			//act on result.
+			iClickedProfile = false;
+			alert('error');
+		});
+	}
+</script>

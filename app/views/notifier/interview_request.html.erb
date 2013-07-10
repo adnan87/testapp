@@ -1,0 +1,44 @@
+
+<h3> Interview Request</h3>
+<h4>Candidate Details</h4>
+<p>
+	<ul>
+		<li>
+			Name: <%= @candidate.name %>
+		</li>
+		<li>
+			Email: <%= @candidate.email %>
+		</li>
+		<li>
+			Phone: <%= @candidate.phone %>
+		</li>
+
+	</ul>
+</p>
+<h4>Employer Details</h4>
+<p>
+	<ul>
+		<li>
+			Company Name: <%= @employer.companyname %>
+		</li>
+		<li>
+			Name: <%= @employer.name %>
+		</li>
+		<li>
+			Email: <%= @employer.email %>
+		</li>
+		<li>
+			Phone: <%= @employer.phone %>
+		</li>
+
+	</ul>
+</p>
+
+<p>
+	<%= link_to "click here",  interview_url(:id => @interview.id)  %> to review the request. In the link you can either accept or decline the request.
+</p>
+<p>
+	Thank you
+	<br/>
+	Interviewjet Team
+</p>

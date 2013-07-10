@@ -1,0 +1,149 @@
+/*
+Table Of Content:
+
+1.) Fonts Style
+2.) Global Typography
+3.) Form Element
+4.) Basic Structure
+--------------------------------*/
+
+/*
+1.) Fonts Style
+---------------------------------------*/
+@font-face {
+ font-family: 'gotham_blackregular';
+ src: url('/assets/gotham-black-webfont.eot');
+ src: url('/assets/gotham-black-webfont.eot?#iefix') format('embedded-opentype'), url('/assets/gotham-black-webfont.woff') format('woff'), url('/assets/gotham-black-webfont.ttf') format('truetype'), url('/assets/gotham-black-webfont.svg#gotham_blackregular') format('svg');
+}
+ @font-face {
+ font-family: 'gotham_boldregular';
+ src: url('/assets/gotham-bold-webfont.eot');
+ src: url('/assets/gotham-bold-webfont.eot?#iefix') format('embedded-opentype'), url('/assets/gotham-bold-webfont.woff') format('woff'), url('/assets/gotham-bold-webfont.ttf') format('truetype'), url('/assets/gotham-bold-webfont.svg#gotham_boldregular') format('svg');
+}
+ @font-face {
+ font-family: 'gotham_bookregular';
+ src: url('/assets/gotham-book-webfont.eot');
+ src: url('/assets/gotham-book-webfont.eot?#iefix') format('embedded-opentype'), url('/assets/gotham-book-webfont.woff') format('woff'), url('/assets/gotham-book-webfont.ttf') format('truetype'), url('/assets/gotham-book-webfont.svg#gotham_bookregular') format('svg');
+}
+ @font-face {
+ font-family: 'gotham_lightregular';
+ src: url('/assets/gotham-light-webfont.eot');
+ src: url('/assets/gotham-light-webfont.eot?#iefix') format('embedded-opentype'), url('/assets/gotham-light-webfont.woff') format('woff'), url('/assets/gotham-light-webfont.ttf') format('truetype'), url('/assets/gotham-light-webfont.svg#gotham_lightregular') format('svg');
+}
+ @font-face {
+ font-family: 'gotham_ultraregular';
+ src: url('/assets/gotham-ultra-webfont.eot');
+ src: url('/assets/gotham-ultra-webfont.eot?#iefix') format('embedded-opentype'), url('/assets/gotham-ultra-webfont.woff') format('woff'), url('/assets/gotham-ultra-webfont.ttf') format('truetype'), url('/assets/gotham-ultra-webfont.svg#gotham_ultraregular') format('svg');
+}
+/*
+2.) Global Typography
+---------------------------------------*/
+body {
+	font-family: 'Open Sans', sans-serif;
+	font-size:62.5%;
+	line-height:1;
+	color:rgb(255,255,255);
+}
+h2 {
+	font-size:4.2em;
+	line-height:125%;
+	color:#161616;
+}
+h3 {
+	font-size:3.6em;
+	line-height:120%;
+	color:#000;
+}
+h4 {
+	font-size:2.4em;
+	line-height:100%;
+	color:#212121;
+}
+h5 {
+	font-size:1.8em;
+}
+h6 {
+	font-size:1.4em;
+	line-height:100%;
+	text-transform:uppercase;
+}
+/*
+3.) Form Element
+---------------------------------------*/
+input[type="text"], textarea {
+	font-family: 'Open Sans', sans-serif;
+	font-size:1.8em;
+	padding:15px 12px;
+	margin-bottom:20px;
+	/*color:#a2a2a2;*/
+	color: #000000;
+	width:92%;
+}
+
+textarea {
+	resize: none;
+}
+/*
+4.) Basic Structure
+---------------------------------------*/
+h2 {
+	font-family: 'gotham_lightregular';
+}
+h3, .next_flight span, .footer_address span, .timer_box ul li span {
+	font-family: 'gotham_bookregular';
+}
+h4, .next_flight h5, .next_flight strong, .user_location, .overlayed span, .candidate_overlay span {
+	font-family: 'gotham_blackregular';
+}
+h5, h6, .attach_resume strong, .attach_resume input[type="button"], .application_btn a, .timer_box ul li small, .user_profile small, .occupation span, .user_profile .contact_btn, .user_gallery .close, .layervault {
+	font-family: 'gotham_boldregular';
+}
+.footer_address strong {
+	font-family: 'gotham_ultraregular';
+}
+#content, #footer, #header, .user_data, .capabilities, .occupation, .portfolio, .layervault, .thank_box, .candidate_overlay {
+	width:100%;
+}
+.interview_content .brand, .footer_small_logo, .attach_resume, #header .brand, .timer_box ul, .user_data, .user_detail ul, .capabilities, .occupation, .layervault a, .recent_work {
+	display:inline-block;
+}
+.email_section span, .next_flight span, .talent_header span, .attach_resume span, .attach_resume strong, .timer_box ul li span, .overlayed span, .candidate_overlay span, .User_img a, .user_profile small, .request_interview_textarea .terms_condition strong, .authorized_email small {
+	display:block;
+}
+.next_flight h5, .footer_logo, .footer_small_logo, .footer_list, .footer_list ul, .talent_inputarea, .input_textarea, .attach_resume span, .employer_titles, .application_btn a, .invalid_email .continue_btn, .timer_box ul li, .user_detail ul li, .user_profile_img, .user_bio, .recent_work ul li, .occupation li, .capabilities ul {
+	float:left;
+}
+.next_flight span, .footer_address, .attach_resume input[type="button"] {
+	float:right;
+}
+.email_section p, .next_flight h5, .next_flight span, .timer h5 {
+	text-shadow:0px 1px 2px #272727;
+}
+body, html {
+	height:100%;
+}
+#wrapper {
+	position:relative;
+	min-height:100%;
+}
+#content {
+	padding-bottom:240px;
+}
+#footer {
+	position:absolute;
+	bottom:0px;
+}
+
+
+::-webkit-input-placeholder { /* WebKit browsers */
+    color:    #999;
+}
+:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+    color:    #999;
+}
+::-moz-placeholder { /* Mozilla Firefox 19+ */
+    color:    #999;
+}
+:-ms-input-placeholder { /* Internet Explorer 10+ */
+    color:    #999;
+}

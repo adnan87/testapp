@@ -1,0 +1,29 @@
+
+<div class="row-fluid">
+	<div class="span6">
+		<ul class="unstyled" style="padding: 15px;">
+			<li>
+				<%= f.label :title, "Title" %>
+
+				<%= f.text_field :title, :class => 'span12' %>
+			</li>
+			<li>
+				<%= f.label :description, "Description:" %>
+				<%= f.text_field :description, :class => 'span12'%>
+			</li>
+		</ul>
+	</div>
+	<div class="span6">
+		<ul class="unstyled" style="padding: 15px;">
+			
+			<li>
+				<%= label_tag(:thumbnail_image, "**Thumbnail Images |150px × 95px|: (png/jpg/gift)")%>
+				<%= f.file_field :thumbnail_image %>
+			</li>
+			<li>
+				<%= label_tag(:slider_image, "**Slider Images |630px × 400px|: (png/jpg/gift)")%>
+				<%= f.file_field :slider_image %>
+			</li>
+		</ul>
+	</div>
+</div>

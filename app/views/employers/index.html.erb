@@ -1,0 +1,76 @@
+<%- model_class = Employer -%>
+<%= stylesheet_link_tag    "responsive_table", :media => "all" %>
+<div class="page-header">
+	<% if params[:status] %>
+	<h1><%= t '.title', :default => model_class.model_name.human.pluralize %> - <%= params[:status] %></h1>
+	<% else %>
+	
+	<h1>Employers - Requested </h1>
+	<% end %>
+</div>
+<div class="row-fluid" >
+	<div class="span1">
+		<%= link_to t('.new', :default => t("helpers.links.new")),
+		new_employer_path,
+		:class => 'btn btn-primary' %>
+	</div>
+	<div class="span2">
+	   	<ul>
+	   		<li class="dropdown" style="list-style:none;">
+    	<a class="dropdown-toggle"  data-toggle="dropdown" href="#" style="text-decoration: none;">
+    		<i class="icon-filter"></i>Sort By <b class="caret"></b></a>
+
+    	<ul class="dropdown-menu" \>
+	      <li>
+				<%= link_to raw("<i class='icon-envelope'></i> Email"), sort_employer_employers_path(:sortby => "Email"), :remote=>true%>
+			</li>
+	      <li>
+				<%= link_to raw("<i class='icon-user'></i> Name"), sort_employer_employers_path(:sortby => "Name"), :remote=>true%>
+			</li>
+	     <li>
+				<%= link_to raw("<i class='icon-phone'></i> Phone"),sort_employer_employers_path(:sortby => "Phone"), :remote=>true%>
+			</li>
+			<li>
+				<%= link_to raw("<i class='icon-globe'></i> Source"), sort_employer_employers_path(:sortby => "Source"), :remote=>true%>
+			</li>
+	      <li>
+				<%= link_to raw("<i class='icon-calendar'></i> Created At"), sort_employer_employers_path(:sortby => "Created_at"), :remote=>true%>
+			</li>
+    	</ul>
+        </li>	
+	   	</ul>
+
+	   </div>
+	   <div class="span2"><p>Sorted By: <b class="sort"></b></p></div>
+	<div class="span7" style="text-align: right">
+		<ul class="inline">
+			<li>
+				View Employers:
+			</li>
+			<li>
+				<%= link_to "Requested", employers_url(:status => "Requested"), :class => "badge badge-important"%>
+			</li>
+			<li>
+				<%= link_to "Approved", employers_url(:status => "Approved"), :class => "badge badge-success"%>
+			</li>
+			<li>
+				<%= link_to "WaitListed", employers_url(:status => "WaitListed"), :class => "badge badge-warning"%>
+			</li>
+		</ul>
+	</div>
+</div>
+<div class="row-fluid">
+   <div id="data-index">
+      <%= render :partial => "list" -%> 
+    </div>
+</div>
+<script>
+$(document).ready(function(){
+	$('.span2 p').hide();
+	$('.dropdown-menu li a').click(function(){ 
+		$('.span2 p').show();
+		$('.sort').html($(this).text());
+		$('li').removeClass('open');
+	})
+})
+</script>

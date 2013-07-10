@@ -1,0 +1,137 @@
+
+<script>
+	
+	$(function() {
+		
+	var BigDay = new Date();
+	var iUpcoming = false;
+	<% if (@upcomingtakeoff) %>
+		BigDay = new Date('<%= @upcomingtakeoff.startdate.strftime("%B %d, %Y %H:%M:%S")%>');
+		iUpcoming = true;
+	<% else %>$
+		iUpcoming = false;
+	<% end %>
+	
+	var msPerDay = 24 * 60 * 60 * 1000;
+	
+	var ServerDate = new Date('<%= DateTime.now.in_time_zone('Eastern Time (US & Canada)').strftime("%B %d, %Y %H:%M:%S")%>');
+				
+	
+	var timeLeft = (BigDay.getTime() / 1000  - ServerDate.getTime() / 1000 );
+				
+				
+	//alert(BigDay);
+	//alert(ServerDate);
+	
+					
+	var _second=1;
+	var _minute=_second*60;
+	var _hour=_minute*60;
+	var _day=_hour*24;
+	var timer;
+	
+	
+	if (iUpcoming) { 
+		window.setInterval(function() {
+	
+		timeLeft=timeLeft-1;
+		var distance=timeLeft;
+		
+		if (timeLeft < 0) {
+			window.location = '/';
+		}
+		
+		
+		var days=Math.floor(distance/_day);
+		var daysLeft = days;
+		var str_days = (daysLeft >= 10) ? daysLeft : '0' + (daysLeft < 1 ? 0 : daysLeft);
+	
+		var hours=Math.floor((distance%_day)/_hour);
+		var hrsLeft = hours;
+		var str_hours = (hrsLeft >= 10) ? hrsLeft : '0' + (hrsLeft < 1 ? 0 : hrsLeft);
+
+		/*if (daysLeft < 4){
+			hrsLeft =  (daysLeft) * 24;
+			str_hours = (hrsLeft >= 10) ? hrsLeft : '0' + (hrsLeft < 1 ? 0 : hrsLeft);
+		}*/
+		
+		var minutes=Math.floor((distance%_hour)/_minute);
+		var minsLeft = minutes;
+		var str_mins = (minsLeft >= 10) ? minsLeft : '0' + (minsLeft < 1 ? 0 : minsLeft);
+		
+		
+		var seconds=Math.floor((distance%_minute)/_second);
+		var secsLeft = seconds;
+		var str_secs = (secsLeft >= 10) ? secsLeft : '0' + (secsLeft < 1 ? 0 : secsLeft);
+
+		var timeString = "";
+	
+		if (daysLeft >= 4) {
+			$("#spanHours").text(str_days);
+			$("#spanMins").text(str_hours);
+			$("#spanSecs").text(str_mins);
+			$("#smallHours").text('Days');
+			$("#smallMins").text('Hours');
+			$("#smallSecs").text('Minutes');
+		} else {
+			$("#spanHours").text(str_hours);
+			$("#spanMins").text(str_mins);
+			$("#spanSecs").text(str_secs);
+			$("#smallHours").text('Hours');
+			$("#smallMins").text('Minutes');
+			$("#smallSecs").text('Seconds');
+		}
+	}, 1000);
+		} else {
+			$("#spanHours").text('');
+			$("#spanMins").text('');
+			$("#spanSecs").text('');
+			$("#smallHours").text('Hours');
+			$("#smallMins").text('Minutes');
+			$("#smallSecs").text('Seconds');
+			$("#divNextFlight").hide();
+			$("#header").css("padding-bottom","20px");
+			$(".header_bg").css("padding-bottom","0px");
+		}
+	})
+</script>
+<% @candidates.each do |candidate| %>
+<section id="secUserIdentity_<%= candidate.id %>" class="user_identity" style="min-height: 520px; vertical-align: top">
+	<div class="User_img" id="lnkProfile_<%= candidate.id %>" >
+		<figure>
+			<a href="#javascript:void(0)" role="button" data-toggle="modal"> <%= image_tag (candidate.anonymous ? "/assets/anonymous_thumb.png" : candidate.profile_image ) %> </a>
+		</figure>
+		<% if (candidate.anonymous) %>
+		<a href="#javascript:void(0)" style="text-decoration: none">
+		<div class="overlayed active">
+
+			<img alt="" src="/assets/logo.png">
+			<span>ANONYMOUS CANDIDATE</span>
+
+		</div> </a>
+		<% end %>
+		<div id="divPreLoader_<%= candidate.id %>" class="overlayed">
+			<img alt="" src="/assets/logo.png">
+			<span>PLEASE WAIT ...</span>
+		</div>
+		<span class="user_location"><a href="#" style="text-decoration: none"><%= candidate.location_tag%></a></span>
+		<div class="user_detail">
+			<a href="#" style="text-decoration: none"><h6><%= candidate.job_role%></h6></a>
+			<ul>
+				<% candidate.skill_tags.split(",").each do |skill| %>
+				<li>
+					<a href="#" class="btn grey_btn">
+						<%= skill %>
+					</a>
+				</li>
+				<% end %>
+			</ul>
+		</div>
+	</div>
+
+	<p>
+		<%= candidate.one_liner.to_s.html_safe %>
+	</p>
+
+</section>
+<% end %>

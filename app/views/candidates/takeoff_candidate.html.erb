@@ -1,0 +1,49 @@
+<%- model_class = Candidate -%>
+<div class="page-header">
+	<h1><%= t '.title', :default => model_class.model_name.human %> - Takeoff Feature</h1>
+</div>
+<%= form_tag ('/candidates/feature_candidate') %>
+<div class="row-fluid">
+	<div class="span6">
+		<dl class="dl-horizontal">
+			<dt>
+				<strong><%= model_class.human_attribute_name(:email) %>:</strong>
+			</dt>
+			<dd>
+				&nbsp;<%= @candidate.email %>
+			</dd>
+			<dt>
+				<strong><%= model_class.human_attribute_name(:name) %>:</strong>
+			</dt>
+			<dd>
+				&nbsp;<%= @candidate.name %>
+			</dd>			
+		</dl>
+	</div>
+	<div class="span6">
+		<dl class="dl-horizontal">
+
+			<dt>
+				<strong>Select Takeoff:</strong>
+			</dt>
+			<dd>
+	
+				<% if @takeoff.present? %>
+				<%= select_tag "takeoff", options_from_collection_for_select(@takeoffs, "id", "name", @takeoff) %>
+				<% else %>
+				<%= select_tag "takeoff", options_from_collection_for_select(@takeoffs, "id", "name") %>
+				<% end %>
+			</dd>
+			
+		</dl>
+
+	</div>
+</div>
+<div class="form-actions">
+	<p style="text-align: center">
+		<%= hidden_field_tag 'id',  @candidate.id %>
+		<%= submit_tag 'Feature this candidate', :class => "btn" %>
+		<!--<%= link_to "Back", candidates_path, :class => "btn" %>-->
+	</p>
+</div>
+

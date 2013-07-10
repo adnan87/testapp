@@ -1,0 +1,61 @@
+<div class="table">
+	<div class="row table-head">
+		<div class="column" data-label="Date Requested">
+			Date Requested
+		</div>
+		<div class="column" data-label="Employer">
+			Employer
+		</div>
+		<div class="column" data-label="Candidate">
+			Candidate
+		</div>
+		<div class="column" data-label="Status">
+			Status
+		</div>
+		<div class="column" data-label="Candidate Response">
+			Candidate Response
+		</div>
+		<% if params[:status] == "Approved" %>
+		<div class="column" data-label="Days">
+			Days
+		</div>
+		<% end %>
+		<div class="column" data-label="Actions">
+			Actions
+		</div>
+	</div>
+	<% if @interviews.blank? %>
+	<% else %>
+	<% @interviews.each do |interview| %>
+	<div class="row">
+		<div class="column" data-label="Date Requested">
+			<%= interview.request_date %>
+		</div>
+		<div class="column" data-label="Employer">
+			<%= interview.employer_email %><br/><%= interview.employer_name %>		
+		</div>
+		<div class="column" data-label="Candidate">
+			<%= interview.candidate_email %><br/><%= interview.candidate_name %>
+		</div>
+		<div class="column" data-label="Status">
+			<%= interview.status %>
+		</div>
+		<div class="column" data-label="Candidate Response">
+			<%= interview.candidate_status %>
+		</div>
+		<% if params[:status] == "Approved" %>
+		<div class="column" data-label="Days">
+			<% if interview.candidate_status == "Requested" %>
+			 <%= distance_of_time_in_words(interview.request_date, Time.now) %>
+			<% end %>
+		</div>
+		<% end %>
+		<div class="column" data-label="Actions">
+			<%= link_to "View", interview_path(interview) %>
+
+		</div>
+	</div>
+	<% end %>
+<% end -%>
+</div>
+ 

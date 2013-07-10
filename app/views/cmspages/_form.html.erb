@@ -1,0 +1,46 @@
+<%= form_for @cmspage, :html => { :class => 'form-horizontal' } do |f| %>
+<div class="row-fluid">
+	<div class="span12">
+		<ul class="unstyled" style="padding: 15px;">
+			<li>
+				<%= label_tag(:title, "page :*") %>
+
+				<%= f.text_field :title, :class => 'span12' %>
+			</li>
+
+			<li>
+				<%= label_tag(:content, "Content ")%>
+				<%= f.text_area :content, :class => 'span12 tinymce', :cols => 15, :rows => 20%>
+			</li>
+			
+		</ul>
+	</div>
+</div>
+<div class="form-actions" style="padding-left: 0px; text-align: center">
+	<ul class="unstyled">
+		<li class="error error-large">
+			* - Mandatory Fields
+		</li>
+		<% @cmspage.errors.full_messages.each do |message| %>
+       <li class="error error-large"><%= message %></li>
+     <% end %>
+	</ul>
+	<%= f.submit 'Save', :class => 'btn btn-primary btn-large' %>
+	<%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+	@cmspage, :class => 'btn btn-large' %>
+</div>
+<script>
+$('document').ready(function() {
+
+		tinyMCE.init({
+			mode : 'textareas',
+			theme : 'simple',
+			onchange_callback : function(editor) {
+				tinyMCE.triggerSave();
+				$("#" + editor.id).valid();
+			}
+		}); 
+
+	});
+</script>
+<% end %>

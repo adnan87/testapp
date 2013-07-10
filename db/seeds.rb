@@ -1,0 +1,1 @@
+User.create(:email => 'admin@interviewjet.com', :password => '1nterview!', :password_confirmation => '1nterview!')

@@ -1,0 +1,48 @@
+<%- model_class = EmployerAgreement -%>
+<%= stylesheet_link_tag    "responsive_table", :media => "all" %>
+<div class="page-header">
+	
+	<h1>Employers - Agreements </h1>
+
+</div>
+
+<div class="row-fluid">
+<div class="table">
+	<div class="row table-head">
+		<div class="column" data-label="Email">
+			Email
+		</div>
+		<div class="column" data-label="Name">
+			Name
+		</div>
+		<div class="column" data-label="Phone">
+			Phone
+		</div>
+		<div class="column" data-label="Source">
+			Source
+		</div>
+		<div class="column" data-label="Created at">
+			Created at	
+		</div>
+	</div>
+	<% @employer_agreement.each do |employer_agreement| %>
+	<div class="row">
+		<div class="column" data-label="Email">
+			<%= employer_agreement.email %>
+		</div>
+		<div class="column" data-label="Name">
+			<%= employer_agreement.name %>		
+		</div>
+		<div class="column" data-label="Phone">
+			<%= employer_agreement.phone %>
+		</div>
+		<div class="column" data-label="Source">
+			<%= employer_agreement.ipaddress %>
+		</div>
+		<div class="column" data-label="Created at">
+			<%= l employer_agreement.created_at %>	
+		</div>
+	</div>
+	<% end %>
+</div>
+</div>

@@ -1,0 +1,248 @@
+<%= form_for @candidate, :html => { :class => 'form-horizontal', :multipart => true } do |f| %>
+<div class="row-fluid">
+	<div class="span6">
+		<ul class="unstyled" style="padding: 15px;">
+			<li>
+				<%= label_tag(:email, "Email :*") %>
+
+				<%= f.text_field :email, :class => 'span12' %>
+			</li>
+			<li>
+				<%= label_tag(:firstname, "First Name :*")%>
+				<%= f.text_field :firstname, :class => 'span12' %>
+			</li>
+			<li>
+				<%= label_tag(:lastname, "Last Name :*")%>
+				<%= f.text_field :lastname, :class => 'span12' %>
+			</li>
+			<li>
+				<%= label_tag(:displayname, "Display Name :*")%>
+				<%= f.text_field :displayname, :class => 'span12' %>
+			</li>
+			<li>
+				<%= label_tag(:anonymous, "Anonymous :*")%>
+				<%= f.check_box :anonymous, :class => 'span12' %>
+			</li>
+			<li>
+				<%= label_tag(:phone, "Phone :")%>
+				<%= f.text_field :phone, :class => 'span12'  %>
+			</li>
+			<li>
+				<%= label_tag(:linkedin_url, "**Linkedin URL :") %>
+				<%= f.text_field :linkedin_url, :class => 'span12' %>
+			</li>
+			<li>
+				<%= label_tag(:other_url, "Other URL :") %>
+				<%= f.text_field :other_url, :class => 'span12' %>
+			</li>
+		</ul>
+	</div>
+	<div class="span6">
+		<ul class="unstyled" style="padding: 15px;">
+			<li>
+				<%= label_tag(:resume, "**Enter your resume:")%>
+				<%= f.text_area :resume, :class => 'span12 tinymce', :cols => 10, :rows => 9%>
+			</li>
+			<li>
+				<%= label_tag(:resume_file, "**Upload your resume: (word/pdf)")%>
+				<%= f.file_field :resume_file %>
+			</li>
+			<li>
+				<%= label_tag(:one_liner, "One Liner :") %>
+				<%= f.text_field :one_liner, :class => 'span12' %>
+			</li>
+			<li>
+				<%= label_tag(:quote, "Quote :") %>
+				<%= f.text_field :quote, :class => 'span12' %>
+			</li>
+		</ul>
+	</div>
+</div>
+<div class="row-fluid">
+	<div class="span6">
+		<ul class="unstyled" style="padding: 15px;">
+
+			<%= label_tag(:profile_image, "Upload Profile Thumbnail Image (270 x 400): (png/jpg/jpeg/gif)")%>
+			<%= f.file_field :profile_image %>
+			</li>
+			<li>
+				<%= label_tag(:background_image, "Upload Profile Image (419 x 600): (png/jpg/jpeg/gif)" )%>
+				<%= f.file_field :background_image %>
+			</li>
+			<li>
+				<%= label_tag(:candidate_pitch, "Candidate Pitch: ")%>
+				<%= f.text_area :candidate_pitch, :class => 'span12', :cols => 10, :rows => 9%>
+			</li>
+		</ul>
+
+	</div>
+	<div class="span6">
+		<ul class="unstyled" style="padding: 15px;">
+			<li>
+				<%= label_tag(:availability_status, "Availability Status: ")%>
+				<%= f.select(:availability_status, Candidate::AVAILABILITY_TYPES) %>
+			</li>
+			<li>
+				<%= label_tag(:location_tag, "Location (max 3 chars) :") %>
+				<%= f.text_field :location_tag, :class => 'span12', :maxlength => 3 %>
+			</li>
+			<li>
+				<%= label_tag(:location, "Location (City, State) :") %>
+				<%= f.text_field :location, :class => 'span12' %>
+			</li>
+			<li>
+				<%= label_tag(:job_role, "Job Role: ")%>
+				
+				<%= f.text_field :job_role, :class => 'span12', :maxlength => 30 %>
+			</li>
+			<li>
+				<%= label_tag(:skill_tags, "TAGS (max 27 chars, comma seperated) :") %>
+				<%= f.text_field :skill_tags, :class => 'span12', :maxlength => 29 %>
+			</li>
+			<li>
+				<%= label_tag(:skill_set, "SKILL SETS (comma seperated) :") %>
+				<%= f.text_area :skill_set, :class => 'span12', :cols => 10, :rows => 9%>
+			</li>
+			<!--
+			<li>
+				<%= label_tag( "Job Skills : (this will be removed soon.. do not use)")%>
+				<% Skill.all.each do |skill| %>
+				<label class="checkbox"> <%= check_box_tag  'candidate[skill_ids][]', skill.id, @candidate.skills.include?(skill), :id => 'candidate_skill_ids_' + skill.id.to_s %>
+					<%= label_tag 'candidate_skill_ids_' + skill.id.to_s, skill.name %> </label>
+				<% end %>
+			</li>
+			-->
+		</ul>
+	</div>
+</div>
+<h3>Candidate Portfolios</h3>
+ <%= f.fields_for :portfolios do |builder| %>
+    <%= render "portfolio_fields", :f => builder %>
+  <% end %>
+  
+<div class="form-actions" style="padding-left: 0px; text-align: center">
+	<ul class="unstyled">
+		<li class="error error-large">
+			* - Mandatory Fields
+		</li>
+		<li class="error error-large">
+			** - Any one of the field is mandatory
+		</li>
+		<% @candidate.errors.full_messages.each do |message| %>
+		<li class="error error-large">
+			<%= message %>
+		</li>
+		<% end %>
+	</ul>
+	<%= f.submit 'Save', :class => 'btn btn-primary btn-large' %>
+	<%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+	@candidate, :class => 'btn btn-large' %>
+	<!--<%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+	root_path, :class => 'btn btn-large' %> -->
+
+</div>
+<script>
+	$('document').ready(function() {
+/*
+		tinyMCE.init({
+			mode : 'textareas',
+			theme : 'simple',
+			onchange_callback : function(editor) {
+				tinyMCE.triggerSave();
+				$("#" + editor.id).valid();
+			}
+		}); */
+
+	});
+
+	$(document).ready(function() {
+		$.validator.addMethod("linkedinurl", function(value, element) {
+			return this.optional(element) || /linkedin.com/.test(value);
+		}, "Please specify a valid linkedin url");
+
+		// custom method for url validation with or without http://
+		$.validator.addMethod("cus_url", function(value, element) {
+			if (value.substr(0, 7) != 'http://') {
+				value = 'http://' + value;
+			}
+			if (value.substr(value.length - 1, 1) != '/') {
+				value = value + '/';
+			}
+			return this.optional(element) || /^(http|https|ftp):\/\/[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/i.test(value);
+		}, "Not valid url.");
+
+		$.validator.setDefaults({
+			ignore : ''
+		});
+		$('form[id*="_candidate"]').validate({
+			submitHandler : function(form) {
+				//this runs when the form validated successfully
+				if (checkOthers()) {
+					form.submit();
+				}
+				//submit it the form
+			},
+			rules : {
+				"candidate[firstname]" : {
+					required : true,
+				},
+				"candidate[lastname]" : {
+					required : true,
+				},
+				"candidate[displayname]" : {
+					required : true,
+				},
+				"candidate[email]" : {
+					required : true,
+					email : true
+				},
+				"candidate[linkedin_url]" : {
+					linkedinurl : true
+				},
+				"candidate[other_url]" : {
+					cus_url : true
+				}
+			},
+			messages : {
+				"candidate[firstname]" : "Enter your first name*",
+				"candidate[lastname]" : "Enter your last name*",
+				"candidate[email]" : "Enter your email*"
+			}
+		});
+		function checkOthers() {
+			var iResult = false;
+			var iValue = 0;
+
+			if ($('#candidate_resume_file').val() != "") {
+				var ext = $('#candidate_resume_file').val().split('.').pop().toLowerCase();
+				if ($.inArray(ext, ['doc', 'docx', 'pdf', 'rtf', 'txt']) == -1) {
+					alert('Please upload only doc/docx/pdf file formats!');
+					iResult = false;
+					iValue = 0;
+				} else {
+					iResult = true;
+					iValue = iValue + 1;
+				}
+
+			}
+
+			if ($('#candidate_resume').val() != "") {
+				iResult = true;
+				iValue = iValue + 1;
+			}
+
+			if ($('#candidate_linkedin_url').val() != "") {
+				iResult = true;
+				iValue = iValue + 1;
+			}
+			if (iValue < 1) {
+				iResult = false;
+				alert('We require one of the following (Linkedin URL/Resume or Resume File)');
+			}
+
+			return iResult;
+		}
+
+	}); 
+</script>
+<% end %>

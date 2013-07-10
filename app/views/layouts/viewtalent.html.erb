@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+		<title>Welcome to Interview Jet</title>
+		<%= javascript_include_tag "ijetshared" %>
+		<link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+		<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,800,700,600,300' rel='stylesheet' type='text/css'>
+		<link rel="stylesheet" href="/assets/ijet.css" media="screen">
+		<link rel="stylesheet" href="/assets/global.css" media="screen">
+		<link rel="stylesheet" href="/assets/style.css" media="screen">
+		<link rel="stylesheet" href="/assets/handheld.css" media="screen and (max-width:959px)">
+		<link rel="stylesheet" href="/assets/mobile.css" media="screen and (max-width:767px)">
+		<link rel="stylesheet" href="/assets/tablet.css" media="screen and (min-width:768px) and (max-width:959px)">
+		<link rel="stylesheet" href="/assets/tablet-landscape.css" media="screen and (min-width:960px) and (max-width:1024px)">
+		<!--[if lt IE 9]>
+		<script src="/assets/html5shiv.js"></script>
+		<script src="/assets/css3-mediaqueries.js"></script>
+		<script src="/assets/imgsizer.js"></script>
+		<link rel="stylesheet" type="text/css" href="/assets/ie.css" media="screen">
+		<![endif]-->
+		<script src="/assets/jquery-1.9.1.min.js"></script>
+		<script src="/assets/jquery.placeholder.min.js"></script>
+		<script src="/assets/jquery.waitforimages.min.js"></script>
+		<script type="text/javascript">
+			var wt;
+			var iInterviewPopup = false;
+			var tmpCandidateToView = 0;
+			$(document).ready(function() {
+				wt = $(window).height() / 2
+				$(window).resize(function() {
+					wt = $(window).height() / 2
+				});
+			});
+		</script>
+		<style>
+			.overlayed_new {
+				/*background: url(/assets/new_overlay_bg.png) left top repeat;*/
+				width: 262px;
+				height: 256px;
+				padding-top: 136px;
+				border: 4px #333434 solid;
+				position: absolute;
+				left: 0px;
+				top: 0px;
+				display: block;
+				text-align: center;
+				background-color: #000000;
+				opacity: 0.4;
+				filter: alpha(opacity=40);
+				display: none;
+			}
+
+		</style>
+	</head>
+	<body>
+		<!--Page Wrapper-->
+		<div id="wrapper">
+			<!--Header Section-->
+			<header id="header">
+				<div class="container-fluid header_bg">
+					<div class="row-fluid">
+						<a href="/" class="brand"><img src="/assets/logo.png" alt="Website Logo" title="Welcome to Interview Jet" /></a>
+						<div class="timer">
+							<h5>TIME REMAINING</h5>
+							<span class="timer_bg">&nbsp;</span>
+							<div class="timer_box">
+								<ul>
+									<li>
+										<span id="spanHours">00</span><small id="smallHours">Hours</small>
+									</li>
+									<li>
+										<span id="spanMins">00</span><small id="smallMins">Minutes</small>
+									</li>
+									<li>
+										<span id="spanSecs">00</span><small id="smallSecs">Seconds</small>
+									</li>
+								</ul>
+								<span class="white_overlay">&nbsp;</span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</header>
+			<!--Header Section-->
+			<!--Content Section-->
+			<div id="content">
+				<div class="container-fluid">
+					<div class="row-fluid">
+						<div id="divCrewFlew" class="crew_flew">
+							<h2>Getting ready!!!</h2>
+							<p>
+								Please wait as we are getting ready for takeoff....
+							</p>
+						</div>
+						<div id="divUserData" class="user_data" style="display:none;">
+							<%= yield %>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!--Content Section-->
+			<!--Footer Section-->
+			<footer id="footer">
+				<div class="container-fluid">
+					<div class="row-fluid">
+						<div class="footer_content">
+							<div class="footer_logo">
+								<div class="footer_small_logo">
+									<a href="/"><img src="/assets/footer-logo.png" alt="Website Logo" /></a>
+								</div>
+								<nav class="footer_list">
+									<ul class="nav">
+										<li>
+											<a href="/faq">FAQ</a>
+										</li>
+										<li>
+											<a href="/about">About Us</a>
+										</li>
+										<!--<li>
+											<a href="javascript:void(0)">Talent Application</a>
+										</li>-->
+										<li>
+											<a href="/terms">Terms Of Use</a>
+										</li>
+										<li>
+											<a href="/privacy">Privacy</a>
+										</li>
+									</ul>
+									<ul class="nav none_border">										
+										<li>
+											<a href="javascript:void(0)">LinkedIn</a>
+										</li>
+										<li>
+											<a href="javascript:void(0)">Twitter</a>
+										</li>
+										<li>
+											<a href="javascript:void(0)">Facebook</a>
+										</li>
+									</ul>
+								</nav>
+							</div>
+							<div class="footer_address">
+								<a href="#" class="small_logo"><img src="/assets/footer-logo.png" alt="Website Logo" /></a>
+								<address>
+									315 W38th Street Suite 1301
+									<br>
+									New York, New York 10038
+								</address>
+								<span class="made_In">Made In <strong>NYC</strong></span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</footer>
+			<!--Footer Section-->
+		</div>
+		<!--Page Wrapper-->
+
+		<!--Light Box 1 - Candidate Profile-->
+		<div id="myModalCandidate" class="modal hide fade talent_box user_profile" tabindex="-1" data-backdrop="static"  role="dialog" aria-hidden="true">
+			<div id="divCandidateImage" class="user_profile_img">
+
+				<div id="divCandidateImageOverlay" class="candidate_overlay" style="display:none">
+					<div><img src="/assets/logo.png" alt="image" /><span id="spanOverlayText">CANDIDATE NO LONGER AVAILABLE</span>
+					</div>
+				</div>
+				<figure><img id="imgProfileImage" src="/assets/user-profile-img1.jpg" alt="User Image" />
+				</figure>
+			</div>
+			<div class="user_bio">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+					&nbsp;
+				</button>
+				<h3><small>NAME</small><span id="spanCandidateDisplay">JASON</span></h3>
+				<ul class="occupation">
+					<li>
+						<span id="spanJobRole"><small>OCCUPATION</small> BACK END DEVELOPER</span>
+					</li>
+					<li>
+						<span id="spanLocation"><small>LOCATION</small>NEW YORK CITY, NY</span>
+					</li>
+				</ul>
+				<div class="bio_graphi">
+					<small>BIO</small>
+					<p id="pCandidateBio" style="word-wrap: break-word;">
+						Former lead engineer at <a href="#">Hutch</a> with a CS degree from <a href="#">Bowdoin College</a>. Enjoys skiing &amp; skydiving. With past employment at Foursquare, Facebook, Google &amp; Microsoft, Jason is a rockstar candidate that is going to go quick!
+					</p>
+					<nav class="capabilities">
+						<small>CORE CAPABILITIES</small>
+						<ul id="ulSkillList_1">
+							<li>
+								<a href="#">RUBY ON RAILS</a>
+							</li>
+							<li>
+								<a href="#">PYTHON</a>
+							</li>
+							<li>
+								<a href="#">PHP</a>
+							</li>
+						</ul>
+						<ul id="ulSkillList_2">
+							<li>
+								<a href="#">JAVASCRIPT</a>
+							</li>
+							<li>
+								<a href="#">.NET</a>
+							</li>
+						</ul>
+					</nav>
+					<div id="divPortfolio" class="recent_work ipod_none_recent" style="display:none;">
+						<small>RECENT WORK</small>
+						<ul id="ulPortfolio">
+							<li>
+								<a href="#"><img src="/assets/recent-work1.jpg" alt="Recent Work" /></a>
+							</li>
+							<li>
+								<a href="#"><img src="/assets/recent-work2.jpg" alt="Recent Work" /></a>
+							</li>
+							<li>
+								<a href="#"><img src="/assets/recent-work3.jpg" alt="Recent Work" /></a>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<a href="#" id="lnkRequestInterview_1" class="btn btn-large btn-block contact_btn ipod_none_btn"><span>REQUEST INTERVIEW</span></a>
+			</div>
+			<div class="recent_work ipod_block_recent" style="display: none">
+				<small>RECENT WORK</small>
+				<ul>
+					<li>
+						<a href="#"><img src="/assets/recent-work1.jpg" alt="Recent Work" /></a>
+					</li>
+					<li>
+						<a href="#"><img src="/assets/recent-work2.jpg" alt="Recent Work" /></a>
+					</li>
+					<li>
+						<a href="#"><img src="/assets/recent-work3.jpg" alt="Recent Work" /></a>
+					</li>
+				</ul>
+			</div>
+			<a href="#" id="lnkRequestInterview_2" class="btn btn-large btn-block contact_btn ipod_block_btn"><span>REQUEST INTERVIEW</span></a>
+		</div>
+		<!--Light Box 1-->
+
+		<!--Light Box 2 - Portfolio Slider -->
+		<div id="myModal2" class="modal hide fade talent_box user_gallery" tabindex="-1" role="dialog" aria-hidden="true">
+			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+				CLOSE
+			</button>
+			<div class="portfolio">
+				<div class="portfolio_work">
+					<div id="divSlider" class="flexslider">
+						<ul class="slides">
+							<li>
+								<figure><img src="/assets/slider1.jpg" alt="Image" />
+								</figure>
+							</li>
+							<li>
+								<figure><img src="/assets/slider2.jpg" alt="Image" />
+								</figure>
+							</li>
+							<li>
+								<figure><img src="/assets/slider3.jpg" alt="Image" />
+								</figure>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div class="layervault" style="display: none">
+				<a href="http://www.layervault.com" target="_blank">http://www.layervault.com</a>
+			</div>
+		</div>
+		<!--Light Box 2-->
+
+		<!--Light Box 3 - Interview Application -->
+		<div id="myModalInterviewApplication" class="modal hide fade talent_box" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false" aria-hidden="true">
+			<div id="divInterviewApplicationThankYou" class="thank_box" style="display:none">
+				<div class="thank_u_message">
+					<h2>Thank You!</h2>
+					<p>
+						Your request has been sent. Please give us 24hrs to
+						set up a meeting between both parties &amp; we'll be in
+						touch as soon as possible.
+					</p>
+				</div>
+			</div>
+			<div class="modal-header talent_header">
+				<button type="button" class="close close-btn" data-dismiss="modal" aria-hidden="true">
+					&nbsp;
+				</button>
+				<h5 id="hCandidateName"><span>INTERVIEW REQUEST</span> JASON B.</h5>
+			</div>
+			<div class="talent_form">
+				<%= form_tag "/preview/requestinterview", :method => "post", :id => "requestform", :remote => true do %>
+				<div class="talent_inputarea request_interview">
+					<input type="text" id="employer_firstname" name="employer_firstname" placeholder="First Name">
+					<input type="text" id="employer_lastname" name="employer_lastname" placeholder="Last Name">
+					<!--<input type="text" value="LinkedIn URL" onFocus="if(this.value==this.defaultValue)this.value='';" onBlur="if(this.value=='')this.value=this.defaultValue;"> -->
+					<input type="text" id="employer_companyname" name="employer_companyname" placeholder="Company Name">
+					<input type="text" id="employer_website" name="employer_website" placeholder="Company URL">
+					<textarea rows="3" id="employer_about" name="employer_about" placeholder="Company Description"></textarea>
+				</div>
+				<div class="input_textarea request_interview_textarea">
+					<textarea id="employer_pitch" name="employer_pitch" rows="3" placeholder="Please add job description &amp; include job location..."></textarea>
+					<div id="divTerms" class="terms_condition" style="height:166px; overflow-y: auto;">
+						<strong>Terms &amp; Conditions</strong>
+						<p>
+							Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis
+						</p>
+					</div>
+					<label id="lblAcceptTOS" class="radio">
+						<input type="radio" name="accept_tos" id="accept_tos" value="true">
+						Agree to Terms &amp; Services </label>
+				</div>
+				<div style="display: none">
+					<input type="hidden" id="candidate_id" name="candidate_id" value="0" />
+					<input type="hidden" id="hTOS" name="hTOS" value="0" />
+
+					<%= submit_tag 'SEND', :class => 'btn btn-primary btn-large', :id => 'btnSubmitInterviewRequest' %>
+				</div>
+				<% end %>
+			</div>
+			<div class="application_btn">
+				<a href="#" id="lnkCancelInterviewRequest" class="btn btn-large btn-block cancel_btn">CANCEL</a><a href="#" id="lnkProcessRequestInterview" class="btn btn-large btn-block send_btn">SEND <span class="ipod_none">APPLICATION</span></a>
+			</div>
+
+		</div>
+		<!--Light Box 3-->
+
+		<!--Light Box 4 - Thank you message-->
+		<div id="myModal4" class="modal hide fade talent_box" tabindex="-1" role="dialog" aria-hidden="true">
+			<div class="thank_box">
+				<div class="thank_u_message">
+					<h2>Thank You!</h2>
+					<p>
+						Your request has been sent. Please give us 24hrs to
+						set up a meeting between both parties &amp; we'll be in
+						touch as soon as possible.
+					</p>
+				</div>
+			</div>
+			<div class="modal-header talent_header">
+				<button type="button" class="close close-btn" data-dismiss="modal" aria-hidden="true">
+					&nbsp;
+				</button>
+				<h5><span>INTERVIEW REQUEST</span> JASON B.</h5>
+			</div>
+			<div class="talent_form">
+				<form>
+					<div class="talent_inputarea request_interview">
+						<input type="text" value="First Name" onFocus="if(this.value==this.defaultValue)this.value='';" onBlur="if(this.value=='')this.value=this.defaultValue;">
+						<input type="text" value="Last Name" onFocus="if(this.value==this.defaultValue)this.value='';" onBlur="if(this.value=='')this.value=this.defaultValue;">
+						<input type="text" value="LinkedIn URL" onFocus="if(this.value==this.defaultValue)this.value='';" onBlur="if(this.value=='')this.value=this.defaultValue;">
+						<input type="text" value="Company Name" class="small_input" onFocus="if(this.value==this.defaultValue)this.value='';" onBlur="if(this.value=='')this.value=this.defaultValue;">
+						<input type="text" value="Company URL" class="small_input space" onFocus="if(this.value==this.defaultValue)this.value='';" onBlur="if(this.value=='')this.value=this.defaultValue;">
+						<textarea rows="3" onFocus="if(this.value==this.defaultValue)this.value='';" onBlur="if(this.value=='')this.value=this.defaultValue;">Company Description</textarea>
+					</div>
+					<div class="input_textarea request_interview_textarea">
+						<textarea rows="3" onFocus="if(this.value==this.defaultValue)this.value='';" onBlur="if(this.value=='')this.value=this.defaultValue;">Please add job description &amp; include job location...</textarea>
+						<div class="terms_condition" style="height:166px; overflow-y: auto;">
+							<strong>Terms &amp; Conditions</strong>
+							<p>
+								Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis
+							</p>
+						</div>
+						<label class="radio">
+							<input type="radio" name="optionsRadios" id="optionsRadios" value="option1" >
+							Agree to Terms &amp; Services </label>
+					</div>
+				</form>
+			</div>
+			<div class="application_btn">
+				<a href="#" class="btn btn-large btn-block cancel_btn">CANCEL</a><a href="#"  class="btn btn-large btn-block send_btn">SEND <span class="ipod_none">APPLICATION</span></a>
+			</div>
+		</div>
+		<!--Light Box 4-->
+
+		<!--Light Box 5 - Candidate No Longer Available-->
+		<div id="myModal5" class="modal hide fade talent_box user_profile" tabindex="-1" role="dialog" aria-hidden="true">
+			<div class="user_profile_img candidate_longer">
+				<div class="candidate_overlay">
+					<div><img src="/assets/logo.png" alt="image" /><span>CANDIDATE NO LONGER AVAILABLE</span>
+					</div>
+				</div>
+				<figure><img src="/assets/user-profile-img1.jpg" alt="User Image" />
+				</figure>
+			</div>
+			<div class="user_bio">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+					&nbsp;
+				</button>
+				<h3><small>NAME</small> JASON B.</h3>
+				<ul class="occupation">
+					<li>
+						<span><small>OCCUPATION</small>BACK END DEVELOPER</span>
+					</li>
+					<li>
+						<span><small>LOCATION</small>NEW YORK CITY, NY</span>
+					</li>
+				</ul>
+				<div class="bio_graphi">
+					<small>BIO</small>
+					<p>
+						Former lead engineer at <a href="#">Hutch</a> with a CS degree from <a href="#">Bowdoin College</a>. Enjoys skiing &amp; skydiving. With past employment at Foursquare, Facebook, Google &amp; Microsoft, Jason is a rockstar candidate that is going to go quick!
+					</p>
+					<nav class="capabilities">
+						<small>CORE CAPABILITIES</small>
+						<ul>
+							<li>
+								<a href="#">RUBY ON RAILS</a>
+							</li>
+							<li>
+								<a href="#">PYTHON</a>
+							</li>
+							<li>
+								<a href="#">PHP</a>
+							</li>
+						</ul>
+						<ul>
+							<li>
+								<a href="#">JAVASCRIPT</a>
+							</li>
+							<li>
+								<a href="#">.NET</a>
+							</li>
+						</ul>
+					</nav>
+					<div class="recent_work ipod_none_recent">
+						<small>RECENT WORK</small>
+						<ul>
+							<li>
+								<a href="#"><img src="/assets/recent-work1.jpg" alt="Recent Work" /></a>
+							</li>
+							<li>
+								<a href="#"><img src="/assets/recent-work2.jpg" alt="Recent Work" /></a>
+							</li>
+							<li>
+								<a href="#"><img src="/assets/recent-work3.jpg" alt="Recent Work" /></a>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<a href="#" class="btn btn-large btn-block contact_btn orange_btn ipod_none_btn"><span>NO LONGER AVAILABLE</span></a>
+			</div>
+			<div class="recent_work ipod_block_recent">
+				<small>RECENT WORK</small>
+				<ul>
+					<li>
+						<a href="#"><img src="/assets/recent-work1.jpg" alt="Recent Work" /></a>
+					</li>
+					<li>
+						<a href="#"><img src="/assets/recent-work2.jpg" alt="Recent Work" /></a>
+					</li>
+					<li>
+						<a href="#"><img src="/assets/recent-work3.jpg" alt="Recent Work" /></a>
+					</li>
+				</ul>
+			</div>
+			<a href="#" class="btn btn-large btn-block contact_btn orange_btn ipod_block_btn"><span>NO LONGER AVAILABLE</span></a>
+		</div>
+		<!--Light Box 5-->
+
+		<!--Light Box 6 - Authorized Personnel Only-->
+		<div id="myModal6" class="modal hide fade invalid_email authorized_email" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false"  aria-hidden="true">
+			<h4>Authorized Personnel Only</h4>
+			<p>
+				Please provide your email address to access this area.
+			</p>
+			<form>
+				<input type="text" id="txtEmail" value="Email Address" onFocus="if(this.value==this.defaultValue)this.value='';" onBlur="if(this.value=='')this.value=this.defaultValue;">
+			</form>
+			<small>Not a member? <a href="/">Sign Up</a></small><a href="#" id="lnkLoginEmployer" class="btn btn-large btn-block continue_btn">CONTINUE</a>
+		</div>
+		<!--Light Box 6-->
+
+		<script src="/assets/bootstrap.js"></script>
+		<script src="/assets/jquery.flexslider.js"></script>
+		<script type="text/javascript">
+			$(document).ready(function() {
+
+				$('#divUserData').waitForImages(function() {
+					// All descendant images have loaded, now slide up.
+					$(this).show();
+					$("#divCrewFlew").hide();
+				});
+
+				function goToByScroll(id) {
+					// Remove "link" from the ID
+					id = id.replace("link", "");
+					// Scroll
+					$('html,body').animate({
+						scrollTop : $("#" + id).offset().top
+					}, 'slow');
+				}
+				
+				$('a[id^="lnkRequestInterview"]').click(function() {
+		$("#myModalCandidate").modal('hide');
+		return false;
+	})
+
+				$('#myModalCandidate').on('hidden', function() {
+					// alert($('#myModalInterviewApplication').modal());
+					if (!iInterviewPopup)
+						goToByScroll("secUserIdentity_" + $("#candidate_id").val())
+				})
+
+				$('#myModalInterviewApplication').on('show', function() {
+					iInterviewPopup = true;
+				})
+				$('#myModalInterviewApplication').on('hidden', function() {
+					// do something…
+					iInterviewPopup = false;
+					if ($('#divInterviewApplicationThankYou').css('display') == 'none') {
+						$("#myModalCandidate").modal();
+
+					} else {
+						$("#divInterviewApplicationThankYou").hide();
+						goToByScroll("secUserIdentity_" + $("#candidate_id").val());
+					}
+				})
+
+				$("#lnkCancelInterviewRequest").click(function() {
+					if ($("#lnkProcessRequestInterview").html() != 'PROCESSING...') {
+						$('#myModalInterviewApplication').modal('hide');
+					}
+				})
+				$("#lnkProcessRequestInterview").click(function() {
+					
+					if (ValidateInterviewRequest() == true) {
+						$("#lnkProcessRequestInterview").html('PROCESSING...');
+						$("#btnSubmitInterviewRequest").click();
+					}
+
+					return false;
+				})
+			});
+
+		</script>
+	</body>
+</html>

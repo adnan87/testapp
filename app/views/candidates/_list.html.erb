@@ -1,0 +1,50 @@
+<div class="table">
+	<div class="row table-head">
+		<div class="column" data-label="Email">
+			Email
+		</div>
+		<div class="column" data-label="Name">
+			Name
+		</div>
+		<div class="column" data-label="Phone">
+			Phone
+		</div>
+		<div class="column" data-label="Created at">
+			Created at	
+		</div>
+		<div class="column" data-label="Actions">
+			Actions
+		</div>
+	</div>
+	<% if @candidates.blank? %>
+	<% else %>
+	<% @candidates.each do |candidate| %>
+	<div class="row">
+		<div class="column" data-label="Email">
+			<%= link_to candidate.email, candidate_path(candidate) %>
+		</div>
+		<div class="column" data-label="Name">
+			<%= candidate.name %>
+		</div>
+		<div class="column" data-label="Phone">
+			<%= candidate.phone %>
+		</div>
+		<div class="column" data-label="Created at">
+			<%= l candidate.created_at %>
+		</div>
+		<div class="column" data-label="Actions">
+			<% if candidate.status == "Requested" %>
+			<%= button_to "Approve", :action => "approve_candidate", :id => candidate.id %>
+			<%= button_to "Wait List", :action => "waitlist_candidate", :id => candidate.id %>
+			<% end %>
+			<% if candidate.status == "Waitlisted" %>
+			<%= button_to "Approve", :action => "approve_candidate", :id => candidate.id %>
+			<% end %>
+			<% if candidate.status == "Approved" %>
+			<%= link_to "Feature", takeoff_candidate_candidates_url(:id => candidate.id) %>
+			<% end %>
+		</div>
+	</div>
+	<% end %>
+	<% end %>
+</div>

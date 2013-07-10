@@ -1,0 +1,80 @@
+<%- model_class = Candidate -%>
+<%= stylesheet_link_tag    "responsive_table", :media => "all" %>
+<div class="page-header">
+		<h1><%= t '.title', :default => model_class.model_name.human.pluralize %> - Featured</h1>
+</div>
+<div class="row-fluid" >
+	<div class="span4">
+		<%= link_to t('.new', :default => t("helpers.links.new")),
+		new_candidate_path,
+		:class => 'btn btn-primary' %>
+	</div>
+	<div class="span8" style="text-align: right">
+		<ul class="inline">
+			<li>
+				View Candidates:
+			</li>
+			<li>
+				<%= link_to "Requested", candidates_url(:status => "Requested"), :class => "badge badge-important"%>
+			</li>
+			<li>
+				<%= link_to "Approved", candidates_url(:status => "Approved"), :class => "badge badge-success"%>
+			</li>
+			<li>
+				<%= link_to "Waitlisted", candidates_url(:status => "Waitlisted"), :class => "badge badge-warning"%>
+			</li>
+			<li>
+				<%= link_to "Featured", featured_candidates_url, :class => "badge badge-inverse"%>
+			</li>
+		</ul>
+	</div>
+</div>
+
+<div class="row-fluid">
+<div class="table">
+	<div class="row table-head">
+		<div class="column" data-label="Email">
+			Email
+		</div>
+		<div class="column" data-label="Name">
+			Name
+		</div>
+		<div class="column" data-label="Phone">
+			Phone
+		</div>
+		<div class="column" data-label="Takeoff">
+			Takeoff
+		</div>
+		<div class="column" data-label="Featured on">
+			Featured on	
+		</div>
+		<div class="column" data-label="Change Takeoff">
+			Change Takeoff
+		</div>
+	</div>
+	<% @candidates.each do |candidate| %>
+	<div class="row">
+		<div class="column" data-label="Email">
+			<%= link_to candidate.email, candidate_path(candidate) %>
+		</div>
+		<div class="column" data-label="Name">
+			<%= candidate.name %>
+		</div>
+		<div class="column" data-label="Phone">
+			<%= candidate.phone %>
+		</div>
+		<div class="column" data-label="Takeoff">
+			<%= candidate.takeoffname %>
+		</div>
+		<div class="column" data-label="Featured on">
+			<%= l candidate.featured_date %>
+		</div>
+		<div class="column" data-label="Change Takeoff">
+			<%= link_to "Change Takeoff", takeoff_candidate_candidates_url(:id => candidate.id, :takeoff_id => candidate.takeoff_id) %>		
+		</div>
+	</div>
+	<% end %>
+	
+</div>
+</div>
+

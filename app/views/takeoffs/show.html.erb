@@ -1,0 +1,45 @@
+<%- model_class = Takeoff -%>
+<div class="page-header">
+	<h1><%= t '.title', :default => model_class.model_name.human %></h1>
+</div>
+<div class="row-fluid" style="text-align: right">
+	<a href="/previewtakeoff/<%= @takeoff.id%>" target="_blank" style="font-weight: bold; font-size: 16px; color: #ff0000">PREVIEW</a>
+</div>
+<div class="row-fluid">
+	<div class="span6">
+		<dl class="dl-horizontal">
+			<dt>
+				<strong><%= model_class.human_attribute_name(:name) %>:</strong>
+			</dt>
+			<dd>
+				<%= @takeoff.name %>
+			</dd>
+			<dt>
+				<strong><%= model_class.human_attribute_name(:startdate) %>:</strong>
+			</dt>
+			<dd>
+				<%= l @takeoff.startdate %>
+			</dd>
+			<dt>
+				<strong><%= model_class.human_attribute_name(:enddate) %>:</strong>
+			</dt>
+			<dd>
+				<%= l @takeoff.enddate %>
+			</dd>
+			<dt>
+				<strong><%= model_class.human_attribute_name(:active) %>:</strong>
+			</dt>
+			<dd>
+				<%= @takeoff.active %>
+			</dd>
+		</dl>
+	</div>
+</div>
+<div class="form-actions">
+	<p style="text-align: center">
+	<%= link_to t('.back', :default => t("helpers.links.back")),
+	takeoffs_path, :class => 'btn'  %>
+	<%= link_to t('.edit', :default => t("helpers.links.edit")),
+	edit_takeoff_path(@takeoff), :class => 'btn' %>
+	</p>
+</div>

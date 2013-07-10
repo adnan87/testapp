@@ -1,0 +1,135 @@
+/*
+Table Of Content:
+
+1.) Home Page Content
+2.) Talent Application Content
+3.) Employer Application Content
+4.) Landing-LogInWarning Content
+5.) User Grid Content
+6.) Inside-UserProfile
+7.) Inside-UserGallery Content
+8.) Inside-RequestInterview
+9.) Inside-UserNoLongerAvailable
+--------------------------------*/
+
+
+/*
+1.) Home Page Content
+--------------------------------*/
+.interview_content {
+	padding:40px 0px 0px 0px;
+	width:80%;
+}
+/*
+2.) Talent Application Content
+--------------------------------*/
+input[type="text"], textarea {
+	width:96%;
+}
+.talent_box {
+	width:720px;
+	top:2% !important;
+	margin-left:-360px;
+}
+.input_textarea textarea {
+	height:220px;
+}
+.attach_resume {
+	width:99.4%;
+}
+/*
+3.) Employer Application Content
+--------------------------------*/
+.job_title {
+	float:left;
+	padding-left:8%;
+	width:42%;
+}
+/*
+4.) Landing-LogInWarning Content
+--------------------------------*/
+.invalid_email {
+	top:29% !important;
+}
+/*
+5.) User Grid Content
+--------------------------------*/
+.header_bg {
+	padding-bottom:48px;
+}
+/*
+6.) Inside-UserProfile Content
+--------------------------------*/
+.user_profile {
+	min-height:710px;
+	top:5% !important;
+	position:fixed;
+}
+.user_profile_img {
+	width:285px;
+}
+.user_profile_img img {
+	width:286px;
+	height:409px;
+	border-radius:5px 0 0 0px;
+}
+.user_bio {
+	width:434px;
+	min-height:0px;
+}
+.bio_graphi {
+	max-height: 200px; 
+	overflow-y: auto; 
+	padding-right: 8px; 
+	padding-left: 20px;
+}
+.recent_work {
+}
+.recent_work small, .recent_work ul {
+	padding-left:50px;
+}
+.ipod_none_recent, .ipod_none_btn {
+	display:none;
+}
+.ipod_block_btn {
+	display:block;
+}
+.ipod_block_recent {
+	display:inline-block;
+	width:100%;
+}
+.user_profile .contact_btn {
+	border-radius:0px 0px 4px 4px;
+}
+/*
+7.) Inside-UserGallery Content
+--------------------------------*/
+.user_gallery {
+	top:15% !important;
+	position:fixed;
+}
+.flexslider {
+	padding-right:48px;
+}
+.flex-viewport ul li.flex-active-slide {
+	margin:0px 24px;
+}
+/*
+8.) Inside-RequestInterview Content
+------------------------------------*/
+.request_interview .small_input {
+	width:44.3%;
+}
+.request_interview_textarea .terms_condition {
+	width:96%;
+}
+/*
+9.) Inside-UserNoLongerAvailable Content
+-------------------------------------------*/
+.candidate_overlay img {
+	height:28px;
+	width:180px;
+}
+.candidate_overlay div {
+	top:185px;
+}

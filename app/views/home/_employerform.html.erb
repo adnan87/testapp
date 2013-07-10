@@ -1,0 +1,110 @@
+<%= form_for @employer, :url => { :action => :createemployer }, :html => { :class => 'form-horizontal' } do |f| %>
+<div class="row-fluid">
+	<div class="span6">
+		<ul class="unstyled" style="padding: 15px;">
+			<li>
+				<%= label_tag(:email, "Email :*") %>
+				<% email ||= session[:empuser]%>
+				<%= f.text_field :email, :value => email, :class => 'span12' %>
+			</li>
+			<li>
+				<%= label_tag(:companyname, "Company Name :")%>
+				<%= f.text_field :companyname, :class => 'span12' %>
+			</li>
+			<li>
+				<%= label_tag(:name, "Name :*")%>
+				<%= f.text_field :name, :class => 'span12' %>
+			</li>
+			<li>
+				<%= label_tag(:phone, "Phone :")%>
+				<%= f.text_field :phone, :class => 'span12'  %>
+			</li>
+		</ul>
+	</div>
+	<div class="span6">
+		<ul class="unstyled" style="padding: 15px;">
+			<li>
+				<%= label_tag(:about, "About:")%>
+				<%= f.text_area :about, :class => 'span12 tinymce', :cols => 10, :rows => 9%>
+			</li>
+			<li>
+				<%= label_tag(:website, "Website :")%>
+				<%= f.text_field :website, :class => 'span12'  %>
+			</li>
+		</ul>
+	</div>
+</div>
+</div>
+<div class="form-actions" style="padding-left: 0px; text-align: center">
+	<ul class="unstyled">
+		<li class="error error-large">
+			* - Mandatory Fields
+		</li>
+		<li>
+			** - Any one of the field is mandatory
+		</li>
+		<% @employer.errors.full_messages.each do |message| %>
+		<li class="error error-large">
+			<%= message %>
+		</li>
+		<% end %>
+	</ul>
+	<%= f.submit 'Apply Now', :class => 'btn btn-primary btn-large' %>
+
+	<!--<%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+	root_path, :class => 'btn btn-large' %> -->
+
+</div>
+<script>
+	$('document').ready(function() {
+
+		tinyMCE.init({
+			mode : 'textareas',
+			theme : 'simple',
+			onchange_callback : function(editor) {
+				tinyMCE.triggerSave();
+				$("#" + editor.id).valid();
+			}
+		});
+
+	});
+
+	$(document).ready(function() {
+		$.validator.addMethod("cus_url", function(value, element) {
+			if (value.substr(0, 7) != 'http://') {
+				value = 'http://' + value;
+			}
+			if (value.substr(value.length - 1, 1) != '/') {
+				value = value + '/';
+			}
+			return this.optional(element) || /^(http|https|ftp):\/\/[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/i.test(value);
+		}, "Not valid url.");
+
+		$.validator.setDefaults({
+			ignore : ''
+		});
+		$("#new_employer").validate({
+			rules : {
+				"employer[name]" : {
+					required : true,
+				},
+				"employer[email]" : {
+					required : true,
+					email : true
+				},
+				"employer[phone]" : {
+					required : true
+				},
+				"employer[website]" : {
+					cus_url : true
+				}
+			},
+			messages : {
+				"employer[name]" : "Enter your full name*",
+				"employer[email]" : "Enter your email*"
+			}
+		});
+
+	}); 
+</script>
+<% end %>

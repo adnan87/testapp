@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  employer_id: 1
+  agreement_id: 1
+  ipaddress: MyString
+
+two:
+  employer_id: 1
+  agreement_id: 1
+  ipaddress: MyString

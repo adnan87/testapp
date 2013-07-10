@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+		<title>Welcome to Interview Jet</title>
+		<%= javascript_include_tag "ijetshared" %>
+		<link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+		<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,800,700,600,300' rel='stylesheet' type='text/css'>
+		<link rel="stylesheet" href="/assets/ijet.css" media="screen">
+		<link rel="stylesheet" href="/assets/global.css" media="screen">
+		<link rel="stylesheet" href="/assets/style.css" media="screen">
+		<link rel="stylesheet" href="/assets/handheld.css" media="screen and (max-width:959px)">
+		<link rel="stylesheet" href="/assets/mobile.css" media="screen and (max-width:767px)">
+		<link rel="stylesheet" href="/assets/tablet.css" media="screen and (min-width:768px) and (max-width:959px)">
+		<link rel="stylesheet" href="/assets/tablet-landscape.css" media="screen and (min-width:960px) and (max-width:1024px)">
+		<!--[if lt IE 9]>
+		<script src="/assets/html5shiv.js"></script>
+		<script src="/assets/css3-mediaqueries.js"></script>
+		<script src="/assets/imgsizer.js"></script>
+		<link rel="stylesheet" type="text/css" href="/assets/ie.css" media="screen">
+		<![endif]-->
+		<script src="/assets/jquery-1.9.1.min.js"></script>
+		<script src="/assets/jquery.placeholder.min.js"></script>
+		<script src="/assets/jquery.waitforimages.min.js"></script>
+		<script type="text/javascript">
+			var wt;
+			var iInterviewPopup = false;
+			$(document).ready(function() {
+				wt = $(window).height() / 2
+				$(window).resize(function() {
+					wt = $(window).height() / 2
+				});
+			});
+		</script>
+		<style>
+			.overlayed_new {
+				/*background: url(/assets/new_overlay_bg.png) left top repeat;*/
+				width: 262px;
+				height: 256px;
+				padding-top: 136px;
+				border: 4px #333434 solid;
+				position: absolute;
+				left: 0px;
+				top: 0px;
+				display: block;
+				text-align: center;
+				background-color: #000000;
+				opacity: 0.4;
+				filter: alpha(opacity=40);
+				display: none;
+			}
+
+		</style>
+	</head>
+	<body>
+		<!--Page Wrapper-->
+		<div id="wrapper">
+			<!--Header Section-->
+			<header id="header">
+				<div class="container-fluid header_bg">
+					<div class="row-fluid">
+						<a href="/" class="brand"><img src="/assets/logo.png" alt="Website Logo" title="Welcome to Interview Jet" /></a>
+						<div id="divNextFlight" class="timer">
+							<h5>NEXT TAKEOFF IN</h5>
+							<span class="timer_bg">&nbsp;</span>
+							<div class="timer_box">
+								<ul>
+									<li>
+										<span id="spanHours">&nbsp;</span><small id="smallHours">Hours</small>
+									</li>
+									<li>
+										<span id="spanMins">&nbsp;</span><small id="smallMins">Minutes</small>
+									</li>
+									<li>
+										<span id="spanSecs">&nbsp;</span><small id="smallSecs">Seconds</small>
+									</li>
+								</ul>
+								<span class="white_overlay">&nbsp;</span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</header>
+			<!--Header Section-->
+			<!--Content Section-->
+			<div id="content">
+				<div class="container-fluid">
+					<div class="row-fluid">
+						<div id="divCrewFlewLoading" class="crew_flew">
+          <h2>Getting ready!!!</h2>
+          <p>Please wait as we are getting ready for takeoff....</p>
+        </div>
+        <div id="divCrewFlew" class="crew_flew" style="display: none">
+<h2>This Crew Flew!</h2>
+<p>Sorry but you just missed some incredible talent. Next take off is just around the corner - make sure you're back here to take full advantage.</p>
+</div>
+						<div id="divUserData" class="user_data in_active_detail" style="display:none;">
+							 <div class="in_active"></div>
+							<%= yield %>
+							
+						</div>
+					</div>
+				</div>
+			</div>
+			<!--Content Section-->
+			<!--Footer Section-->
+			<footer id="footer">
+				<div class="container-fluid">
+					<div class="row-fluid">
+						<div class="footer_content">
+							<div class="footer_logo">
+								<div class="footer_small_logo">
+									<a href="/"><img src="/assets/footer-logo.png" alt="Website Logo" /></a>
+								</div>
+								<nav class="footer_list">
+									<ul class="nav">
+										<li>
+											<a href="/faq">FAQ</a>
+										</li>
+										<li>
+											<a href="/about">About Us</a>
+										</li>
+										<!--<li>
+											<a href="javascript:void(0)">Talent Application</a>
+										</li>-->
+										<li>
+											<a href="/terms">Terms Of Use</a>
+										</li>
+										<li>
+											<a href="/privacy">Privacy</a>
+										</li>
+									</ul>
+									<ul class="nav none_border">										
+										<li>
+											<a href="javascript:void(0)">LinkedIn</a>
+										</li>
+										<li>
+											<a href="javascript:void(0)">Twitter</a>
+										</li>
+										<li>
+											<a href="javascript:void(0)">Facebook</a>
+										</li>
+									</ul>
+								</nav>
+							</div>
+							<div class="footer_address">
+								<a href="#" class="small_logo"><img src="/assets/footer-logo.png" alt="Website Logo" /></a>
+								<address>
+									315 W38th Street Suite 1301
+									<br>
+									New York, New York 10038
+								</address>
+								<span class="made_In">Made In <strong>NYC</strong></span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</footer>
+			<!--Footer Section-->
+		</div>
+		<!--Page Wrapper-->
+
+		<!--Light Box 6 - Authorized Personnel Only-->
+		<div id="myModal6" class="modal hide fade invalid_email authorized_email" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false"  aria-hidden="true">
+			<h4>Authorized Personnel Only</h4>
+			<p>
+				Please provide your email address to access this area.
+			</p>
+			<form>
+				<input type="text" id="txtEmail" value="Email Address" onFocus="if(this.value==this.defaultValue)this.value='';" onBlur="if(this.value=='')this.value=this.defaultValue;">
+			</form>
+			<small>Not a member? <a href="/">Sign Up</a></small><a href="#" id="lnkLoginEmployer" class="btn btn-large btn-block continue_btn">CONTINUE</a>
+		</div>
+		<!--Light Box 6-->
+
+
+		<script src="/assets/bootstrap.js"></script>
+	
+		<script type="text/javascript">
+			
+			$(document).ready(function() {
+				
+				
+				<% if !session[:empuser].to_s.blank? %>
+				//alert ('working' + '<%= session[:empuser].to_s %>');
+				<% else %>
+				
+				$('#myModal6').modal();
+				
+				<% end %>
+		$('#divUserData').waitForImages(function() {
+			// All descendant images have loaded, now slide up.
+			$("#divCrewFlewLoading").hide();
+			$("#divCrewFlew").show();
+			$(this).show();
+			
+			
+		});			
+});
+		</script>
+
+		<script type="text/javascript">
+			$(function() {
+				var testTextBox = $('#txtEmail');
+				var code = null;
+
+				testTextBox.keypress(function(e) {
+					code = (e.keyCode ? e.keyCode : e.which);
+					if (code == 13) {
+
+						ValidateEmployer();
+						e.preventDefault();
+					}
+				});
+
+			});
+			$("#lnkLoginEmployer").click(function() {
+				ValidateEmployer();
+				return false;
+			})
+			function ValidateEmployer() {
+				var EmployerEmail = $('#txtEmail').val();
+				var iResult = false;
+				element = "#txtEmail";
+				var filter = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+
+				if ($(element).val() == "" || !filter.test($(element).val())) {
+					$(element).css("border", "1px solid #FF0000");
+					iResult = false;
+				} else {
+					$(element).css("border", "1px solid #CCCCCC");
+					iResult = true;
+				}
+
+				if (iResult) {
+					$.ajax({
+						type : "GET",
+						async : false,
+						//contentType : 'multipart/form-data',
+						url : "/validateemployer.json", //sumbits it to the given url of the form
+						data : "email=" + $("#txtEmail").val(),
+						dataType : "JSON" // you want a difference between normal and ajax-calls, and json is standard
+					}).success(function(json) {
+						//act on result.
+						$("#txtEmail").blur();
+						if (json.message == "Approved") 
+							
+							$('#myModal6').modal('hide');
+							
+						else
+							$(element).css("border", "2px solid #FF0000");
+
+					}).error(function(json) {
+						//act on result.
+
+					});
+				}
+			}
+
+		</script>
+	
+		<!--IE 8 Light Box 4-->
+		<div id="myModalIE8" class="modal hide fade invalid_email" style="top:50px" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false" aria-hidden="true">
+			<h4>Warning! Your browser is really old.</h4>
+			<p>
+				 Our website probably won't display correctly for you.<br/>
+				 For a less-frustrating experience, please download latest version of <a href="http://www.microsoft.com/ie" target="_blank" href="#">Internet Explorer</a> or use Firefox or Chrome for a less-frustrating experience
+			</p>
+			<a href="http://www.microsoft.com/ie" target="_blank" class="btn btn-large btn-block continue_btn">DOWNLOAD</a>
+		</div>
+		<!--IE 8 Light Box 4-->
+		<!--[if lt IE 9 ]>
+			<script>
+			var is_ie_lt9 = true;
+			$(document).ready(function() {
+			$('#myModal6').modal('hide');
+			$("#myModalIE8").modal();
+			});
+			</script>
+		<![endif]--> 
+	</body>
+</html>

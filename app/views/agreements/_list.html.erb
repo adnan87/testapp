@@ -1,0 +1,25 @@
+<%- model_class = Agreement -%>
+<table class="table table-striped">
+	<thead>
+		<tr>
+			<th><%= model_class.human_attribute_name(:title) %></th>
+			<th><%= model_class.human_attribute_name(:version) %></th>
+			<th><%= model_class.human_attribute_name(:isactive) %></th>
+			<th>View Employers</th>
+		</tr>
+	</thead>
+	<tbody>
+	<% if @agreements.blank? %>
+	<% else %>
+		<% @agreements.each do |agreement| %>
+		<tr>
+			<td><%= link_to agreement.title, agreement_path(agreement) %></td>
+			<td><%= agreement.version %></td>
+			<td><%= agreement.isactive %></td>
+			<td><%= link_to "view", employer_agreements_path(:agreement_id => agreement.id) %></td>
+		</tr>
+		<% end %>
+		<% end %>
+	</tbody>
+</table>
+</div>

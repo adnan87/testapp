@@ -1,0 +1,49 @@
+/*
+1.) Global Style For Mobile and Tablet
+---------------------------------------*/
+.content_banner {
+	text-align:center;
+}
+.interview_content {
+	display:inline-block;
+}
+.talent_box {
+	position:absolute;
+}
+.talent_inputarea, .input_textarea {
+	float:none;
+	width:100%;
+	padding-left:0;
+}
+.attach_resume {
+	margin-bottom:20px;
+}
+.employer_titles {
+	width:100%;
+	padding-left:0;
+}
+#header {
+	text-align:center;
+}
+#header .brand {
+	margin-left:0;
+}
+.timer {
+	top:55px;
+}
+.occupation li {
+	border-left:none;
+	border-top:1px #cccccc solid;
+	float:none;
+}
+#wrapper {
+	position:inherit;
+	min-height:0;
+}
+#content {
+	padding-bottom:0px;
+}
+#footer {
+	position:inherit;
+	bottom:inherit;
+}

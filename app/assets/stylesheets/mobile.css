@@ -1,0 +1,305 @@
+/*
+1.) TypoGraphical Changes For Mobile Devices
+2.) Global Design Changes For Home Page
+3.) Talent Application Content
+4.) Employer Application Content
+5.) Landing-LogInWarning Content
+6.) User Grid Content
+7.) Inside-PastFlightCrew Content
+8.) Inside-UserProfile Content
+9.) Inside-UserGallery Content
+10.) Inside-RequestInterview Content
+11.) Inside-SentConfirmation Content
+12.) Inside-UserNoLongerAvailable Content
+13.) Authorized Personnel Only Content
+---------------------------------------------*/
+
+
+/*
+1.) TypoGraphical Changes For Mobile Devices
+------------------------------------------*/
+body {
+	padding:0px;
+}
+/*
+2.) Global Design Changes For Home Page
+------------------------------------------*/
+.content_banner .container-fluid {
+	padding:0px 10px;
+}
+.interview_content {
+	padding:20px 0px 0px 0px;
+	width:100%;
+}
+.email_section p {
+	font-size:2.8em;
+}
+.email_section input[type="text"] {
+	font-size:1.8em;
+	width:90%;
+	padding:18px 13px 22px;
+}
+.next_flight h5, .next_flight .span {
+	font-size:1.1em;
+}
+.next_flight span {
+	padding-top:10px;
+}
+
+.next_flight ul li {
+	font-size: 1.1em;
+	padding-top: 10px;
+}
+.next_flight  li span {
+	padding-top:0px;
+	width: 15px;
+	font-family: 'gotham_blackregular';
+	
+}
+.footer_logo, .footer_address, .footer_list {
+	float:none;
+	width:100%;
+	display:inline-block;
+}
+.footer_small_logo {
+	display:none;
+}
+.footer_content, .footer_list, .footer_list ul {
+	padding:0px;
+}
+.footer_list ul {
+	border:none;
+	margin:0px;
+	width:100%;
+	font-size:1.8em;
+}
+.footer_list ul li {
+	padding:18px 0px 18px 20px;
+	border-bottom:1px #333 solid;
+}
+.footer_address {
+	text-align:center;
+	padding:35px 0px;
+}
+.footer_address address {
+	min-height:inherit;
+}
+/*
+3.) Talent Application Content
+------------------------------------------*/
+.talent_box, .talent_header, .application_btn .cancel_btn, .application_btn .send_btn {
+	border-radius:0px;
+}
+.talent_box {
+	width:100%;
+	top:0% !important;
+	left:0%;
+	margin-left:0;
+}
+input[type="text"], textarea {
+	width:91%;
+}
+.attach_resume span, .attach_resume input[type="button"] {
+	float:none;
+}
+.attach_resume {
+	width:99.3%;
+}
+.attach_resume input[type="button"] {
+	width:100%;
+	padding:15px 0px;
+	border-left:0px;
+	border-top:1px #414141 solid;
+}
+.ipod_none {
+	display:none;
+}
+/*
+4.) Employer Application Content
+------------------------------------------*/
+.job_title {
+	padding-left:5%;
+	width:95%;
+}
+/*
+5.) Landing-LogInWarning Content
+------------------------------------------*/
+.invalid_email {
+	position:absolute;
+	width:300px;
+	margin-left:-150px;
+	top:13% !important;
+}
+.invalid_email h5 {
+	font-size:1.8em;
+}
+.invalid_email p {
+	font-size:1.4em;
+}
+/*
+6.) User Grid Content
+--------------------------------*/
+#header {
+	padding-bottom:60px;
+}
+.header_bg {
+	padding-bottom:91px;
+	border-radius:0 0 5px 5px;
+}
+.timer {
+	width:320px;
+}
+.timer .timer_bg {
+	display:none;
+}
+/*
+7.) Inside-PastFlightCrew Content
+------------------------------------*/
+.crew_flew {
+	width:312px;
+}
+.crew_flew h2 {
+	font-size:3.6em;
+}
+.in_active {
+	height:100%;
+}
+/*
+8.) Inside-UserProfile Content
+--------------------------------*/
+.user_profile small {
+	font-size:10px;
+}
+.user_bio {
+	/*min-height:945px;*/
+}
+.user_bio h3 {
+	font-size:3.6em;
+}
+.user_profile_img, .user_bio {
+	float:none;
+	width:100%;
+}
+.user_profile_img {
+	text-align:center;
+	background:none;
+	padding-right:0px;
+}
+.user_profile_img img {
+	width:320px;
+	height:458px;
+	border-radius:0px;
+}
+.user_bio .close {
+	background-position:0px 0px;
+	position:absolute;
+	right:15px;
+	top:-470px;
+}
+
+.bio_graphi {
+padding: 18px 22px 0px 18px;
+font-size: 1.4em;
+max-height: none;
+overflow-y: auto;
+}
+.occupation span {
+	font-size:1.4em;
+}
+.user_profile .contact_btn {
+	border-radius:0px;
+}
+.recent_work ul li {
+	float:none;
+	margin:0px 0px 15px 0px;
+}
+
+.user_profile .contact_btn {
+	width: 100%;
+	position: static;
+	bottom: 0px;
+	padding: 1px 0px;
+}
+/*
+9.) Inside-UserGallery Content
+--------------------------------*/
+.user_gallery {
+	min-height:500px;
+}
+.flexslider {
+	width:300px;
+	padding:80px 20px 0px 0px;
+	height:290px;
+}
+.flex-viewport img {
+	height:190px;
+}
+.flex-viewport ul li.flex-active-slide {
+	margin:0px 10px;
+}
+.flex-control-paging {
+	left:41%;
+}
+/*
+10.) Inside-RequestInterview Content
+--------------------------------------*/
+.request_interview .small_input, .request_interview_textarea .terms_condition {
+	width:91%;
+}
+.request_interview .small_input + .small_input {
+	margin-left:0;
+}
+/*
+11.) Inside-SentConfirmation Content
+---------------------------------------*/
+.thank_box {
+	border-radius:0px;
+}
+.thank_u_message {
+	width:280px;
+	margin-left:-140px;
+	top:10%;
+}
+/*
+12.) Inside-UserNoLongerAvailable Content
+-------------------------------------------*/
+.candidate_overlay img {
+	width:180px;
+	height:28px;
+}
+.candidate_overlay {
+	border-radius:0px;
+}
+.candidate_overlay div {
+	top:200px;
+}
+/*
+13.) Authorized Personnel Only Content
+--------------------------------------------*/
+.authorized_email {
+}
+.authorized_email h4 {
+	font-size:1.8em;
+}
+.authorized_email input[type="text"] {
+	margin:0 15px 8px;
+}
+ @media handheld, only screen and (min-width: 480px) and (max-width:767px) {
+input[type="text"], textarea, .request_interview .small_input, .request_interview_textarea .terms_condition {
+ width:93.5%;
+}
+.user_bio {
+ min-height:655px;
+}
+.user_bio .close {
+ background-position: 0 -35px;
+}
+.recent_work ul li {
+ width:29%;
+ float:left;
+ margin-left:14px;
+}
+.invalid_email {
+ top:9% !important;
+}
+}

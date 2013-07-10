@@ -1,0 +1,11 @@
+<h2 style="font-size: 24px;">Hi Admin</h2>
+<p style="font-size: 20px; font-weight: bold">
+<% if @interview.candidate_status == "Accepted"%>
+<%= @candidate.name %> has accepted the interview request of <%= @employer.companyname %>
+<% else %>
+<%= @candidate.name %> has declined the interview request of <%= @employer.companyname %>
+<% end %>
+</p>   
+<p style="font-size: 18px;">Best</p>
+<p style="font-size: 20px;">INTERVIEW JET</p>
+<p style="font-size: 18px; font-style: italic">www.interviewjet.com</p>

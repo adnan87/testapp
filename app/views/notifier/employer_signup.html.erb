@@ -1,0 +1,44 @@
+<h3> We have a new employer signup with following details</h3>
+<p>
+	<ul>
+		<li>
+			Name: <%= @employer.name %>
+		</li>
+		<li>
+			Company: <%= @employer.companyname %>
+		</li>
+		<li>
+			Email: <%= @employer.email %>
+		</li>
+		<li>
+			Phone: <%= @employer.phone %>
+		</li>
+	
+		<li>
+			About: <%= @employer.about %>
+		</li>
+		<li>
+			Website: <%= @employer.website%>
+		</li>
+		<li>Job Titles: 
+			<% @employer.job_titles.all.each do |jobtitle| %>
+				<%= jobtitle.name %>&nbsp;
+				<% end %>
+		</li>
+		<li>
+			Skills: 
+			<% @employer.skills.all.each do |skill| %>
+				<%= skill.name %>&nbsp;
+				<% end %>
+		</li>
+		<li>
+			<%= link_to "click here",  employer_url(:id => @employer.id)  %> to view the employer.
+		</li>
+
+	</ul>
+</p>
+<p>
+	Thank you
+	<br/>
+	Interviewjet Team
+</p>

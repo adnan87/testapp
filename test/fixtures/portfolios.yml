@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  candidate_id: 1
+  thumbnail_image: MyString
+  slider_image: MyString
+  title: MyString
+  description: MyString
+
+two:
+  candidate_id: 1
+  thumbnail_image: MyString
+  slider_image: MyString
+  title: MyString
+  description: MyString

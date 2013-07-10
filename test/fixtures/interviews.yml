@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  request_date: 2013-02-21 18:44:04
+  employer_id: 1
+  candidate_id: 1
+  employer_pitch: MyString
+  status: MyString
+  status_changed_on: 2013-02-21 18:44:04
+  candidate_status: MyString
+  candidate_status_changed_on: 2013-02-21 18:44:04
+
+two:
+  request_date: 2013-02-21 18:44:04
+  employer_id: 1
+  candidate_id: 1
+  employer_pitch: MyString
+  status: MyString
+  status_changed_on: 2013-02-21 18:44:04
+  candidate_status: MyString
+  candidate_status_changed_on: 2013-02-21 18:44:04

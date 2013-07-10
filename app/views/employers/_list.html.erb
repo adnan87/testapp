@@ -1,0 +1,53 @@
+<div class="table">
+	<div class="row table-head">
+		<div class="column" data-label="Email">
+			Email
+		</div>
+		<div class="column" data-label="Name">
+			Name
+		</div>
+		<div class="column" data-label="Phone">
+			Phone
+		</div>
+		<div class="column" data-label="Source">
+			Source
+		</div>
+		<div class="column" data-label="Created at">
+			Created at	
+		</div>
+		<div class="column" data-label="Actions">
+			Actions
+		</div>
+	</div>
+	<% if @employers.blank? %>
+	<% else %>
+	<% @employers.each do |employer| %>
+	<div class="row">
+		<div class="column" data-label="Email">
+			<%= link_to employer.email, employer_path(employer) %>
+		</div>
+		<div class="column" data-label="Name">
+			<%= employer.name %>		
+		</div>
+		<div class="column" data-label="Phone">
+			<%= employer.phone %>
+		</div>
+		<div class="column" data-label="Source">
+			<%= employer.source %>
+		</div>
+		<div class="column" data-label="Created at">
+			<%= l employer.created_at %>	
+		</div>
+		<div class="column" data-label="Actions">
+			 <% if employer.status == "Requested" %>
+			<%= button_to "Approve", :action => "approve_employer", :id => employer.id %>
+			<%= button_to "Wait List", :action => "waitlist_employer", :id => employer.id %>
+			<% end %>
+			<% if employer.status == "WaitListed" %>
+			<%= button_to "Approve", :action => "approve_employer", :id => employer.id %>
+			<% end %>
+		</div>
+	</div>
+	<% end %>
+	<% end %>
+</div>

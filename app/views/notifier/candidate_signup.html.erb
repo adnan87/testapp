@@ -1,0 +1,36 @@
+<h3> We have a new candidate signup with following details</h3>
+<p>
+	<ul>
+		<li>
+			Name: <%= @candidate.name %>
+		</li>
+		<li>
+			Email: <%= @candidate.email %>
+		</li>
+		<li>
+			Phone: <%= @candidate.phone %>
+		</li>
+		<li>
+			Personal URL: <%= @candidate.other_url %>
+		</li>
+		<li>
+			Linkedin URL: <%= @candidate.linkedin_url %>
+		</li>
+	
+		<li>
+			Resume File: 	<% if @candidate.resume_file.present? %>
+				<%= link_to 'Download', @candidate.resume_file.url, target: "_blank" %>
+				<% end %>
+		</li>
+		<li>
+			<%= link_to "click here",  candidate_url(:id => @candidate.id)  %> to view the candidate.
+		</li>
+		
+
+	</ul>
+</p>
+<p>
+	Thank you
+	<br/>
+	Interviewjet Team
+</p>

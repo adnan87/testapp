@@ -1,0 +1,17 @@
+<%- model_class = Employerdomain -%>
+<table class="table table-striped">
+	<thead>
+		<tr>
+			<th><%= model_class.human_attribute_name(:employer_domain) %></th>
+			<th><%= model_class.human_attribute_name(:status) %></th>
+		</tr>
+	</thead>
+	<tbody>
+		<% @employerdomain.each do |employerdomain| %>
+		<tr>
+			<td><%= link_to employerdomain.employer_domain, employerdomain_path(employerdomain) %></td>
+			<td><%= employerdomain.status %></td>
+		</tr>
+		<% end %>
+	</tbody>
+</table>

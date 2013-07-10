@@ -1,0 +1,58 @@
+<%- model_class = Candidate -%> 
+<h1>Current Takeoff</h1>
+<p style="text-align: right">
+	Logged in as <%= session[:empuser] %>
+</p>
+
+<% if @takeoff %>
+<script type="text/javascript" src="http://keith-wood.name/js/jquery.countdown.js"></script>
+<link rel="stylesheet" type="text/css" href="http://keith-wood.name/css/jquery.countdown.css">
+
+<h2>Take off - Count Down</h2>
+<div id="defaultCountdown" style="padding: 10px; font-size: 1.3em"  class="row-fluid"></div>
+
+<div class="page-header">
+	<h3>Candidates - Featured </h3>
+</div>
+<table class="table table-striped">
+	<thead>
+		<tr>
+			<th></th>
+			<th>Name</th>
+			<th>Pitch</th>
+			<th></th>
+		</tr>
+	</thead>
+	<tbody>
+		<% @candidates.each do |candidate| %>
+		<tr>
+			<td><%= image_tag candidate.background_image, :width => "125px" %></td>
+			<% if candidate.interview_status %>
+			<td><%= candidate.name %></td>
+			<% else %>
+			<td><%= link_to candidate.name, viewprofile_home_path(id: candidate.id ) %></td>
+			<% end %>
+			<td><%= candidate.candidate_pitch.to_s.html_safe %></td>
+			<% if candidate.interview_status %>
+			<td><span class="badge badge-info"><%= candidate.interview_status %></span></td>
+			<% else %>
+			<td><%= link_to "Request", viewprofile_home_path(id: candidate.id), :class => "btn btn-primary" %></td>
+			<% end %>
+		</tr>
+		<% end %>
+	</tbody>
+</table>
+
+<script>
+	var takeoffdate = new Date('<%= @takeoffdate %>');
+	//newYear = new Date(newYear.getFullYear() + 1, 1 - 1, 1);
+	$('#defaultCountdown').countdown({
+	until : takeoffdate
+	});
+</script>
+
+<% else %>
+<div class="hero-unit ">
+<h2>stay tuned for our next take off schedule</h2>
+</div>
+<% end %>

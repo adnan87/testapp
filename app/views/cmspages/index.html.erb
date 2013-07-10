@@ -1,0 +1,25 @@
+<%- model_class = Cmspage -%>
+<div class="page-header">
+
+	<h1>Manage - CMS </h1>
+
+</div>
+
+<table class="table table-striped">
+	<thead>
+		<tr>
+			<th><%= model_class.human_attribute_name(:page) %></th>
+			<th>action</th>
+		</tr>
+	</thead>
+	<tbody>
+		<% @cmspages.each do |cms| %>
+		<tr>
+			
+			<td><%= cms.page %></td>
+			<td><%= link_to 'edit', cmspage_path(cms) %></td>
+		</tr>
+		<% end %>
+	</tbody>
+</table>
+

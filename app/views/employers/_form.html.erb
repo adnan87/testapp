@@ -1,0 +1,76 @@
+<%= form_for @employer, :html => { :class => 'form-horizontal' } do |f| %>
+<div class="row-fluid">
+	<div class="span6">
+		<ul class="unstyled" style="padding: 15px;">
+			<li>
+				<%= label_tag(:email, "Email :*") %>
+				<%= f.text_field :email, :class => 'span12' %>
+			</li>
+			<li>
+				<%= label_tag(:companyname, "Company Name :")%>
+				<%= f.text_field :companyname, :class => 'span12' %>
+			</li>
+			<li>
+				<%= label_tag(:firstname, "First Name :*")%>
+				<%= f.text_field :firstname, :class => 'span12' %>
+			</li>
+			<li>
+				<%= label_tag(:lastname, "Last Name :*")%>
+				<%= f.text_field :lastname, :class => 'span12' %>
+			</li>
+			<li>
+				<%= label_tag(:phone, "Phone :")%>
+				<%= f.text_field :phone, :class => 'span12'  %>
+			</li>
+			<li>
+				<%= label_tag( "Job Titles :")%>
+				<% JobTitle.all.each do |jobtitle| %>
+			<label class="checkbox"> 
+				<%= check_box_tag  'employer[job_title_ids][]', jobtitle.id, @employer.job_titles.include?(jobtitle), :id => 'employer_job_title_ids_' + jobtitle.id.to_s %>
+				<%= label_tag 'employer_job_title_ids_' + jobtitle.id.to_s, jobtitle.name %> 
+			</label>
+			<% end %>
+			</li>
+		</ul>
+	</div>
+	<div class="span6">
+		<ul class="unstyled" style="padding: 15px;">
+			<li>
+				<%= label_tag(:about, "**About:")%>
+				<%= f.text_area :about, :class => 'span12 tinymce', :cols => 10, :rows => 9%>
+			</li>
+			<li>
+				<%= label_tag(:website, "Website :")%>
+				<%= f.text_field :website, :class => 'span12'  %>
+			</li>
+			
+			<li>
+				<%= label_tag( "Job Skills :")%>
+				<% Skill.all.each do |skill| %>
+			<label class="checkbox"> 
+				<%= check_box_tag  'employer[skill_ids][]', skill.id, @employer.skills.include?(skill), :id => 'employer_skill_ids_' + skill.id.to_s %>
+				<%= label_tag 'employer_skill_ids_' + skill.id.to_s, skill.name %> 
+			</label>
+			<% end %>
+			</li>
+		</ul>
+	</div>
+</div>
+</div>
+<div class="form-actions" style="padding-left: 0px; text-align: center">
+	<ul class="unstyled">
+		<li class="error error-large">* - Mandatory Fields</li>
+		<li>** - Any one of the field is mandatory</li>
+	 <% @employer.errors.full_messages.each do |message| %>
+       <li class="error error-large"><%= message %></li>
+     <% end %>
+    </ul> 
+	<%= f.submit 'Save', :class => 'btn btn-primary btn-large' %>
+	<%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+	@employer, :class => 'btn btn-large' %>
+	
+	<!--<%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+	root_path, :class => 'btn btn-large' %> -->
+	
+</div>
+<% end %>

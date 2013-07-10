@@ -1,0 +1,75 @@
+<!--Light Box 1 - Candidate Application-->
+
+<div id="myModal1" class="modal hide fade talent_box" tabindex="-1" role="dialog" aria-hidden="true">
+	
+</div>
+<!--Light Box 1-->
+<!--Light Box 4-->
+<div id="myModalTalentSuccess" class="modal hide fade invalid_email" tabindex="-1" role="dialog" aria-hidden="true">
+	<h4>Congrats!!! We have received your application!</h4>
+	<p>
+		Welcome to InterviewJet - We will review your application and update you on the status within 48 hours
+	</p>
+	<a href="javascript:void(0)" id="lnkTalentSuccessClose" class="btn btn-large btn-block continue_btn">CONTINUE</a>
+</div>
+<!--Light Box 4-->
+
+<!--Light Box 2-->
+<div id="myModal2" class="modal hide fade talent_box" tabindex="-1" role="dialog" aria-hidden="true">
+	<div class="modal-header talent_header">
+		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+			&nbsp;
+		</button>
+		<h5><span>INTERVIEWJET</span> EMPLOYER APPLICATION</h5>
+	</div>
+	<%= render :partial => "employerapplication"%>
+</div>
+<!--Light Box 2-->
+
+<!--Light Box 4-->
+<div id="myModalEmployerSuccess" class="modal hide fade invalid_email" tabindex="-1" role="dialog" aria-hidden="true">
+	<h4>Congrats!!! We have received your application!</h4>
+	<p>
+		Welcome to InterviewJet - We will review your application and update you on the status within 48 hours
+	</p>
+	<a href="javascript:void(0)" id="lnkEmployerSuccessClose" class="btn btn-large btn-block continue_btn">CONTINUE</a>
+</div>
+<!--Light Box 4-->
+
+<!--Light Box 4-->
+<div id="myModalEmployerPending" class="modal hide fade invalid_email" tabindex="-1" role="dialog" aria-hidden="true">
+	<h4>Your application is under review!</h4>
+	<p>
+		Welcome to InterviewJet - We will review your application and update you on the status within 48 hours
+	</p>
+	<a href="javascript:void(0)" id="lnkEmployerPendingClose" class="btn btn-large btn-block continue_btn">CONTINUE</a>
+</div>
+<!--Light Box 4-->
+
+
+
+<!--Light Box 4-->
+<div id="myModalEmployerLoginSuccess" class="modal hide invalid_email" tabindex="-1" role="dialog" aria-hidden="true">
+	<h4>Login Successfull</h4>
+	<p>
+		Welcome to InterviewJet - your one stop shop for tech talent. Let's get yourstraight to today's flight!
+	</p>
+	<a href="javascript:void(0)" id="lnkEmployerLoginSuccessClose" class="btn btn-large btn-block continue_btn">CONTINUE</a>
+</div>
+<!--Light Box 4-->
+<script>
+	$("#lnkTalentSuccessClose").click(function() {
+		$("#myModalTalentSuccess").modal("hide");
+	})
+	$("#lnkEmployerSuccessClose").click(function() {
+		$("#myModalEmployerSuccess").modal("hide");
+	})
+	$("#lnkEmployerPendingClose").click(function() {
+		$("#myModalEmployerPending").modal("hide");
+	})
+	
+	$("#lnkEmployerLoginSuccessClose").click(function() {
+		$("#myModalEmployerLoginSuccess").modal("hide");
+	})
+	
+</script>

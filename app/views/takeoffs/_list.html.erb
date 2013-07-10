@@ -1,0 +1,27 @@
+<%- model_class = Takeoff -%>
+<table class="table table-striped">
+	<thead>
+		<tr>
+			<th><%= model_class.human_attribute_name(:name) %></th>
+			<th><%= model_class.human_attribute_name(:startdate) %></th>
+			<th><%= model_class.human_attribute_name(:enddate) %></th>
+			<th><%= model_class.human_attribute_name(:active) %></th>
+			<th>preview</th>
+		</tr>
+	</thead>
+	<tbody>
+		<% if @takeoffs.blank? %>
+		<% else %>
+		<% @takeoffs.each do |takeoff| %>
+		<tr>
+			<td><%= link_to takeoff.name, takeoff_path(takeoff) %></td>
+			<td><%= l takeoff.startdate %></td>
+			<td><%= l takeoff.enddate %></td>
+			<td><%= takeoff.active %></td>
+			<td><a href="/previewtakeoff/<%= takeoff.id%>" target="_blank" style="color: #ff0000">PREVIEW</a></td>
+		</tr>
+		<% end %>
+		<% end %>
+	</tbody>
+</table>
+

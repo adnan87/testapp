@@ -1,0 +1,12 @@
+@charset "utf-8";
+/* CSS Document */
+
+.talent_box, .talent_header, .attach_resume, .application_btn a, .invalid_email, .invalid_email .continue_btn, .talent_box input[type="text"], talent_box textarea, .timer_box, .user_location, .user_detail .grey_btn, .user_profile .contact_btn, .flex-control-paging li a, .thank_box, .invalid_email input[type="text"]{
+	behavior:url(/assets/PIE.htc);
+}
+.user_detail .grey_btn{
+	position:relative;
+}
+.interview_content{
+	width:37%;
+}

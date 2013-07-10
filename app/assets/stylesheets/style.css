@@ -1,0 +1,942 @@
+/*
+ Table Of Content:
+
+ 1.) Side Wide Content
+ 2.) Home Page Content
+ 3.) Talent Application Content
+ 4.) Employer Application Content
+ 5.) Landing-LogInWarning Content
+ 6.) User Grid Content
+ 7.) Inside-PastFlightCrew Content
+ 8.) Inside-UserProfile Content
+ 9.) Inside-UserGallery Content
+ 10.) Inside-RequestInterview Content
+ 11.) Inside-SentConfirmation Content
+ 12.) Inside-UserNoLongerAvailable Content
+ 13.) Authorized Personnel Only Content
+ --------------------------------------------*/
+/*
+ 1.) Side Wide Content
+ --------------------------------*/
+
+/*===Footer Style===*/
+#footer {
+	background-color: #000;
+	min-height: 240px;
+}
+.footer_content {
+	padding: 36px 6% 0px;
+	overflow: hidden;
+}
+.footer_logo {
+}
+.footer_small_logo {
+	padding-top: 24px;
+}
+.footer_list {
+	padding-left: 30px;
+}
+.footer_list ul {
+	border-left: 1px #333333 solid;
+	border-right: 1px #333333 solid;
+	font-size: 1.4em;
+	font-weight: 600;
+	padding: 19px 33px 11px 30px;
+}
+.footer_list .none_border {
+	border: none;
+}
+.footer_list ul li {
+	padding-bottom: 10px;
+}
+.footer_list ul li a {
+	color: #7d7d7d;
+}
+.footer_list .nav a:hover {
+	background: none;
+	color: #fff;
+}
+.footer_address {
+	text-align: right;
+	padding-top: 15px;
+}
+.small_logo img {
+	width: 115px;
+}
+/*.footer_address strong {
+ font-size:1.4em;
+ line-height:171%;
+ }*/
+.footer_address address {
+	font-size: 1.2em;
+	color: #7d7d7d;
+	line-height: 150%;
+	min-height: 79px;
+}
+.made_In, .made_In strong {
+	font-family: 'Open Sans', sans-serif;
+	font-size: 1.1em;
+	color: #383838;
+}
+.made_In strong {
+	font-weight: 800;
+}
+/*
+ 2.) Home Page Content
+ --------------------------------*/
+#content {
+}
+.content_banner {
+	min-height: 760px;
+}
+#supersized {
+	display: block;
+	position: fixed;
+	left: 0;
+	top: 0;
+	overflow: hidden;
+	z-index: -999;
+	height: 100%;
+	width: 100%;
+	margin: 0;
+}
+#supersized img {
+	width: auto;
+	height: auto;
+	position: relative;
+	display: none;
+	outline: none;
+	border: none;
+	max-width: none;
+}
+#supersized li {
+	display: block;
+	list-style: none;
+	z-index: -30;
+	position: fixed;
+	overflow: hidden;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: #111;
+}
+#supersized a {
+	width: 100%;
+	height: 100%;
+	display: block;
+}
+#supersized li.prevslide img, #supersized li.activeslide img {
+	display: inline;
+}
+.interview_content {
+	padding: 199px 0 0 5.9%;
+	width: 552px;
+}
+.interview_content .brand {
+	margin-bottom: 14px;
+}
+.email_section {
+	border-top: 1px #a8ada9 solid;
+	border-bottom: 1px #a8ada9 solid;
+	padding: 21px 0px 28px;
+}
+.email_section p {
+	font-size: 2.8em;
+	color: #fff;
+	font-weight: 305;
+	line-height: 120%;
+}
+.email_section input[type="text"] {
+	background: url(/assets/input-bg.png) left top repeat;
+	border: 4px #c6caca solid;
+	border-radius: 7px;
+	font-size: 2.4em;
+	color: #babfbf;
+	width: 389px;
+	/*padding:18px 21px 22px;*/
+	padding: 10px 21px 14px;
+	margin: 15px 0px 17px;
+	height: auto;
+}
+.email_section span {
+	font-size: 1.2em;
+	color: #c4c4c4;
+	font-weight: 600;
+}
+.email_section span a {
+	font-weight: 700;
+}
+.next_flight {
+}
+.next_flight h5 {
+	line-height: 200%;
+}
+.next_flight .span {
+	font-size: 1.8em;
+	line-height: 200%;
+	color: #c9c9c9;
+	padding-top: 12px;
+	
+}
+.next_flight strong {
+	color: #fff;
+}
+.next_flight  li {
+	float: right;
+	font-family: 'gotham_bookregular';
+}
+.next_flight ul li {
+	font-size: 1.8em;
+	line-height: 200%;
+	color: #c9c9c9;
+	padding-top: 12px;
+	padding-left: 3px;
+	padding-right: 3px;
+}
+.next_flight  li span {
+	font-weight: bold;
+	line-height: 200%;
+	color: #fff;
+	width: 24px;
+	font-family: 'gotham_blackregular';
+	float: left;
+	text-align: right;
+}
+.light_box {
+	padding-top: 20px;
+	display: inline-block;
+	width: 100%;
+}
+.light_box ul {
+	list-style: none;
+	font-size: 1.2em;
+	margin-left: 0px;
+	display: inline-block;
+}
+.light_box ul li {
+	padding: 0px 5px;
+	display: inline-block;
+}
+.light_box ul li a {
+	color: #fff;
+}
+/*
+ 3.) Talent Application Content
+ --------------------------------*/
+.talent_box {
+	width: 960px;
+	left: 50%;
+	border-radius: 8px;
+	margin-left: -480px;
+	border: none;
+}
+.talent_header {
+	background-color: #292929;
+	padding: 6px 18px;
+	border-top: 1px #3f3f3f solid;
+	border-radius: 4px 4px 0px 0px;
+	border-bottom: none;
+}
+.talent_header .close, .user_bio .close {
+	background: url(/assets/close-btn.png) left top no-repeat;
+	width: 35px;
+	height: 35px;
+	opacity: 1;
+	margin-top: 12px;
+}
+.talent_header .close:hover {
+	opacity: 0.6;
+}
+.talent_header span {
+	font-size: 12px;
+	color: #545454;
+}
+.talent_form {
+	margin: 18px 20px 0px;
+	overflow: hidden;
+}
+.talent_form p {
+	font-size: 1.1em;
+	text-align: center;
+	font-weight: bold;
+	color: #b7b7b7;
+	padding-bottom: 5px;
+}
+.talent_inputarea {
+	width: 50%;
+}
+.input_textarea {
+	width: 48.5%;
+	padding-left: 1.5%;
+}
+.input_textarea textarea {
+	height: 308px;
+}
+.attach_resume {
+	background-color: #454545;
+	font-size: 1.4em;
+	border-radius: 4px;
+	border: 1px #414141 solid;
+	width: 97.5%;
+}
+.attach_resume span {
+	color: #cacaca;
+	font-weight: 600;
+	padding: 11px 0px 11px 8px;
+}
+.attach_resume strong {
+	color: #fff;
+}
+.attach_resume input[type="button"] {
+	background-color: #5a5a5a;
+	color: #fff;
+	border: 0px;
+	border-left: 1px #414141 solid;
+	padding: 17px 19px;
+	text-shadow: 0 1px 2px #333333;
+	border-radius: 0px;
+}
+.application_btn a, .invalid_email .continue_btn, .user_profile .contact_btn {
+	width: 50%;
+	color: #fff;
+	text-shadow: 0 1px 2px #333333;
+	padding: 20px 0px;
+	border: none;
+}
+.application_btn a:hover {
+	color: #fff;
+}
+.application_btn .btn-block + .btn-block {
+	margin-top: 0px;
+}
+.application_btn .send_btn, .application_btn .cancel_btn {
+	padding: 19px 0px 20px;
+	border-top: 1px #1a9edc solid;
+}
+.application_btn .cancel_btn {
+	border-top: 1px #919191 solid;
+}
+.application_btn .cancel_btn {
+	border-radius: 0px 0px 0px 4px;
+	background: #767676;
+	background: -webkit-gradient(linear, 0 0, 0 bottom, from(#767676), to(#5c5c5c));
+	background: -webkit-linear-gradient(#767676, #5c5c5c);
+	background: -moz-linear-gradient(#767676, #5c5c5c);
+	background: -ms-linear-gradient(#767676, #5c5c5c);
+	background: -o-linear-gradient(#767676, #5c5c5c);
+	background: linear-gradient(#767676, #5c5c5c);
+	-pie-background: linear-gradient(#767676, #5c5c5c);
+	border-right: 1px #000 dotted;
+}
+.application_btn .cancel_btn:hover {
+	background: #5c5c5c;
+	background: -webkit-gradient(linear, 0 0, 0 bottom, from(#5c5c5c), to(#767676));
+	background: -webkit-linear-gradient(#5c5c5c, #767676);
+	background: -moz-linear-gradient(#5c5c5c, #767676);
+	background: -ms-linear-gradient(#5c5c5c, #767676);
+	background: -o-linear-gradient(#5c5c5c, #767676);
+	background: linear-gradient(#5c5c5c, #767676);
+	-pie-background: linear-gradient(#5c5c5c, #767676);
+}
+.application_btn .send_btn, .invalid_email .continue_btn, .user_profile .contact_btn {
+	border-radius: 0px 0px 4px 0px;
+	background: #1AAAED;
+	background: -webkit-gradient(linear, 0 0, 0 bottom, from(#1AAAED), to(#036acd));
+	background: -webkit-linear-gradient(#1AAAED, #036acd);
+	background: -moz-linear-gradient(#1AAAED, #036acd);
+	background: -ms-linear-gradient(#1AAAED, #036acd);
+	background: -o-linear-gradient(#1AAAED, #036acd);
+	background: linear-gradient(#1AAAED, #036acd);
+	-pie-background: linear-gradient(#1AAAED, #036acd);
+}
+.application_btn .send_btn:hover, .invalid_email .continue_btn:hover, .user_profile .contact_btn:hover {
+	background: #036acd;
+	background: -webkit-gradient(linear, 0 0, 0 bottom, from(#036acd), to(#1AAAED));
+	background: -webkit-linear-gradient(#036acd, #1AAAED);
+	background: -moz-linear-gradient(#036acd, #1AAAED);
+	background: -ms-linear-gradient(#036acd, #1AAAED);
+	background: -o-linear-gradient(#036acd, #1AAAED);
+	background: linear-gradient(#036acd, #1AAAED);
+	-pie-background: linear-gradient(#036acd, #1AAAED);
+}
+/*
+ 4.) Employer Application Content
+ --------------------------------*/
+.employer_inputarea {
+	width: 70.5%;
+}
+.employer_titles {
+	padding-left: 4.5%;
+	width: 25%;
+}
+.employer_titles label {
+	color: #b1b0b1;
+	font-weight: 700;
+}
+.job_title {
+	padding-bottom: 20px;
+}
+.job_title h5 {
+	text-transform: uppercase;
+	color: #000;
+	padding: 8px 0px 5px;
+}
+/*
+ 5.) Landing-LogInWarning Content
+ --------------------------------*/
+.invalid_email {
+	width: 383px;
+	top: 38% !important;
+	left: 50%;
+	text-align: center;
+	border-radius: 8px;
+	margin-left: -191px;
+}
+.invalid_email h4 {
+	padding-top: 15px;
+}
+.invalid_email p {
+	font-size: 1.8em;
+	color: #727272;
+	line-height: 133%;
+	padding: 0px 10% 10px;
+}
+.invalid_email a {
+	color: #1aaaed;
+	font-weight: 700;
+}
+.invalid_email .continue_btn {
+	width: 100%;
+	float: none;
+	border-radius: 0px 0px 4px 4px;
+}
+/*
+ 6.) User Grid Content
+ --------------------------------*/
+#header {
+	padding-bottom: 100px;
+}
+#header .brand {
+	margin: 12px 0px 13px 2.9%;
+	width: 225px;
+	height: 35px;
+}
+.header_bg {
+	background-color: #000;
+	position: relative;
+}
+.timer {
+	width: 328px;
+	position: absolute;
+	left: 50%;
+	top: 7px;
+	margin-left: -164px;
+	text-align: center;
+}
+.timer h5 {
+	color: #7f7f7f;
+}
+.timer .timer_bg {
+	background: url(/assets/rounded-timer-bg.jpg) left top no-repeat;
+	width: 328px;
+	height: 73px;
+	position: absolute;
+	left: 0px;
+	top: 53px;
+}
+.timer_box {
+	width: 300px;
+	min-height: 107px;
+	background-color: #f9f8f8;
+	border-radius: 5px;
+	position: relative;
+	z-index: 10;
+	left: 14px;
+	box-shadow: 0px 2px 3px #a5a5a5;
+}
+.timer_box ul {
+	margin: 0px;
+}
+.timer_box ul li {
+	width: 99px;
+	min-height: 107px;
+	line-height: normal;
+	text-align: center;
+	border-left: 1px #e0dfdf dotted;
+	list-style: none;
+}
+.timer_box ul li span {
+	font-size: 7.2em;
+	color: #141414;
+	padding-top: 6px;
+}
+.timer_box ul li small {
+	font-size: 1.2em;
+	color: #a5a5a5;
+	text-transform: uppercase;
+}
+.timer_box ul li:first-child {
+	border: none;
+}
+.timer_box .white_overlay {
+	background: url(/assets/timer-bg.png) left top repeat;
+	height: 51px;
+	width: 300px;
+	position: absolute;
+	left: 0px;
+	bottom: 0px;
+	border-top: 2px #ececec groove;
+}
+.user_data {
+	padding: 20px 0px 50px 0px;
+	text-align: center;
+}
+.user_identity {
+	padding: 6px 6px 0px;
+	width: 270px;
+	display: inline-block;
+	margin: 0px 10px 0px;
+	text-align: left;
+}
+.user_identity p {
+	font-size: 1.4em;
+	color: #121111;
+	text-align: center;
+	line-height: 142%;
+	padding: 15px 5px;
+	margin-bottom: 0px;
+}
+.user_identity p a, .bio_graphi a {
+	font-weight: 700;
+	color: #1aaaed;
+}
+.User_img {
+	position: relative;
+	box-shadow: 0 2px 3px #A5A5A5;
+}
+.overlayed {
+	background: url(/assets/overlay-bg.png) left top repeat;
+	width: 262px;
+	height: 256px;
+	padding-top: 136px;
+	border: 4px #333434 solid;
+	position: absolute;
+	left: 0px;
+	top: 0px;
+	display: none;
+	text-align: center;
+}
+.overlayed img, .candidate_overlay img {
+	width: 180px;
+	height: 28px;
+}
+.overlayed span {
+	font-size: 1.4em;
+	color: #595858;
+	padding-top: 7px;
+}
+.User_img .active {
+	display: block;
+}
+.user_location {
+	width: 39px;
+	height: 26px;
+	position: absolute;
+	border: 3px #fff solid;
+	border-radius: 30px;
+	padding-top: 13px;
+	right: 10px;
+	top: 10px;
+	color: #fff;
+	font-size: 1.2em;
+	text-align: center;
+}
+.user_detail {
+	width: 270px;
+	position: absolute;
+	border-top: 1px #595858 dotted;
+	text-align: center;
+	left: 0px;
+	bottom: 0px;
+}
+.user_detail ul {
+	list-style: none;
+	margin: 0px 0px 12px 5px;
+}
+.user_detail ul li {
+	padding-right: 5px;
+}
+.user_detail .grey_btn {
+	background: url(/assets/btn-bg.png) left top repeat;
+	font-size: 1em;
+	font-weight: 700;
+	color: #fff;
+	border: none;
+	box-shadow: none;
+	text-shadow: none;
+	padding: 4px 13px 5px;
+	line-height: normal;
+	border-radius: 15px;
+}
+/*
+ 7.) Inside-PastFlightCrew Content
+ ------------------------------------*/
+.in_active_detail {
+	position: relative;
+}
+.in_active {
+	background: url(/assets/white-overlay.png) left top repeat;
+	width: 100%;
+	height: 98%;
+	position: absolute;
+	z-index: 1000;
+}
+.crew_flew {
+	width: 475px;
+	margin: 0 auto;
+	text-align: center;
+	padding-top: 20px;
+}
+.crew_flew p {
+	font-size: 1.8em;
+	color: #5b5b5b;
+	line-height: 133%;
+}
+/*
+ 8.) Inside-UserProfile Content
+ --------------------------------*/
+.user_profile {
+}
+.user_profile_img {
+	width: 419px;
+	padding-right: 1px;
+	background: #040404;
+	border-radius: 5px 0 0 5px;
+}
+.user_profile_img img {
+	border-radius: 5px 0 0 5px;
+}
+.user_bio {
+	width: 540px;
+	position: relative;
+	min-height: 600px;
+}
+.user_bio .close {
+	background: url(/assets/close-btn-new.png) left -35px no-repeat;
+	margin-right: 10px;
+}
+.user_bio h3 {
+	padding: 10px 0px 5px 22px;
+}
+.user_profile small {
+	font-size: 12px;
+	color: #a5a5a5;
+}
+.user_profile ul {
+	margin: 0;
+	list-style: none;
+}
+.occupation {
+	border-top: 1px #cccccc solid;
+	border-bottom: 1px #cccccc solid;
+}
+.occupation li {
+	padding: 22px;
+	border-left: 1px #b2b2b2 dotted;
+}
+.occupation li:first-child {
+	border: none;
+}
+.occupation span {
+	font-size: 1.8em;
+	line-height: 110%;
+	color: #000;
+}
+.bio_graphi {
+	padding: 18px 22px 0px 18px;
+	font-size: 1.4em;
+	max-height: 335px; 
+	overflow-y: auto; 
+}
+.bio_graphi p {
+	color: #121111;
+	line-height: 142%;
+	padding-top: 6px;
+}
+.capabilities, .capabilities ul {
+	padding-top: 5px;
+}
+.capabilities ul {
+	padding-right: 10%;
+}
+.recent_work {
+	padding-top: 25px;
+}
+.recent_work ul {
+	padding-top: 12px;
+}
+.recent_work ul li {
+	background-color: #fff;
+	/*padding: 3px;*/
+	border-radius: 3px;
+	box-shadow: 0 0 5px #C6C6C6;
+	margin-left: 14px;
+}
+.recent_work ul li:first-child {
+	margin-left: 0px;
+}
+.ipod_block_recent, .ipod_block_btn {
+	display: none;
+}
+.user_profile .contact_btn {
+	width: 100%;
+	position: absolute;
+	bottom: 0px;
+	padding: 1px 0px;
+}
+.user_profile .contact_btn span {
+	border-top: 1px #75ccf4 solid;
+	padding: 19px 0px;
+	display: block;
+}
+/*
+ 9.) Inside-UserGallery Content
+ ---------------------------------------*/
+.user_gallery {
+	min-height: 600px;
+}
+.user_gallery .close {
+	color: #bbbbbb;
+	font-size: 1.4em;
+	opacity: 1;
+	margin: 16px 15px 0px 0px;
+}
+.user_gallery .close:hover {
+	color: #797878;
+}
+.portfolio {
+	overflow: hidden;
+	text-align: center;
+}
+.portfolio_work {
+}
+.flexslider {
+	width: 630px;
+	position: relative;
+	margin: 0 auto;
+	height: 498px;
+	padding: 45px 70px 0px 0px;
+}
+.flexslider ul, .flexslider ol {
+	margin: 0;
+}
+.flex-viewport ul li {
+	opacity: 0.15;
+}
+.flex-viewport img {
+	box-shadow: 0px 0px 24px #d9d7d7;
+}
+.flex-viewport {
+	display: inline-block;
+	width: 100%;
+	overflow: visible !important;
+}
+.flex-viewport ul li.flex-active-slide {
+	margin: 0px 35px;
+	opacity: 1;
+}
+.flex-control-paging {
+	position: absolute;
+	left: 46%;
+	bottom: 0px;
+}
+.flex-control-paging li {
+	display: inline-block;
+}
+.flex-control-paging li a {
+	background-color: #bbbbbb;
+	width: 12px;
+	height: 12px;
+	border-radius: 8px;
+	display: block;
+	cursor: pointer;
+	margin: 0px 4px;
+	text-indent: -9999px;
+}
+.flex-control-paging li a:hover, .flex-control-paging li a.flex-active {
+	background-color: #000000;
+}
+.flex-direction-nav {
+}
+.flex-direction-nav a {
+	background: url(/assets/next-prev-arrow.png) left top no-repeat;
+	position: absolute;
+	width: 25px;
+	height: 39px;
+	top: 41%;
+	text-indent: -9999px;
+}
+.flex-direction-nav a.flex-prev {
+	left: -107px;
+}
+.flex-direction-nav a.flex-next {
+	background-position: -25px 0px;
+	right: -107px;
+}
+.layervault {
+	font-size: 1.4em;
+	margin-top: -75px;
+	position: relative;
+	text-align: center;
+}
+.layervault a {
+	color: #1396e3;
+}
+/*
+ 10.) Inside-RequestInterview Content
+ ---------------------------------------*/
+.request_interview {
+}
+.request_interview .small_input {
+	width: 40.7%;
+}
+.request_interview .space {
+	margin-left: 20px;
+}
+.request_interview textarea {
+	height: 88px;
+}
+.request_interview_textarea textarea {
+	font-size: 1.6em;
+	height: 132px;
+}
+.request_interview_textarea label {
+	font-size: 1.6em;
+	color: #747474;
+	font-weight: 700;
+}
+.request_interview_textarea .terms_condition {
+	padding: 15px 12px;
+	width: 92%;
+	font-size: 1.4em;
+	border: 1px #ccc solid;
+	border-radius: 4px;
+	margin-bottom: 8px;
+}
+.request_interview_textarea .terms_condition strong {
+	color: #585858;
+	padding-bottom: 5px;
+}
+.request_interview_textarea .terms_condition p {
+	line-height: 150%;
+	text-align: left;
+	font-weight: normal;
+	font-size: 14px;
+	color: #555555;
+	padding: 0;
+	margin: 0;
+}
+/*
+ 11.) Inside-SentConfirmation Content
+ ----------------------------------------*/
+.thank_box {
+	position: absolute;
+	background: url(/assets/white-overlay.png) left top repeat;
+	height: 100%;
+	opacity: 0.9;
+	border-radius: 6px;
+}
+.thank_u_message {
+	width: 440px;
+	text-align: center;
+	position: absolute;
+	left: 50%;
+	margin-left: -220px;
+	top: 37%;
+}
+.thank_u_message p {
+	font-size: 1.8em;
+	line-height: 133%;
+	color: #161616;
+}
+.close-btn {
+	position: relative;
+}
+.user_data .light_box {
+	color: #555555;
+	text-align: center;
+}
+.user_data .light_box a {
+	color: #555555;
+}
+/*
+ 12.) Inside-UserNoLongerAvailable Content
+ --------------------------------------------*/
+.user_profile .orange_btn {
+	background: #e44e2b !important;
+	padding: 0px 0px 1px;
+	border-top: 1px #a93f26 solid;
+}
+.user_profile .orange_btn span {
+	border-top: 1px #ef947f solid;
+}
+.user_profile .orange_btn:hover {
+	background: #e44e2b !important;
+}
+.candidate_longer {
+	position: relative;
+}
+.candidate_overlay {
+	background: url(/assets/black-overlay.png) left top repeat;
+	height: 100%;
+	position: absolute;
+	left: 0px;
+	top: 0px;
+	text-align: center;
+	border-radius: 5px 0 0 5px;
+}
+.candidate_overlay span {
+	font-size: 1.4em;
+	color: #e44e2b;
+}
+.candidate_overlay div {
+	position: relative;
+	top: 275px;
+}
+/*
+ 13.) Authorized Personnel Only Content
+ --------------------------------------------*/
+.authorized_email {
+}
+.authorized_email form {
+	margin-bottom: 0px;
+}
+.authorized_email input[type="text"] {
+	margin: 0px 23px 8px;
+	width: 81%;
+}
+.authorized_email small {
+	font-size: 1.2em;
+	color: #727272;
+	padding-bottom: 25px;
+}
+/*For Android Phone Style*/
+.android-default {
+	background: url(/assets/home_banner.jpg) center top no-repeat;
+	background-size: cover;
+	background-attachment: fixed;
+}
+.android-default .backstretch2, .android-default .backstretch {
+	display: none !important;
+}
+/*For Android Phone Style*/
+
+.open {
+	background: url(/assets/home_banner.jpg) center top no-repeat;
+	background-size: cover;
+	background-attachment: fixed;
+}
+.open .backstretch2, .open .backstretch {
+	display: none !important;
+}

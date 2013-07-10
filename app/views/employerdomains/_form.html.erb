@@ -1,0 +1,36 @@
+<%= form_for @employerdomain, :html => { :class => 'form-horizontal' } do |f| %>
+<div class="row-fluid">
+	<div class="span6">
+		<ul class="unstyled" style="padding: 15px;">
+			<li>
+				<%= label_tag(:employer_domain, "Domain :* (eg: hotmail.com)") %>
+
+				<%= f.text_field :employer_domain, :class => 'span12' %>
+			</li>
+		</ul>
+	</div>
+	<div class="span6">
+		<ul class="unstyled" style="padding: 15px;">
+			<li>
+				<%= label_tag(:status, "Status: ")%>
+				<%= f.select(:status, Employerdomain::STATUS_TYPES) %>
+			</li>
+			
+		</ul>
+	</div>
+</div>
+<div class="form-actions" style="padding-left: 0px; text-align: center">
+	<ul class="unstyled">
+		<li class="error error-large">
+			* - Mandatory Fields
+		</li>
+		<% @employerdomain.errors.full_messages.each do |message| %>
+       <li class="error error-large"><%= message %></li>
+     <% end %>
+	</ul>
+	<%= f.submit 'Save', :class => 'btn btn-primary btn-large' %>
+	<%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+	@employerdomain, :class => 'btn btn-large' %>
+</div>
+
+<% end %>

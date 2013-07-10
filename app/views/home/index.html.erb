@@ -1,0 +1,75 @@
+<div class="row-fluid">
+	<div class="hero-unit span6" style="margin-top: 25px;">
+		<h1 style="text-align: center; font-size: 2.5em">takeoff with interviewjet</h1>
+		<p style="text-align: center">
+			<ul>
+				<li>
+					You have a proven portfolio of excellent work.
+				</li>
+				<li>
+					You're currently working at a recognized tech company.
+				</li>
+				<li>
+					You graduated from a top 20 school, as defined by
+					<a href="http://grad-schools.usnews.rankingsandreviews.com/best-graduate-schools/top-science-schools/computer-science-rankings" target="_blank">this list.</a>
+				</li>
+			</ul>
+		</p>
+		<p style="text-align: center">
+			<%= link_to "Get Featured",
+			featured_home_path,
+			:class => 'btn btn-primary btn-large' %>
+		</p>
+
+	</div>
+
+	<div class="hero-unit span6" style="margin-top: 25px;">
+		<h1 style="text-align: center; font-size: 2.5em">are you hiring?</h1>
+		<p style="padding: 10px">
+			Enter your email and we'll start sending you candidates. No staffing agencies or third-party recruiters, please.
+		</p>
+		<p>
+			<%= form_tag '/verfiyemployer', :method => :post, :id => "empsignup" do%>
+			<div class="row-fluid">
+				<div class="span12">
+					<ul class="unstyled" style="padding: 15px;">
+						<li>
+							<% email ||= session[:empuser]%>
+							<%= text_field_tag "email", email , :class => 'span12' %>
+						</li>
+					</ul>
+					<p style="text-align: center; padding: 10px">
+						<%= submit_tag 'Sign In/ Sign up',  :class => 'btn btn-primary btn-large'  %>
+					</p>
+				</div>
+				<% end %>
+			</div>
+		</p>
+	</div>
+</div>
+
+<script>
+	$(document).ready(function() {
+		$.validator.setDefaults({
+			ignore : ''
+		});
+		$("#empsignup").validate({
+			rules : {
+				email : {
+					required : {
+						depends : function() {
+							$(this).val($.trim($(this).val()));
+							return true;
+						}
+					},
+
+					email : true
+				}
+			},
+			messages : {
+				email : "Enter a valid email*"
+			}
+		});
+
+	}); 
+</script>

@@ -1,0 +1,364 @@
+<%= form_for @candidate, :url => { :action => :talent } , :remote => true do |f| %>
+<div class="talent_form">
+	<p>
+		Note: Talent inquiries only have to provide one of the following LinkedIn URL, Bio or Resume.
+	</p>
+
+	<div class="talent_inputarea">
+		<!--
+		<input type="text" value="First Name" onFocus="if(this.value==this.defaultValue)this.value='';" onBlur="if(this.value=='')this.value=this.defaultValue;">
+		<input type="text" value="Last Name" onFocus="if(this.value==this.defaultValue)this.value='';" onBlur="if(this.value=='')this.value=this.defaultValue;">
+		<input type="text" value="Email Address" onFocus="if(this.value==this.defaultValue)this.value='';" onBlur="if(this.value=='')this.value=this.defaultValue;">
+		<input type="text" value="Phone Number" onFocus="if(this.value==this.defaultValue)this.value='';" onBlur="if(this.value=='')this.value=this.defaultValue;">
+		<input type="text" value="Personal URL" onFocus="if(this.value==this.defaultValue)this.value='';" onBlur="if(this.value=='')this.value=this.defaultValue;">
+		<input type="text" value="LinkedIn URL" onFocus="if(this.value==this.defaultValue)this.value='';" onBlur="if(this.value=='')this.value=this.defaultValue;">
+		-->
+		<%= f.text_field :firstname, :placeholder => "First Name*" %>
+		<%= f.text_field :lastname, :placeholder => "Last Name*" %>
+		<%= f.text_field :email, :placeholder => "Email Address*" %>
+		<%= f.text_field :phone, :placeholder => "Phone Number" %>
+		<%= f.text_field :other_url, :placeholder => "Personal URL" %>
+		<%= f.text_field :linkedin_url, :placeholder => "LinkedIn URL" %>
+
+	</div>
+	<div class="input_textarea">
+		<!-- <textarea onFocus="if(this.value==this.defaultValue)this.value='';" onBlur="if(this.value=='')this.value=this.defaultValue;">Tell us about yourself...</textarea> -->
+		<%= f.text_area :resume, :placeholder => "Tell us about yourself..." %>
+		<div class="attach_resume">
+			<span id="spanFileName"><strong>ATTACH RESUME</strong> Please upload your resume (PDF).</span>
+			<input type="button" id="btnFileUpload" value="UPLOAD FILE">
+			<%= f.file_field :resume_file, :style => "display: none"%>
+		</div>
+	</div>
+</div>
+<div class="application_btn">
+	<a href="javascript:void(0)" id="lnkCancelTalentApplication" class="btn btn-large btn-block cancel_btn">CANCEL</a>
+	<a href="javascript:void(0)" id="lnkSendTalentApplication" class="btn btn-large btn-block send_btn">SEND <span class="ipod_none">APPLICATION</span></a>
+	<div style="display:none"><%= f.submit 'SEND', :class => 'btn btn-primary btn-large', :id => 'btnSubmit' %></div>
+</div>
+
+<script>
+	
+
+	$('document').ready(function() {
+		$('#candidate_resume_file').change(function() { 
+    		//$("#btnFileUpload").val('FILE SELECTED');
+    		var fileName = $('#candidate_resume_file').val().split('/').pop().split('\\').pop();
+    		var ext = $('#candidate_resume_file').val().split('.').pop().toLowerCase();
+    		if (fileName.length > 25) {
+    			fileName = fileName.substr(0,24)
+    		}
+    		$("#spanFileName").html('<strong>RESUME ATTACHED</strong> ' + fileName +  ' + </span>');
+		});
+		$("#btnFileUpload").click(function() {
+			//alert("okchooseImg");
+			$('#candidate_resume_file').click();
+			//alert("ok");
+			return false;
+		});
+		$("#lnkCancelTalentApplication").click(function () {
+			$("#myModal1").modal('hide');
+			return false;
+		})
+		$("#lnkSendTalentApplication").click(function() {
+			$(document).ajaxStart(function() {
+				//alert('loading...')
+				$("#lnkCancelTalentApplication").attr("disabled", true);
+  				$( "#spinner").show();
+			});
+
+			$(document).ajaxStop(function() {
+				//alert('loading stop')
+  			$( "#spinner").hide();
+			});
+
+			var iResult = ValidateTalentApplication(2);
+			//alert('ready or not :' + iResult)
+			if (iResult == true) {
+				$("#lnkSendTalentApplication").html('PROCESSING');
+				$("#btnSubmit").click();
+			}
+			return false;
+		})
+		
+		$("form#new_candidate :input").blur(function () {
+			ValidateTalentApplication(1);
+		})
+		
+	});
+	//Custome validation for the candidate form
+	function ValidateTalentApplication(level) {
+
+		var element;
+		var iResult = false;
+
+		//Check for first and last name
+		element = "#candidate_firstname";
+
+		if ($(element).val() == "") {
+			//$(element).css("border", "1px solid #ff0000");
+			
+			$(element).addClass('input-error');
+			//$(element).focus();
+			//alert('first name required')
+			iResult = false;
+		} else {
+			//$(element).css("border", "1px solid #cccccc");
+			$(element).removeClass('input-error');
+			$(element).addClass('input-success');
+			iResult = true;
+		}
+		
+		if (iResult == true) {
+			element = "#candidate_lastname";
+			
+			if ($(element).val() == "") {
+				//$(element).css("border", "1px solid #ff0000");
+				$(element).addClass('input-error');
+	
+				//alert('first name required')
+				iResult = false;
+			} else {
+				//$(element).css("border", "1px solid #CCCCCC");
+				$(element).removeClass('input-error');
+				$(element).addClass('input-success');
+				element = "#candidate_email";
+				var filter = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+				if ($(element).val() == "" || !filter.test($(element).val())) {
+					//$(element).css("border", "1px solid #ff0000");
+					$(element).addClass('input-error');
+					iResult = false;
+				} else {
+					//$(element).css("border", "1px solid #CCCCCC");
+					$(element).removeClass('input-error');
+					//$(element).addClass('input-success');
+					element = "#candidate_other_url";
+					value = $(element).val();
+					if (value != "") {
+						if (value.substr(0, 7) != 'http://') {
+							value = 'http://' + value;
+						}
+						if (value.substr(value.length - 1, 1) != '/') {
+							value = value + '/';
+						}
+	
+						filter = /^(http|https|ftp):\/\/[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/i;
+	
+						if (!filter.test(value)) {
+							//$(element).css("border", "1px solid #ff0000");
+							$(element).addClass('input-error');
+							iResult = false;
+						} else {
+							//$(element).css("border", "1px solid #CCCCCC");
+							$(element).removeClass('input-error');
+							$(element).addClass('input-success');
+							element = "#candidate_linkedin_url";
+							value = $(element).val();
+							if (value != "") {
+								if (value.substr(0, 7) != 'http://') {
+									value = 'http://' + value;
+								}
+								if (value.substr(value.length - 1, 1) != '/') {
+									value = value + '/';
+								}
+	
+								filter = /linkedin.com/;
+	
+								if (!filter.test($(element).val())) {
+									//$(element).css("border", "1px solid #ff0000");
+									$(element).addClass('input-error');
+									iResult = false;
+								} else {
+									//$(element).css("border", "1px solid #CCCCCC");
+									$(element).removeClass('input-error');
+									$(element).addClass('input-success');
+									iResult = true;
+								}
+							} else {
+								//$(element).css("border", "1px solid #CCCCCC");
+								$(element).removeClass('input-error');
+								//$(element).addClass('input-success');
+								iResult = true;
+							}
+						}
+					} else {
+						//$(element).css("border", "1px solid #CCCCCC");
+						$(element).removeClass('input-error');
+						//$(element).addClass('input-success');
+						element = "#candidate_linkedin_url";
+						value = $(element).val();
+						if (value != "") {
+	
+							filter = /linkedin.com/;
+	
+							if (!filter.test($(element).val())) {
+								//$(element).css("border", "1px solid #ff0000");
+								$(element).addClass('input-error');
+								iResult = false;
+							} else {
+								//$(element).css("border", "1px solid #CCCCCC");
+								$(element).removeClass('input-error');
+								$(element).addClass('input-success');
+								iResult = true;
+							}
+						} else {
+							//$(element).css("border", "1px solid #CCCCCC");
+							$(element).removeClass('input-error');
+							//$(element).addClass('input-success');
+							iResult = true;
+						}
+					}
+				}
+			}
+	
+			if (iResult) {
+				$.ajax({
+					type : "GET",
+					async : false,
+					//contentType : 'multipart/form-data',
+					url : "/verifycandidate.json", //sumbits it to the given url of the form
+					data : "email=" + $("#candidate_email").val(),
+					dataType : "JSON" // you want a difference between normal and ajax-calls, and json is standard
+				}).success(function(json) {
+					//act on result.
+					if (json.message == "false")
+						iResult = false;
+	
+					if (iResult == false) {
+						//$("#candidate_email").css("border", "1px solid #ff0000");
+						$("#candidate_email").addClass('input-error');
+					} else {
+						$("#candidate_email").removeClass('input-error');
+						$("#candidate_email").addClass('input-success');
+					}
+	
+				}).error(function(json) {
+					//act on result.
+					iResult = false;
+				});
+			}
+			
+			if (iResult && level == 2)
+				iResult = checkOthers();
+
+		}
+		
+		return iResult;
+	}
+	//Custom function to validate linkedinurl, resume and resume file
+	function checkOthers() {
+		var iResult = false;
+		var iValue = 0;
+		var iFileOK = true;
+		if ($('#candidate_resume_file').val() != "") {
+			var ext = $('#candidate_resume_file').val().split('.').pop().toLowerCase();
+			if ($.inArray(ext, ['pdf']) == -1 && $.inArray(ext, ['docx']) == -1 && $.inArray(ext, ['doc']) == -1) {
+				alert('Please upload only pdf and docx file formats!');
+				iResult = false;
+				iValue = 0;
+				iFileOK = false;
+			} else {
+				iResult = true;
+				iValue = iValue + 1;
+			}
+		}
+
+		if ($('#candidate_resume').val() != "") {
+			iResult = true;
+			iValue = iValue + 1;
+		}
+
+		if ($('#candidate_linkedin_url').val() != "") {
+			iResult = true;
+			iValue = iValue + 1;
+		}
+		
+		if (iValue < 1) {
+			iResult = false;
+			alert('We require one of the following (Linkedin URL or Resume or Resume File)');
+		}
+		
+		if (iFileOK == false)
+			iResult = false;
+			
+		return iResult;
+	}
+	
+	
+	//Block of JS to be removed later
+	
+	/* @projectDescription jQuery Serialize Anything - Serialize anything (and not just forms!)
+	 * @author Bramus! (Bram Van Damme)
+	 * @version 1.0
+	 * @website: http://www.bram.us/
+	 * @license : BSD
+	 */
+	(function($) {
+		$.fn.serializeAll = function() {
+			var rselectTextarea = /^(?:select|textarea)/i;
+			var rinput = /^(?:color|date|datetime|datetime-local|email|file|hidden|month|number|password|range|search|tel|text|time|url|week)$/i;
+			var rCRLF = /\r?\n/g;
+
+			var arr = this.map(function() {
+				return this.elements ? jQuery.makeArray(this.elements) : this;
+			}).filter(function() {
+				return this.name && !this.disabled && (this.checked || rselectTextarea.test(this.nodeName) || rinput.test(this.type) );
+			}).map(function(i, elem) {
+				var val = jQuery(this).val();
+
+				return val == null ? null : jQuery.isArray(val) ? jQuery.map(val, function(val, i) {
+					return {
+						name : elem.name,
+						value : val.replace(rCRLF, "\r\n")
+					};
+				}) : {
+					name : elem.name,
+					value : val.replace(rCRLF, "\r\n")
+				};
+			}).get();
+
+			return $.param(arr);
+		}
+	})(jQuery);
+	
+	$("#lnkSendTalentApplication_old").click(function() {
+			//$("#new_candidate").submit();
+			var iResult = ValidateTalentApplication();
+			//alert('ready or not :' + iResult)
+			if (iResult == true) {
+				var iMessage = 'SEND <span class="ipod_none">APPLICATION</span>';
+
+				var valuesToSubmit = $('#new_candidate').serializeAll();
+
+				//valuesToSubmit += $('#candidate_resume_file').serializeAnything();
+				//console.log(valuesToSubmit);
+				$("#lnkSendTalentApplication").html('PROCESSING');
+
+				$.ajax({
+					type : "POST",
+					//contentType : 'multipart/form-data',
+					url : $('#new_candidate').attr('action'), //sumbits it to the given url of the form
+					data : valuesToSubmit,
+					dataType : "JSON" // you want a difference between normal and ajax-calls, and json is standard
+				}).success(function(json) {
+					//act on result.
+					$("#lnkSendTalentApplication").html(iMessage);
+					$("#myModal1").modal('hide');
+					$("#myModalTalentSuccess").modal();
+					//window.location.reload();
+					//alert("profile created")
+				}).error(function(json) {
+					//act on result.
+					$("#lnkSendTalentApplication").html(iMessage);
+					var result = json.responseText;
+					alert(result);
+				});
+			}
+			return false;
+			// prevents normal behaviour
+
+		})
+	//Block of JS to be removed ends
+	
+</script>
+<% end %>
