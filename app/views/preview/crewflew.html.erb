@@ -120,7 +120,7 @@
 		<div class="user_detail">
 			<a href="#" style="text-decoration: none"><h6><%= candidate.job_role%></h6></a>
 			<ul>
-				<%# if candidate.skill_tags %>
+				<% if candidate.skill_tags %>
 					<% candidate.skill_tags.split(",").each do |skill| %>
 						<li>
 							<a href="#" class="btn grey_btn">
@@ -128,7 +128,7 @@
 							</a>
 						</li>
 					<% end %>
-				<%# end %>
+				<% end %>
 			</ul>
 		</div>
 	</div>
